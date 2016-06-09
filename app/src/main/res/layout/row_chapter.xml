@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_row_play"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"     android:background="@drawable/rowselect"
+    android:minHeight="?android:listPreferredItemHeightSmall"
+    android:orientation="horizontal"
+    android:theme="@style/AppTheme">
+
+    <TextView       android:typeface="serif"
+        android:id="@+id/listTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+        android:text="Primary text"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/colorButton" />
+
+    <ImageView
+        android:id="@+id/im_slideshow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"
+        android:gravity="center"
+        android:paddingBottom="@dimen/marginTop"
+        android:paddingTop="@dimen/marginTop"
+        android:src="@android:drawable/ic_menu_slideshow"
+        android:tint="@color/colorAccent" />
+</LinearLayout>

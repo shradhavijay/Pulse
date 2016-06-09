@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_takeexam_a2z"
+            android:title="@string/nav_take_exam"  />
+        <item android:id="@+id/nav_examhistory"
+            android:title="@string/nav_exam_history" />
+
+    </group>
+
+    <item android:title="Communicate">
+
+        <menu>
+
+            <item android:id="@+id/nav_contact" android:icon="@android:drawable/sym_action_call"
+                android:title="@string/nav_contactus" />
+            <item android:id="@+id/nav_logout" android:icon="@android:drawable/ic_lock_power_off"
+                android:title="@string/nav_logout" />
+        </menu>
+    </item>
+</menu>

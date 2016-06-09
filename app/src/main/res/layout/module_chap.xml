@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_module"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTop"
+        android:paddingTop="10dp"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/darkBlue"
+        android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/tv_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/marginStar"
+        android:gravity="right"
+        android:textAppearance="?android:textAppearance"
+        android:textColor="@color/darkBlue"
+        android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/mainTopic"
+        android:layout_marginBottom="@dimen/marginTop"
+        android:layout_marginTop="@dimen/marginStar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/marginStar"
+        android:gravity="center"
+        android:text="@string/main_topics"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/colorButton"
+        android:typeface="serif" />
+
+    <LinearLayout
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"></LinearLayout>
+
+    <ProgressBar
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        android:id="@+id/main_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:theme="@style/AppTheme.Progress"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/lv_topic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTop"></ListView>
+</LinearLayout>

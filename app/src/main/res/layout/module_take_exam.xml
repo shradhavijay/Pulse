@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_marginTop="@dimen/marginStar"
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_module_az"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTop"
+        android:paddingTop="10dp"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/darkBlue"
+        android:typeface="serif" />
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/marginStar"
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"/>
+
+    <ProgressBar
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        android:id="@+id/main_progress_az"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:theme="@style/AppTheme.Progress"
+        android:visibility="gone" />
+
+    <ExpandableListView
+        android:id="@+id/elv_take_exam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTop"></ExpandableListView>
+
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/rowselect"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:onClick="songPicked" android:minHeight="?android:listPreferredItemHeightSmall"
+    android:orientation="vertical"
+    tools:context="com.pmpulse.ui.FreeAudioActivity">
+
+
+    <TextView
+
+        android:layout_marginTop="@dimen/marginStar"
+        android:layout_marginBottom="@dimen/marginStar"
+        android:id="@+id/audioTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Primary text"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/colorButton"
+        android:typeface="serif" />
+
+</LinearLayout>

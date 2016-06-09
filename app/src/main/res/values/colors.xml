@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#c70923</color>
+    <color name="colorButton">#082e7b</color>
+    <color name="colorSideBar">#bf1e34</color>
+
+    <color name="highlightRed">#c74759</color>
+
+    <!--  <color name="colorPrimary">#3F51B5</color>
+      <color name="colorPrimaryDark">#303F9F</color>-->
+    <!--    <color name="colorAccent">#FF4081</color>-->
+
+    <!--  <color name="star1">#EE0000</color>
+      <color name="star2">#FFA500</color>
+      <color name="star3">#e6e610</color>
+      <color name="star4">#58ea58</color>
+      <color name="star5">#006400</color>
+      <color name="star0">#758075</color>-->
+
+    <color name="audioClicked">#7981ac</color>
+    <color name="darkBlue">#02023b</color>
+</resources>

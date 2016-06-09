@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:minHeight="?android:listPreferredItemHeightSmall"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    >
+    <!--android:background="@drawable/rowselect"-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:theme="@style/AppTheme">
+
+        <LinearLayout
+            android:id="@+id/ll_exam_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/marginStar"
+            android:paddingRight="@dimen/marginStar"
+            android:paddingTop="@dimen/marginTop">
+
+            <TextView
+                android:id="@+id/examName"
+                android:gravity="left"
+                android:layout_marginLeft="@dimen/marginStar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Primary text"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorAccent"
+                android:typeface="serif" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_exam_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/marginStar"
+            android:paddingRight="@dimen/marginStar"
+            android:paddingTop="@dimen/marginTop">
+
+            <TextView
+                android:id="@+id/exam_details"
+                android:gravity="left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginStar"
+                android:layout_marginRight="@dimen/marginStar"
+                android:text="Primary text hi thi is test tect"
+                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textColor="@color/colorButton"
+                android:typeface="serif" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_exam_subdetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/marginTop"
+            android:paddingLeft="@dimen/marginStar"
+            android:paddingRight="@dimen/marginStar">
+
+            <TextView
+                android:id="@+id/exam_subdetails"
+                android:gravity="left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginStar"
+                android:layout_marginRight="@dimen/marginStar"
+                android:text="Primary text"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/audioClicked"
+                android:typeface="serif" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

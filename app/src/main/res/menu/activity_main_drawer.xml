@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_audiotraining"
+            android:title="@string/nav_audiotraining"  />
+        <item android:id="@+id/nav_playlist"
+            android:title="@string/nav_playlist" />
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item android:id="@+id/nav_logout" android:icon="@android:drawable/ic_lock_power_off"
+                android:title="@string/nav_logout" />
+        </menu>
+    </item>
+
+    <!--<group android:checkableBehavior="single">
+        <item android:id="@+id/nav_audiotraining" android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/nav_audiotraining"  />
+        <item android:id="@+id/nav_freeaudio" android:icon="@android:drawable/ic_menu_upload_you_tube"
+            android:title="@string/nav_freeaudios" />
+        <item android:id="@+id/nav_playlist" android:icon="@android:drawable/ic_menu_upload_you_tube"
+            android:title="@string/nav_playlist" />
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item android:id="@+id/nav_logout" android:icon="@android:drawable/ic_lock_power_off"
+                android:title="@string/nav_logout" />
+        </menu>
+    </item>-->
+
+</menu>

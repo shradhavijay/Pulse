@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pmpulse"
+    android:versionCode="2"
+    android:versionName="2.0">
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="23"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/pmmobile"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.FeaturesActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name="com.pmpulse.ui.LoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateVisible|adjustUnspecified"/>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name="com.pmpulse.ui.MainActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name="com.pmpulse.ui.AudioActivity"
+            android:excludeFromRecents="true"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name="com.pmpulse.ui.AudioPlaylistActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name="com.pmpulse.ui.FreeAudioActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"/>
+        <service
+            android:name="com.pmpulse.mediacontrol.AudioService"/>
+
+        <activity
+            android:label="@string/app_name"
+            android:name="com.pmpulse.ui.A2ZLoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateVisible|adjustUnspecified"/>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name="com.pmpulse.ui.A2ZMainActivity"
+            android:configChanges="orientation|screenSize"/>
+    </application>
+
+</manifest>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView
+        android:gravity="center_horizontal"
+        android:text="sds"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/colorAccent"
+        android:layout_marginBottom="@dimen/marginSmall"
+        android:layout_marginLeft="@dimen/marginSmall"
+        android:typeface="serif"
+        android:id="@+id/songTitleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
