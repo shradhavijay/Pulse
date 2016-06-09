@@ -101,7 +101,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
         navigationView = (NavigationView) findViewById(R.id.nav_view_a2z);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(R.id.nav_takeexam_a2z).setChecked(true);
-        //to set email id in side drawer
+        //to set username in side drawer
         TextView userName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userNameA2Z);
         userName.setText("User");
 
@@ -129,7 +129,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_a2z);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -148,8 +148,8 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
         if (checkUserLoggedIn.isUserLogged()) {
             // Handle navigation view item clicks here.
             int id = item.getItemId();
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-           // drawer.closeDrawer(GravityCompat.START);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_a2z);
+           drawer.closeDrawer(GravityCompat.START);
 
             if (id == R.id.nav_takeexam_a2z) {
                 getSupportActionBar().setTitle(getString(R.string.nav_take_exam));
