@@ -56,6 +56,9 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
         inflateExams();
     }
     private void loadTempData(){
+
+        mapExamDetails.clear();
+        examName.clear();
         examName.add("PMP Simulation");
         examName.add("PMP - KA Questions");
 
@@ -153,14 +156,14 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
 
             if (id == R.id.nav_takeexam_a2z) {
                 getSupportActionBar().setTitle(getString(R.string.nav_take_exam));
-               inflateExams();
+              inflateExams();
             } else if (id == R.id.nav_logout) {
                 confirmLogout();
             } else if (id == R.id.nav_examhistory) {
                 getSupportActionBar().setTitle(getString(R.string.nav_exam_history));
                 //   PlayList playList = new PlayList();
                 //   List<PlayList> playListList = playList.getPlayList();
-                //inflatePlaylist();
+              //  inflatePlaylist();
             } else if (id == R.id.nav_contact){
                getSupportActionBar().setTitle(getString(R.string.nav_contactus));
                 navigationView.getMenu().findItem(R.id.nav_contact).setChecked(true);
@@ -175,6 +178,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
     private void inflateExams() {
         //for temp data
         loadTempData();
+        //todo handle for no data
         navigationView.getMenu().findItem(R.id.nav_takeexam_a2z).setChecked(true);
         getSupportActionBar().setTitle(getString(R.string.nav_take_exam));
         myLayout.removeAllViews();
@@ -196,21 +200,24 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
     }
 
 
-    /*private void inflatePlaylist() {
+  /*  private void inflatePlaylist() {
         navigationView.getMenu().findItem(R.id.nav_playlist).setChecked(true);
         //get playlists
-        DBQuery dbQuery = new DBQuery(this);
-        List<String> playlist = dbQuery.getAllPlayListNames();
+       // DBQuery dbQuery = new DBQuery(this);
+      //  List<String> playlist = dbQuery.getAllPlayListNames();
         if (playlist.size() > 0) {
+            navigationView.getMenu().findItem(R.id.nav_takeexam_a2z).setChecked(true);
+            getSupportActionBar().setTitle(getString(R.string.nav_take_exam));
             myLayout.removeAllViews();
+
             hiddenInfo = getLayoutInflater().inflate(R.layout.module_playlist, myLayout, false);
             lv_topic = (ListView) hiddenInfo.findViewById(R.id.lv_topic);
             PlayListsAdapter adapter = new PlayListsAdapter(playlist, A2ZMainActivity.this);
             myLayout.addView(hiddenInfo);
             lv_topic.setAdapter(adapter);
         } else {
-            getSupportActionBar().setTitle(getString(R.string.nav_audiotraining));
-            showAlert(getString(R.string.error_no_playlist));
+            getSupportActionBar().setTitle(getString(R.string.nav_take_exam));
+            showAlert(getString(R.string.error_no_exam_history));
         }
     }*/
 
