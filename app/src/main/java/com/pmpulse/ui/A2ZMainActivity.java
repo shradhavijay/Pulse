@@ -24,8 +24,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pmpulse.R;
+import com.pmpulse.baseadapter.ExamHistoryAdapter;
 import com.pmpulse.baseadapter.TakeExamAdapter;
 import com.pmpulse.data.ExamDetails;
+import com.pmpulse.data.ExamResult;
 import com.pmpulse.data.KeyValues;
 import com.pmpulse.serviceutil.CheckA2ZUserLoggedIn;
 
@@ -35,13 +37,16 @@ import java.util.List;
 
 public class A2ZMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-   LinearLayout myLayout;
+    LinearLayout myLayout;
     ExpandableListView elv_take_exam;
     View hiddenInfo;
     NavigationView navigationView;
     View main_progress;
     List<String> examName = new ArrayList<String>();
     HashMap<String, List<ExamDetails>> mapExamDetails = new HashMap<String, List<ExamDetails>>();
+    List<ExamDetails> listExamHistory = new ArrayList<ExamDetails>();
+    //HashMap<String, List<ExamResult>> examScore = new HashMap<>();
+    HashMap<ExamDetails, ExamResult> examHistory = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,8 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
 
         inflateExams();
     }
-    private void loadTempData(){
+
+    private void loadTempData() {
 
         mapExamDetails.clear();
         examName.clear();
@@ -89,8 +95,79 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
         mapExamDetails.put(examName.get(0), listExamDetails);
         mapExamDetails.put(examName.get(1), listExamDetails);
     }
+
+    private void loadtempHistory() {
+
+        //examHistoryDetails.clear();
+        //examScore.clear();
+        ExamDetails examDetails = new ExamDetails();
+        ExamResult examResult = new ExamResult();
+        examDetails.setExamName("PMP ninja kick exam 1");
+        examDetails.setCategory("PMP Ninja Kick");
+        examDetails.setChapter("PM Chap");
+        examDetails.setDuration("4:0:0");
+        examDetails.setTotalQuestion("200");
+        examDetails.setTotalMarks("200");
+        examDetails.setPassingMarks("61%");
+
+        examResult.setExamDate("04/05/2016");
+        examResult.setTimeTaken("01:05:25");
+        examResult.setScore("65%");
+        examResult.setAttempted("24");
+        examResult.setCorrectAnswer("19");
+        examResult.setOverallStatus("Pass");
+        examResult.setExamName(examDetails.getExamName());
+
+        ExamDetails examDetails1 = new ExamDetails();
+        ExamResult examResult1 = new ExamResult();
+        examDetails1.setExamName("PMP ninja kick exam 2");
+        examDetails1.setCategory("PMP Ninja Kick");
+        examDetails1.setChapter("PM Chap");
+        examDetails1.setDuration("4:0:0");
+        examDetails1.setTotalQuestion("200");
+        examDetails1.setTotalMarks("200");
+        examDetails1.setPassingMarks("61%");
+
+        examResult1.setExamDate("06/02/2016");
+        examResult1.setTimeTaken("01:00:00");
+        examResult1.setScore("5%");
+        examResult1.setAttempted("24");
+        examResult1.setCorrectAnswer("14");
+        examResult1.setOverallStatus("Fail");
+        examResult1.setExamName(examDetails1.getExamName());
+
+
+        ExamDetails examDetails2 = new ExamDetails();
+        ExamResult examResult2 = new ExamResult();
+        examDetails2.setExamName("PMP ninja kick exam 3");
+        examDetails2.setCategory("PMP  Kick");
+        examDetails2.setChapter("PMChap");
+        examDetails2.setDuration("3:0:0");
+        examDetails2.setTotalQuestion("220");
+        examDetails2.setTotalMarks("2020");
+        examDetails2.setPassingMarks("61%");
+
+        examResult2.setExamDate("04/04/2016");
+        examResult2.setTimeTaken("01:30:00");
+        examResult2.setScore("55%");
+        examResult2.setAttempted("45");
+        examResult2.setCorrectAnswer("42");
+        examResult2.setOverallStatus("Pass");
+        examResult2.setExamName(examDetails2.getExamName());
+
+        List<ExamDetails> listExamDetails = new ArrayList<>();
+        listExamDetails.add(examDetails);
+        listExamDetails.add(examDetails1);
+        listExamDetails.add(examDetails2);
+
+        listExamHistory = listExamDetails;
+        examHistory.put(examDetails, examResult);
+        examHistory.put(examDetails1, examResult1);
+        examHistory.put(examDetails2, examResult2);
+    }
+
     private void initializeView() {
-       myLayout = (LinearLayout) findViewById(R.id.ll_module_chap_az);
+        myLayout = (LinearLayout) findViewById(R.id.ll_module_chap_az);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarA2Z);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.nav_take_exam));
@@ -117,9 +194,9 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
         String title = (getSupportActionBar().getTitle().toString());
         if (title.equals(getResources().getString(R.string.nav_take_exam))) {
             navigationView.getMenu().findItem(R.id.nav_takeexam_a2z).setChecked(true);
-        } else if(title.equals(getResources().getString(R.string.nav_exam_history))){
+        } else if (title.equals(getResources().getString(R.string.nav_exam_history))) {
             navigationView.getMenu().findItem(R.id.nav_examhistory).setChecked(true);
-        }else if (title.equals(getResources().getString(R.string.nav_contactus))){
+        } else if (title.equals(getResources().getString(R.string.nav_contactus))) {
             System.out.println("hih");
             navigationView.getMenu().findItem(R.id.nav_contact).setChecked(true);
         }
@@ -152,27 +229,25 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
             // Handle navigation view item clicks here.
             int id = item.getItemId();
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_a2z);
-           drawer.closeDrawer(GravityCompat.START);
+            drawer.closeDrawer(GravityCompat.START);
 
             if (id == R.id.nav_takeexam_a2z) {
                 getSupportActionBar().setTitle(getString(R.string.nav_take_exam));
-              inflateExams();
+                inflateExams();
             } else if (id == R.id.nav_logout) {
                 confirmLogout();
             } else if (id == R.id.nav_examhistory) {
                 getSupportActionBar().setTitle(getString(R.string.nav_exam_history));
-                //   PlayList playList = new PlayList();
-                //   List<PlayList> playListList = playList.getPlayList();
-              //  inflatePlaylist();
-            } else if (id == R.id.nav_contact){
-               getSupportActionBar().setTitle(getString(R.string.nav_contactus));
+                inflateHistory();
+            } else if (id == R.id.nav_contact) {
+                getSupportActionBar().setTitle(getString(R.string.nav_contactus));
                 navigationView.getMenu().findItem(R.id.nav_contact).setChecked(true);
             }
         } else {
             Intent intent = new Intent(A2ZMainActivity.this, FeaturesActivity.class);
             startActivity(intent);
         }
-            return true;
+        return true;
     }
 
     private void inflateExams() {
@@ -200,26 +275,35 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
     }
 
 
-  /*  private void inflatePlaylist() {
-        navigationView.getMenu().findItem(R.id.nav_playlist).setChecked(true);
-        //get playlists
-       // DBQuery dbQuery = new DBQuery(this);
-      //  List<String> playlist = dbQuery.getAllPlayListNames();
-        if (playlist.size() > 0) {
+    private void inflateHistory() {
+        navigationView.getMenu().findItem(R.id.nav_examhistory).setChecked(true);
+        loadtempHistory();
+        if (examHistory.size() > 0) {
             navigationView.getMenu().findItem(R.id.nav_takeexam_a2z).setChecked(true);
-            getSupportActionBar().setTitle(getString(R.string.nav_take_exam));
+            getSupportActionBar().setTitle(getString(R.string.nav_exam_history));
             myLayout.removeAllViews();
+            hiddenInfo = getLayoutInflater().inflate(R.layout.module_take_exam, myLayout, false);
+            elv_take_exam = (ExpandableListView) hiddenInfo.findViewById(R.id.elv_take_exam);
 
-            hiddenInfo = getLayoutInflater().inflate(R.layout.module_playlist, myLayout, false);
-            lv_topic = (ListView) hiddenInfo.findViewById(R.id.lv_topic);
-            PlayListsAdapter adapter = new PlayListsAdapter(playlist, A2ZMainActivity.this);
+            ExamHistoryAdapter adapter = new ExamHistoryAdapter(A2ZMainActivity.this, listExamHistory, examHistory);
+            TextView tv_module = (TextView) hiddenInfo.findViewById(R.id.tv_module_az);
+            tv_module.setText(getString(R.string.a2z_test_center));
+            main_progress = hiddenInfo.findViewById(R.id.main_progress_az);
             myLayout.addView(hiddenInfo);
-            lv_topic.setAdapter(adapter);
+            elv_take_exam.setAdapter(adapter);
+
+            elv_take_exam.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                @Override
+                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                    return false;
+                }
+            });
+
         } else {
             getSupportActionBar().setTitle(getString(R.string.nav_take_exam));
             showAlert(getString(R.string.error_no_exam_history));
         }
-    }*/
+    }
 
     //show alert dialog
     private void confirmLogout() {
@@ -240,7 +324,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
     }
 
     private void logout() {
-            //TODO logout functionality
+        //TODO logout functionality
         Intent intent = new Intent(A2ZMainActivity.this, FeaturesActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         // intent.putExtra(KeyValues.KEY_FEATURE_NAME, getString(R.string.nav_freeaudios));
@@ -435,8 +519,8 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
     }*/
 
     //show alert dialog
-  /*  private void showAlert(String message) {
-     //   lv_topic.setVisibility(View.VISIBLE);
+    private void showAlert(String message) {
+        //   lv_topic.setVisibility(View.VISIBLE);
         AlertDialog.Builder alert = new AlertDialog.Builder(A2ZMainActivity.this);
         alert.setMessage(message);
         alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
@@ -445,7 +529,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
             }
         });
         alert.show();
-    }*/
+    }
 
    /* class TopicInnerAdapter extends BaseAdapter {
 
