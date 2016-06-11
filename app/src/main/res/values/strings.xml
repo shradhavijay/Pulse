@@ -25,6 +25,7 @@
     <string name="error_no_playlist_found">No playlist found. Do you want to create a new playlist?</string>
     <string name="error_chapter_already_added">This chapter is already added in playlist.</string>
     <string name="error_no_playlist">No playlist found. Please create a playlist in PM-Dhwani section.</string>
+    <string name="error_no_exam_history">No exam history found.</string>
     <string name="error_blank_playlistname">Playlist field is required</string>
     <string name="error_no_chapter_added_in_playlist">No chapter added in this Playlist.  Please add chapters in playlist in PM-Dhwani section.</string>
     <string name="error_training_not_heard">It seems you have not heard this training audio. Please hear it and then provide your rating.</string>
@@ -74,5 +75,6 @@
     <string name="stop_player">Stop Training</string>
 
     <string name="a2z_exam_simulator">A2Z Exam Simulator</string>
+    <string name="a2z_test_center">A2Z Test Center</string>
 
 </resources>
