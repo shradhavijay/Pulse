@@ -144,7 +144,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
         examDetails2.setChapter("PMChap");
         examDetails2.setDuration("3:0:0");
         examDetails2.setTotalQuestion("220");
-        examDetails2.setTotalMarks("2020");
+        examDetails2.setTotalMarks("220");
         examDetails2.setPassingMarks("61%");
 
         examResult2.setExamDate("04/04/2016");
