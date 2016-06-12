@@ -12,6 +12,7 @@
 
     <!-- Screen margintop for Login Page-->
     <dimen name="activity_margin_top">60dp</dimen>
+    <dimen name="tv_margin_top">40dp</dimen>
 
     <!-- Icon Size -->
     <dimen name="ic_width">25dp</dimen>
