@@ -104,7 +104,6 @@ public class ExamHistoryAdapter extends BaseExpandableListAdapter {
         //Set details
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.examHistoryName);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(examDetails.getExamName());
 
         TextView tv_examDetails = (TextView) convertView.findViewById(R.id.exam_history_details);
