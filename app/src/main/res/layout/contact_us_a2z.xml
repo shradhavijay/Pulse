@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/ic_width"
+        android:paddingRight="@dimen/marginSmall"
+        android:paddingTop="@dimen/activity_margin_top">
+
+        <TextView
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/colorButton"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_feedback" />
+
+        <TextView
+            android:paddingTop="@dimen/marginSmall"
+            android:paddingBottom="@dimen/marginSmall"
+            android:background="@drawable/rowselect"
+            android:id="@+id/email_fedback"
+            android:textAppearance="?android:textAppearanceListItemSmall"
+            android:textStyle="italic"
+            android:textColor="@color/colorAccent"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/ic_width"
+            android:text="@string/email_feedback" />
+
+        <TextView
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/colorButton"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/tv_margin_top"
+            android:text="@string/contact_account" />
+
+        <TextView
+            android:paddingTop="@dimen/marginSmall"
+            android:paddingBottom="@dimen/marginSmall"
+            android:background="@drawable/rowselect"
+            android:id="@+id/email_admin"
+            android:textAppearance="?android:textAppearanceListItemSmall"
+            android:textStyle="italic"
+            android:textColor="@color/colorAccent"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/ic_width"
+            android:text="@string/email_admin" />
+
+        <TextView
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/colorButton"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/tv_margin_top"
+            android:text="@string/contact_technical" />
+
+        <TextView
+            android:paddingTop="@dimen/marginSmall"
+            android:paddingBottom="@dimen/marginSmall"
+            android:background="@drawable/rowselect"
+            android:id="@+id/email_technical"
+            android:textAppearance="?android:textAppearanceListItemSmall"
+            android:textStyle="italic"
+            android:textColor="@color/colorAccent"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/ic_width"
+            android:text="@string/email_technical" />
+
+        <TextView
+            android:paddingTop="@dimen/marginSmall"
+            android:paddingBottom="@dimen/marginSmall"
+            android:background="@drawable/rowselect"
+            android:id="@+id/call_technical"
+            android:textAppearance="?android:textAppearanceListItemSmall"
+            android:textStyle="italic"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:textColor="@color/colorAccent"
+            android:typeface="serif"
+            android:layout_marginBottom="@dimen/ic_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/ic_width"
+            android:text="@string/mobile_technical" />
+
+    </LinearLayout>
+</ScrollView>
