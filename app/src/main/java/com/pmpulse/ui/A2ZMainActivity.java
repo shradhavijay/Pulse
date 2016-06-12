@@ -308,7 +308,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
     //show alert dialog
     private void confirmLogout() {
         AlertDialog.Builder alert = new AlertDialog.Builder(A2ZMainActivity.this);
-        alert.setMessage(getString(R.string.message_logout));
+        alert.setMessage(getString(R.string.message_logout_a2Z));
         alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 logout();
