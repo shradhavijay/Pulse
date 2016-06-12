@@ -99,7 +99,6 @@ public class TakeExamAdapter extends BaseExpandableListAdapter{
 
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.examTitle);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 
         return convertView;
