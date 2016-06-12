@@ -7,7 +7,9 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -22,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pmpulse.R;
 import com.pmpulse.baseadapter.ExamHistoryAdapter;
@@ -237,13 +240,83 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
                 inflateHistory();
             } else if (id == R.id.nav_contact) {
                 getSupportActionBar().setTitle(getString(R.string.nav_contactus));
-                navigationView.getMenu().findItem(R.id.nav_contact).setChecked(true);
+                inflateContact();
             }
         } else {
             Intent intent = new Intent(A2ZMainActivity.this, FeaturesActivity.class);
             startActivity(intent);
         }
         return true;
+    }
+
+    private void inflateContact(){
+        myLayout.removeAllViews();
+        navigationView.getMenu().findItem(R.id.nav_contact).setChecked(true);
+        hiddenInfo = getLayoutInflater().inflate(R.layout.contact_us_a2z, myLayout, false);
+        myLayout.addView(hiddenInfo);
+
+        initializeContactUs();
+    }
+
+    private void initializeContactUs() {
+        TextView email_feedback = (TextView) findViewById(R.id.email_fedback);
+        email_feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                writeEmail(getString(R.string.email_feedback), getString(R.string.subject_feedback), getString(R.string.body_email));
+            }
+        });
+
+        TextView email_admin = (TextView) findViewById(R.id.email_admin);
+        email_admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                writeEmail(getString(R.string.email_admin), getString(R.string.subject_admin), getString(R.string.dear_admin));
+            }
+        });
+
+        TextView call_technical = (TextView) findViewById(R.id.call_technical);
+        call_technical.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callTechnical();
+            }
+        });
+
+        TextView email_technical = (TextView) findViewById(R.id.email_technical);
+        email_technical.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                writeEmail(getString(R.string.email_technical), getString(R.string.subject_technical), getString(R.string.body_email));
+            }
+        });
+    }
+    private void writeEmail(String emailId, String subject, String body){
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{emailId});
+        i.putExtra(Intent.EXTRA_SUBJECT, subject);
+        i.putExtra(Intent.EXTRA_TEXT   , body);
+        try {
+            startActivity(Intent.createChooser(i, getString(R.string.send_mail)));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(A2ZMainActivity.this, getString(R.string.no_emailclients), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //makes call to technical assistant
+    private void callTechnical(){
+        if(checkWriteExternalPermission()){
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + getString(R.string.mobile_technical)));
+            startActivity(intent);
+        }
+    }
+
+    //checks id user has granted calling permission
+    private boolean checkWriteExternalPermission(){
+        String permission = "android.permission.CALL_PHONE";
+        int res = checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
     }
 
     private void inflateExams() {
