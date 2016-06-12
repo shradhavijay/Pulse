@@ -45,6 +45,7 @@
             android:layout_marginBottom="@dimen/marginStar"
             android:layout_marginTop="@dimen/marginStar"
             android:text="Primary text"
+            android:textStyle="bold"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/colorButton"
             android:typeface="serif" />
