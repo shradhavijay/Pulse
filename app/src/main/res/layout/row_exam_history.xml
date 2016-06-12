@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/marginStar"
                 android:layout_marginTop="@dimen/marginStar"
+                android:textStyle="bold"
                 android:text="Primary text"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorButton"
