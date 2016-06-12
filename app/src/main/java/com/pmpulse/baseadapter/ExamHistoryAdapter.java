@@ -45,8 +45,8 @@ public class ExamHistoryAdapter extends BaseExpandableListAdapter {
         TextView exam_score_details = (TextView) convertView.findViewById(R.id.exam_history_score);
         exam_score_details.setText(childText.getDuration() + " Duration   " + childText.getTotalQuestion() + " Questions   " +
                 childText.getTotalMarks() + " Total Marks   " + childText.getPassingMarks() + " Passing Marks");
-        exam_details.setText("Exam Date "+childResult.getExamDate()+ "  Time Taken "+childResult.getTimeTaken() +" Attempted " +childResult.getAttempted()
-                 + "  Correct Answers "+childResult.getCorrectAnswer() + "  Score(%) "+ childResult.getScore() + "  Overall Status "+childResult.getOverallStatus());
+        exam_details.setText("Exam Date "+childResult.getExamDate()+ "   Time Taken "+childResult.getTimeTaken() +"   Attempted " +childResult.getAttempted()
+                 + "   Correct Answers "+childResult.getCorrectAnswer() + "   Score(%) "+ childResult.getScore() + "   Overall Status "+childResult.getOverallStatus());
         return convertView;
     }
 
