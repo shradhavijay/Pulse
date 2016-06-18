@@ -249,11 +249,10 @@ public class A2ZLoginActivity extends AppCompatActivity {
                 try {
                     //TODO connect to service
                     // Simulate network access.
-                    /*String response = new ConnectionMaker().service(KeyValues.urlLogin + "/" + mEmail + "/" + mPassword+"^"+udid, ConnectionMaker.METHOD_GET);
+                    String response = new ConnectionMaker().serviceA2Z(KeyValues.urlLoginA2Z+"/" + mEmail + "/" + mPassword+"/"+udid, ConnectionMaker.METHOD_GET);
                     if (KeyValues.isDebug)
                         System.out.println("response " + response);
-                    return response;*/
-                    return "";
+                    return response;
                 } catch (Exception e) {
                     return null;
                 }

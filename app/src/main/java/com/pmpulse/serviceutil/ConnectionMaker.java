@@ -77,4 +77,84 @@ public class ConnectionMaker {
         }
         return null;
     }
+
+    public String serviceA2Z(String url, String methodType) {
+        if(KeyValues.isDebug)
+            System.out.println("url "+url);
+        HttpURLConnection con = null;
+        InputStream is = null;
+        ByteArrayOutputStream outStream = null;
+        try {
+            con = (HttpURLConnection) (new URL(url)).openConnection();
+            con.setRequestMethod(methodType);
+            //con.setDoInput(false);
+            //con.setDoOutput(false);
+            con.setRequestProperty("Content-Type", "application/json");
+
+            con.setConnectTimeout(KeyValues.TIMEOUT);
+            con.connect(); // Let's read the response
+
+            try {
+                is = con.getInputStream();
+                outStream = new ByteArrayOutputStream();
+
+                byte[] returnData = new byte[1024];
+                int size = -1;
+
+                while ((size = is.read(returnData)) != -1) {
+                    outStream.write(returnData, 0, size);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            byte[] responseByte = outStream.toByteArray();
+            String response = new String(responseByte);
+            con.disconnect();
+            return response;
+        } catch (Throwable t) {
+            t.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (Throwable t) {
+            }
+            try {
+                con.disconnect();
+            } catch (Throwable t) {
+            }
+        }
+        return null;
+    }
+
+
+   /* public Users AuthenticateUser(string UserID, string Pwd)
+    {
+        HttpWebRequest req = null;
+        HttpWebResponse res = null;
+        //string url = "http://localhost:57814/A2ZService.svc/Rest/UserAuthentication/" + UserID + "/" + Pwd + "/" + Session.SessionID;
+        string url = "http://a2zservice.pm-pulse.com/A2ZService.svc/Rest/UserAuthentication/" + UserID + "/" + Pwd + "/" + Session.SessionID;
+        req = (HttpWebRequest)WebRequest.Create(url);
+        req.Method = "GET";
+        req.ContentType = "application/json; charset=utf-8";
+
+        req.Headers["ABC"] = "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(UserID + ":" + Pwd + ":check"));
+        string str = Convert.ToString(req.Headers["ABC"]);
+        res = (HttpWebResponse)req.GetResponse();
+        Stream responseStream = res.GetResponseStream();
+        var streamReader = new StreamReader(responseStream);
+
+        string txt = streamReader.ReadToEnd();
+        streamReader.Close();
+        streamReader.Dispose();
+
+        responseStream.Close();
+        responseStream.Dispose();
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        Users usr =  (Users)js.Deserialize(txt, typeof(Users));
+        Session["LoggedInUser"] = usr;
+        return usr;
+
+    }*/
 }
