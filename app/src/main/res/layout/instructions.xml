@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/marginStar"
+        android:paddingRight="@dimen/marginStar">
+
+
+
+        <TextView
+            android:layout_marginBottom="@dimen/marginStar"
+            android:layout_marginTop="@dimen/marginStar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textStyle="bold"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/colorButton"
+            android:typeface="serif"
+
+            />
+
+
+        <TextView
+            android:layout_marginTop="@dimen/marginStar"
+            android:textAppearance="?android:textAppearanceListItemSmall"
+            android:textColor="@color/colorButton"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/topic_covered" />
+
+
+        <TextView
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/audioClicked"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="topic" />
+
+
+        <TextView
+            android:layout_marginTop="@dimen/marginStar"
+            android:textAppearance="?android:textAppearanceListItemSmall"
+            android:textColor="@color/colorButton"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/duration" />
+
+
+        <TextView
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/audioClicked"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="duration" />
+
+
+        <TextView
+            android:layout_marginTop="@dimen/marginStar"
+            android:textAppearance="?android:textAppearanceListItemSmall"
+            android:textColor="@color/colorButton"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/instructions" />
+
+        <TextView
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/audioClicked"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="instructions" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/email_sign_in_button"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/buttonred"
+        android:text="@string/action_start_test"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:typeface="serif" />
+</RelativeLayout>
