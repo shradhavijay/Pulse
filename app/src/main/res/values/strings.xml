@@ -8,6 +8,10 @@
     <string name="action_sign_in">Login</string>
     <string name="action_sign_in_short">Login</string>
     <string name="action_start_test">Start Test</string>
+    <string name="action_next">Next</string>
+    <string name="action_previous">Previous</string>
+    <string name="action_review">Review</string>
+    <string name="action_mark">Marked</string>
 
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -102,4 +106,7 @@
     <string name="instructions">Instructions:</string>
     <string name="exam_name">Exam</string>
 
+    <string name="question">Question 1 of 200</string>
+    <string name="time_remaining">Time Remaining : 03:15:17</string>
+    <string name="question_demo">There are many variations of passages teration in some form, by injected humour, or randomise?</string>
 </resources>

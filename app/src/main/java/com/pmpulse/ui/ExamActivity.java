@@ -6,11 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.pmpulse.R;
+import com.pmpulse.data.KeyValues;
 
 /**
  * Created by shradha on 18/6/16.
@@ -19,8 +22,36 @@ public class ExamActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.skill_test_a2z);
 
+        if (!KeyValues.isDebug)
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                    WindowManager.LayoutParams.FLAG_SECURE);
+        setContentView(R.layout.test_center);
+        TypefaceUtil.overrideFont(ExamActivity.this);
+        //for back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initialise();
+    }
+    private void initialise() {
+        getSupportActionBar().setTitle(getString(R.string.a2z_test_center));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here.
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
       /*  private void initialise() {
