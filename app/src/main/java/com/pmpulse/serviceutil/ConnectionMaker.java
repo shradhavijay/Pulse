@@ -88,8 +88,10 @@ public class ConnectionMaker {
             con = (HttpURLConnection) (new URL(url)).openConnection();
             con.setRequestMethod(methodType);
             //con.setDoInput(false);
-            //con.setDoOutput(false);
+            con.setDoOutput(false);
             con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Headers","Shradha:vijay");
+           // con.setRequestProperty("Headers","vijay");
 
             con.setConnectTimeout(KeyValues.TIMEOUT);
             con.connect(); // Let's read the response
