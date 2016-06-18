@@ -1,94 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginTop="@dimen/ic_height"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/ic_height"
     android:orientation="vertical">
 
     <ScrollView
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/take_exam_button"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
 
-
-        <TextView
-            android:id="@+id/tv_examname"
-            android:layout_marginBottom="@dimen/marginStar"
-            android:layout_marginTop="@dimen/marginStar"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/exam_name"
-            android:textStyle="bold"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:textColor="@color/colorButton"
-            android:typeface="serif"
-            android:gravity="center"
-            />
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:id="@+id/tv_examname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marginStar"
+                android:layout_marginTop="@dimen/marginStar"
+                android:gravity="center"
+                android:text="@string/exam_name"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@color/colorButton"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/topic_covered"
+                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textColor="@color/colorButton"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="topic"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/audioClicked"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/duration"
+                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textColor="@color/colorButton"
+                android:typeface="serif" />
 
 
-        <TextView
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textAppearance="?android:textAppearanceListItemSmall"
-            android:textColor="@color/colorButton"
-            android:typeface="serif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/topic_covered" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="duration"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/audioClicked"
+                android:typeface="serif" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/instructions"
+                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textColor="@color/colorButton"
+                android:typeface="serif" />
 
-        <TextView
-            android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="@color/audioClicked"
-            android:typeface="serif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="topic" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="instructions "
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/audioClicked"
+                android:typeface="serif" />
 
-
-        <TextView
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textAppearance="?android:textAppearanceListItemSmall"
-            android:textColor="@color/colorButton"
-            android:typeface="serif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/duration" />
-
-
-        <TextView
-            android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="@color/audioClicked"
-            android:typeface="serif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="duration" />
-
-
-        <TextView
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textAppearance="?android:textAppearanceListItemSmall"
-            android:textColor="@color/colorButton"
-            android:typeface="serif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/instructions" />
-
-        <TextView
-            android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="@color/audioClicked"
-            android:typeface="serif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="instructions" />
-
-    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
+
     <Button
         android:id="@+id/take_exam_button"
         style="?android:textAppearanceSmall"
