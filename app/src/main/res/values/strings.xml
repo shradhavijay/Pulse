@@ -99,6 +99,7 @@
     <!--Instructions for exam-->
     <string name="topic_covered">This test will cover the following topics:</string>
     <string name="duration">Duration:</string>
-    <string name="instructions">Instructions</string>
+    <string name="instructions">Instructions:</string>
+    <string name="exam_name">Exam</string>
 
 </resources>

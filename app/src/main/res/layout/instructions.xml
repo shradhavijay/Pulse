@@ -6,7 +6,6 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -14,13 +13,13 @@
         android:paddingRight="@dimen/marginStar">
 
 
-
         <TextView
+            android:id="@+id/tv_examname"
             android:layout_marginBottom="@dimen/marginStar"
             android:layout_marginTop="@dimen/marginStar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/exam_name"
             android:textStyle="bold"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/colorButton"
