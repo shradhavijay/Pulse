@@ -36,6 +36,7 @@ import com.pmpulse.data.ExamDetails;
 import com.pmpulse.data.ExamResult;
 import com.pmpulse.data.KeyValues;
 import com.pmpulse.serviceutil.CheckA2ZUserLoggedIn;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -586,7 +587,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = infalInflater.inflate(R.layout.row_take_exam_sub, null);
             }
-            TextView examTitle = (TextView) convertView.findViewById(R.id.examName);
+            final TextView examTitle = (TextView) convertView.findViewById(R.id.examName);
             TextView exam_details = (TextView) convertView.findViewById(R.id.exam_details);
             TextView exam_subdetails = (TextView) convertView.findViewById(R.id.exam_subdetails);
             examTitle.setText(childText.getExamName());
@@ -598,7 +599,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    loadInstructions();
+                    loadInstructions(examTitle.getText().toString());
                 }
             });
             return convertView;
@@ -662,8 +663,9 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
         }
 
         //transfer to Instructions activity
-        private void loadInstructions() {
+        private void loadInstructions(String examName) {
             Intent intent = new Intent(A2ZMainActivity.this, InstructionsActivity.class);
+            intent.putExtra(KeyValues.KEY_EXAM_NAME, examName);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
