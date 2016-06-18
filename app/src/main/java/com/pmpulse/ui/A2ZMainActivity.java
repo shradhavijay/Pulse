@@ -5,6 +5,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,9 +19,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,12 +32,10 @@ import android.widget.Toast;
 
 import com.pmpulse.R;
 import com.pmpulse.baseadapter.ExamHistoryAdapter;
-import com.pmpulse.baseadapter.TakeExamAdapter;
 import com.pmpulse.data.ExamDetails;
 import com.pmpulse.data.ExamResult;
 import com.pmpulse.data.KeyValues;
 import com.pmpulse.serviceutil.CheckA2ZUserLoggedIn;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -249,7 +251,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
         return true;
     }
 
-    private void inflateContact(){
+    private void inflateContact() {
         myLayout.removeAllViews();
         navigationView.getMenu().findItem(R.id.nav_contact).setChecked(true);
         hiddenInfo = getLayoutInflater().inflate(R.layout.contact_us_a2z, myLayout, false);
@@ -291,12 +293,13 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
             }
         });
     }
-    private void writeEmail(String emailId, String subject, String body){
+
+    private void writeEmail(String emailId, String subject, String body) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{emailId});
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{emailId});
         i.putExtra(Intent.EXTRA_SUBJECT, subject);
-        i.putExtra(Intent.EXTRA_TEXT   , body);
+        i.putExtra(Intent.EXTRA_TEXT, body);
         try {
             startActivity(Intent.createChooser(i, getString(R.string.send_mail)));
         } catch (android.content.ActivityNotFoundException ex) {
@@ -305,15 +308,15 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
     }
 
     //makes call to technical assistant
-    private void callTechnical(){
-        if(checkWriteExternalPermission()){
+    private void callTechnical() {
+        if (checkWriteExternalPermission()) {
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + getString(R.string.mobile_technical)));
             startActivity(intent);
         }
     }
 
     //checks id user has granted calling permission
-    private boolean checkWriteExternalPermission(){
+    private boolean checkWriteExternalPermission() {
         String permission = "android.permission.CALL_PHONE";
         int res = checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
@@ -560,5 +563,109 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
             }
         });
         alert.show();
+    }
+
+    private class TakeExamAdapter extends BaseExpandableListAdapter {
+
+        private Context context;
+        private List<String> examName;
+        private HashMap<String, List<ExamDetails>> examDetails;
+
+        public TakeExamAdapter(Context context, List<String> examName, HashMap<String, List<ExamDetails>> examDetails) {
+            this.context = context;
+            this.examName = examName;
+            this.examDetails = examDetails;
+        }
+
+        @Override
+        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+
+            final ExamDetails childText = (ExamDetails) (getChild(groupPosition, childPosition));
+            if (convertView == null) {
+                LayoutInflater infalInflater = (LayoutInflater) this.context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = infalInflater.inflate(R.layout.row_take_exam_sub, null);
+            }
+            TextView examTitle = (TextView) convertView.findViewById(R.id.examName);
+            TextView exam_details = (TextView) convertView.findViewById(R.id.exam_details);
+            TextView exam_subdetails = (TextView) convertView.findViewById(R.id.exam_subdetails);
+            examTitle.setText(childText.getExamName());
+            exam_details.setText(childText.getCategory() + " of Chapter " + childText.getChapter());
+            exam_subdetails.setText(childText.getDuration() + " Duration   " + childText.getTotalQuestion() + " Questions   " +
+                    childText.getTotalMarks() + " Total Marks   " + childText.getPassingMarks() + " Passing Marks");
+
+            //show instructions
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    loadInstructions();
+                }
+            });
+            return convertView;
+        }
+
+        @Override
+        public boolean isChildSelectable(int groupPosition, int childPosition) {
+            return true;
+        }
+
+        @Override
+        public int getGroupCount() {
+            return this.examName.size();
+        }
+
+        @Override
+        public int getChildrenCount(int groupPosition) {
+            return this.examDetails.get(this.examName.get(groupPosition)).size();
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return false;
+        }
+
+        @Override
+        public Object getChild(int groupPosition, int childPosition) {
+            return this.examDetails.get(this.examName.get(groupPosition)).get(childPosition);
+        }
+
+        @Override
+        public long getGroupId(int groupPosition) {
+            return groupPosition;
+        }
+
+        @Override
+        public Object getGroup(int groupPosition) {
+            return this.examName.get(groupPosition);
+        }
+
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {
+            return childPosition;
+        }
+
+        @Override
+        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+            String headerTitle = (String) getGroup(groupPosition);
+            if (convertView == null) {
+                LayoutInflater infalInflater = (LayoutInflater) this.context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = infalInflater.inflate(R.layout.row_take_exam, null);
+            }
+
+            TextView lblListHeader = (TextView) convertView
+                    .findViewById(R.id.examTitle);
+            lblListHeader.setText(headerTitle);
+
+            return convertView;
+
+        }
+
+        //transfer to Instructions activity
+        private void loadInstructions() {
+            Intent intent = new Intent(A2ZMainActivity.this, InstructionsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
     }
 }

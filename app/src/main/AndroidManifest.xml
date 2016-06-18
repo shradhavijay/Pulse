@@ -66,6 +66,10 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:name="com.pmpulse.ui.A2ZMainActivity"
             android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name="com.pmpulse.ui.InstructionsActivity"
+            android:excludeFromRecents="true"
+            android:configChanges="orientation|screenSize"/>
     </application>
 
 </manifest>
