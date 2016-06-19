@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/marginStar"
+    android:paddingRight="@dimen/marginStar">
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lay">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/marginStar"
+                android:layout_marginTop="@dimen/marginStar"
+                android:text="@string/exam_name"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@color/colorButton"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/marginSmall"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/marginStar"
+                android:paddingRight="@dimen/marginStar">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/marginStar"
+                    android:layout_marginTop="@dimen/marginStar"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/question"
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/marginStar"
+                    android:layout_marginTop="@dimen/marginStar"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="@string/time_remaining"
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marginStar"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/marginStar"
+                android:paddingRight="@dimen/marginStar"
+                android:text="@string/question_demo"
+                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textColor="@color/colorButton"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <RadioGroup
+                android:id="@+id/answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginSmall">
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintv"
+                    android:text="The standard chunk of Lorem Ipsum used "
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintv"
+                    android:text="The standard chunk of Lorem Ipsum used "
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintv"
+                    android:text="The standard chunk of Lorem Ipsum used "
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintv"
+                    android:text="The standard chunk of Lorem Ipsum used "
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/lay"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_prev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@android:drawable/ic_media_previous" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_mark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:tint="@android:color/white"
+                android:src="@android:drawable/btn_star_big_off" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:src="@android:drawable/ic_dialog_dialer" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_media_next" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

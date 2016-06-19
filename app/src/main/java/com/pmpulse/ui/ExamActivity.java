@@ -26,7 +26,7 @@ public class ExamActivity extends AppCompatActivity {
         if (!KeyValues.isDebug)
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                     WindowManager.LayoutParams.FLAG_SECURE);
-        setContentView(R.layout.test_center);
+        setContentView(R.layout.test_center_round);
         TypefaceUtil.overrideFont(ExamActivity.this);
         //for back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
