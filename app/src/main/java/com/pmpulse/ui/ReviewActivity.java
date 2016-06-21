@@ -1,14 +1,11 @@
 package com.pmpulse.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -16,71 +13,33 @@ import android.widget.TextView;
 
 import com.pmpulse.R;
 import com.pmpulse.data.KeyValues;
-import com.pmpulse.serviceutil.Parser;
 
 /**
- * Created by shradha on 18/6/16.
+ * Created by shradha on 21/6/16.
  */
-public class ExamActivity extends AppCompatActivity {
+public class ReviewActivity extends AppCompatActivity {
 
-    FloatingActionButton fab_review;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (!KeyValues.isDebug)
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                     WindowManager.LayoutParams.FLAG_SECURE);
-        setContentView(R.layout.test_center_round);
-        TypefaceUtil.overrideFont(ExamActivity.this);
+        setContentView(R.layout.review);
+        TypefaceUtil.overrideFont(ReviewActivity.this);
         //for back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initialise();
     }
     private void initialise() {
-        getSupportActionBar().setTitle(getString(R.string.a2z_test_center));
-        fab_review = (FloatingActionButton)findViewById(R.id.fab_review);
-        fab_review.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showReview();
-            }
-
-            private void showReview() {
-                Intent intent = new Intent(ExamActivity.this, ReviewActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here.
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
-
-      /*  private void initialise() {
         RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
-            ExamAdapter adapter = new ExamAdapter();
-            recList.setAdapter(adapter);
+        ExamAdapter adapter = new ExamAdapter();
+        recList.setAdapter(adapter);
     }
 
     public static class ExamViewHolder extends RecyclerView.ViewHolder{
@@ -93,20 +52,20 @@ public class ExamActivity extends AppCompatActivity {
     public class ExamAdapter extends RecyclerView.Adapter<ExamViewHolder>{
         @Override
         public void onBindViewHolder(ExamViewHolder holder, int position) {
-            holder.vName.setText("hdijhvfod");
+            holder.vName.setText("Test");
         }
 
         @Override
         public int getItemCount() {
-            return 1;
+            return 7;
         }
 
         @Override
         public ExamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext()).
-                    inflate(R.layout.row_skill_test, parent, false);
+                    inflate(R.layout.row_review, parent, false);
 
             return new ExamViewHolder(itemView);
         }
-    }*/
+    }
 }

@@ -74,6 +74,9 @@
             android:name=".ui.ExamActivity"
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true" />
+        <activity android:name=".ui.ReviewActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"/>
     </application>
 
 </manifest>
