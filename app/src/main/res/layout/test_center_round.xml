@@ -129,7 +129,7 @@
 
     <LinearLayout
         android:id="@+id/lay"
-
+        android:layout_marginBottom="@dimen/marginSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -146,6 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:scaleType="center"
                 android:src="@android:drawable/ic_media_previous" />
         </LinearLayout>
 
@@ -160,8 +161,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:tint="@android:color/white"
-                android:src="@android:drawable/btn_star_big_off" />
+                android:src="@android:drawable/btn_star_big_off"
+                android:tint="@android:color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -188,6 +189,7 @@
                 android:id="@+id/fab_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:scaleType="center"
                 android:src="@android:drawable/ic_media_next" />
         </LinearLayout>
 
