@@ -27,8 +27,6 @@ public class ReviewActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.review);
         TypefaceUtil.overrideFont(ReviewActivity.this);
-        //for back button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initialise();
     }
     private void initialise() {
@@ -43,21 +41,21 @@ public class ReviewActivity extends AppCompatActivity {
     }
 
     public static class ExamViewHolder extends RecyclerView.ViewHolder{
-        protected TextView vName;
+        protected TextView question_review;
         public ExamViewHolder(View v){
             super(v);
-            vName =  (TextView) v.findViewById(R.id.teg);
+            question_review =  (TextView) v.findViewById(R.id.question_review);
         }
     }
     public class ExamAdapter extends RecyclerView.Adapter<ExamViewHolder>{
         @Override
         public void onBindViewHolder(ExamViewHolder holder, int position) {
-            holder.vName.setText("Test");
+            holder.question_review.setText("Q No 1");
         }
 
         @Override
         public int getItemCount() {
-            return 7;
+            return 50;
         }
 
         @Override

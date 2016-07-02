@@ -4,13 +4,46 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    card_view:cardCornerRadius="4dp">
+    android:layout_marginBottom="@dimen/marginSmall"
+    android:layout_marginLeft="@dimen/fab_margin"
+    android:layout_marginRight="@dimen/fab_margin"
+    android:layout_marginTop="@dimen/marginSmall"
+    android:background="@android:color/transparent"
+    card_view:cardCornerRadius="@dimen/marginSmall">
 
-    <TextView
-        android:id="@+id/teg"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/exam_name"
-        />
+        android:layout_margin="@dimen/marginStar"
+        android:background="@drawable/rowselect"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/question_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/exam_name"
+            android:textAppearance="?android:textAppearanceListItemSmall"
+            android:textColor="@color/colorButton" />
+
+        <TextView
+            android:id="@+id/selected_answer_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Selected : A"
+            android:textAppearance="?android:textAppearanceListItemSmall"
+            android:textColor="@color/colorButton" />
+
+        <TextView
+            android:id="@+id/correct_answer_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Correct : D"
+            android:textAppearance="?android:textAppearanceListItemSmall"
+            android:textColor="@color/colorButton" />
+    </LinearLayout>
 </android.support.v7.widget.CardView>
