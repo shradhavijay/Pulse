@@ -2,6 +2,7 @@ package com.pmpulse.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,8 @@ import com.pmpulse.serviceutil.Parser;
 public class ExamActivity extends AppCompatActivity {
 
     FloatingActionButton fab_review;
+    TextView tv_time_remaining;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +40,12 @@ public class ExamActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initialise();
     }
+
     private void initialise() {
         getSupportActionBar().setTitle(getString(R.string.a2z_test_center));
-        fab_review = (FloatingActionButton)findViewById(R.id.fab_review);
+        fab_review = (FloatingActionButton) findViewById(R.id.fab_review);
+        tv_time_remaining = (TextView) findViewById(R.id.tv_time_remaining);
+
         fab_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +58,8 @@ public class ExamActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        startTimmer();
     }
 
     @Override
@@ -72,41 +80,25 @@ public class ExamActivity extends AppCompatActivity {
         finish();
     }
 
-      /*  private void initialise() {
-        RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
-        recList.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recList.setLayoutManager(llm);
+    private void startTimmer() {
+        int duration = 5;
 
-            ExamAdapter adapter = new ExamAdapter();
-            recList.setAdapter(adapter);
+        CountDownTimer countDownTimer = new CountDownTimer(606060, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long seconds = millisUntilFinished / 1000;
+                long s = seconds % 60;
+                long m = (seconds / 60) % 60;
+                long h = (seconds / (60 * 60)) % 24;
+                tv_time_remaining.setText("Time Remaining " + String.format("%d:%02d:%02d", h, m, s));
+            }
+
+            @Override
+            public void onFinish() {
+                tv_time_remaining.setText("Time Over");
+            }
+        };
+
+        countDownTimer.start();
     }
-
-    public static class ExamViewHolder extends RecyclerView.ViewHolder{
-        protected TextView vName;
-        public ExamViewHolder(View v){
-            super(v);
-            vName =  (TextView) v.findViewById(R.id.teg);
-        }
-    }
-    public class ExamAdapter extends RecyclerView.Adapter<ExamViewHolder>{
-        @Override
-        public void onBindViewHolder(ExamViewHolder holder, int position) {
-            holder.vName.setText("hdijhvfod");
-        }
-
-        @Override
-        public int getItemCount() {
-            return 1;
-        }
-
-        @Override
-        public ExamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext()).
-                    inflate(R.layout.row_skill_test, parent, false);
-
-            return new ExamViewHolder(itemView);
-        }
-    }*/
 }
