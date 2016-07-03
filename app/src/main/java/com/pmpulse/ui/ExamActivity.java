@@ -24,7 +24,7 @@ import com.pmpulse.serviceutil.Parser;
  */
 public class ExamActivity extends AppCompatActivity {
 
-    FloatingActionButton fab_review;
+    FloatingActionButton fab_review, fab_prev,fab_mark, fab_next;
     TextView tv_time_remaining;
 
     @Override
@@ -45,6 +45,30 @@ public class ExamActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getString(R.string.a2z_test_center));
         fab_review = (FloatingActionButton) findViewById(R.id.fab_review);
         tv_time_remaining = (TextView) findViewById(R.id.tv_time_remaining);
+        fab_prev = (FloatingActionButton) findViewById(R.id.fab_prev);
+        fab_mark = (FloatingActionButton) findViewById(R.id.fab_mark);
+        fab_next = (FloatingActionButton) findViewById(R.id.fab_next);
+
+        fab_prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        fab_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        fab_mark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         fab_review.setOnClickListener(new View.OnClickListener() {
             @Override
