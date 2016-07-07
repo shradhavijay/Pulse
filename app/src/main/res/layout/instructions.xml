@@ -53,6 +53,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/total_question"
+                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textColor="@color/colorButton"
+                android:typeface="serif" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="50"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/audioClicked"
+                android:typeface="serif" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:text="@string/duration"
                 android:textAppearance="?android:textAppearanceListItemSmall"
                 android:textColor="@color/colorButton"

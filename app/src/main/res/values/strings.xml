@@ -105,11 +105,13 @@
     <string name="duration">Duration:</string>
     <string name="instructions">Instructions:</string>
     <string name="exam_name">Exam</string>
+    <string name="total_question">Questions"</string>
 
     <string name="question">Question 1 of 200</string>
     <string name="time_remaining">Time Remaining : 03:15:17</string>
     <string name="question_demo">There are many variations of passages teration in some form, by injected humour, or randomise?</string>
-
+    <string name="exam_over">Total duration of time is over. Exam is submitted.</string>
+    <string name="exam_forced_finished">Due to invalid navigation, your exam has been submitted</string>
     <string name="question_number">Question No.</string>
     <string name="selected_option">Selected Option</string>
     <string name="marked">Marked</string>
