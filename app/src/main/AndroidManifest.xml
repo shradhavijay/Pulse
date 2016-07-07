@@ -78,7 +78,7 @@
             android:name=".ui.ReviewActivity"
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
     </application>
 
 </manifest>

@@ -8,8 +8,9 @@
     android:layout_marginLeft="@dimen/fab_margin"
     android:layout_marginRight="@dimen/fab_margin"
     android:layout_marginTop="@dimen/marginSmall"
+    card_view:cardElevation="@dimen/fab_margin"
     android:background="@android:color/transparent"
-    card_view:cardCornerRadius="@dimen/marginSmall">
+    card_view:cardCornerRadius="@dimen/marginStar">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -12,6 +12,7 @@
     <string name="action_previous">Previous</string>
     <string name="action_review">Review</string>
     <string name="action_mark">Marked</string>
+    <string name="action_submit_exam">Submit Exam</string>
 
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -116,5 +117,6 @@
     <string name="selected_option">Selected Option</string>
     <string name="marked">Marked</string>
     <string name="correct_option">Correct Option</string>
+    <string name="review_answer">Review Answers</string>
 
 </resources>

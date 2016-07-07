@@ -40,6 +40,7 @@
                 android:paddingRight="@dimen/marginStar">
 
                 <TextView
+                    android:id="@+id/question_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/marginStar"
@@ -74,6 +75,7 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:id="@+id/question_test_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/marginStar"
@@ -93,6 +95,7 @@
                 android:layout_marginTop="@dimen/marginSmall">
 
                 <RadioButton
+                    android:id="@+id/answerA"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margintv"
@@ -101,6 +104,7 @@
                     android:textColor="@color/colorButton" />
 
                 <RadioButton
+                    android:id="@+id/answerB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margintv"
@@ -109,6 +113,7 @@
                     android:textColor="@color/colorButton" />
 
                 <RadioButton
+                    android:id="@+id/answerC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margintv"
@@ -117,6 +122,7 @@
                     android:textColor="@color/colorButton" />
 
                 <RadioButton
+                    android:id="@+id/answerD"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margintv"
@@ -130,13 +136,14 @@
 
     <LinearLayout
         android:id="@+id/lay"
-        android:layout_marginBottom="@dimen/marginSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/marginSmall"
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/lay_prev"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -181,6 +188,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lay_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
