@@ -7,15 +7,15 @@ import java.util.ArrayList;
  */
 public class Exam {
 
-    private String totalQuestion;
+    private int totalQuestion;
     private long totalDuration;
     private ArrayList<Question> question;
 
-    public String getTotalQuestion() {
+    public int getTotalQuestion() {
         return totalQuestion;
     }
 
-    public void setTotalQuestion(String totalQuestion) {
+    public void setTotalQuestion(int totalQuestion) {
         this.totalQuestion = totalQuestion;
     }
 

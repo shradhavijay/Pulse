@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -22,6 +23,7 @@ public class ReviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        KeyValues.isViewReview = true;
         if (!KeyValues.isDebug)
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                     WindowManager.LayoutParams.FLAG_SECURE);
@@ -29,7 +31,12 @@ public class ReviewActivity extends AppCompatActivity {
         TypefaceUtil.overrideFont(ReviewActivity.this);
         initialise();
     }
+
     private void initialise() {
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getString(R.string.review_answer));
+
         RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -40,17 +47,31 @@ public class ReviewActivity extends AppCompatActivity {
         recList.setAdapter(adapter);
     }
 
-    public static class ExamViewHolder extends RecyclerView.ViewHolder{
-        protected TextView question_review;
-        public ExamViewHolder(View v){
-            super(v);
-            question_review =  (TextView) v.findViewById(R.id.question_review);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here.
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
-    public class ExamAdapter extends RecyclerView.Adapter<ExamViewHolder>{
+
+    public static class ExamViewHolder extends RecyclerView.ViewHolder {
+        protected TextView question_review;
+
+        public ExamViewHolder(View v) {
+            super(v);
+            question_review = (TextView) v.findViewById(R.id.question_review);
+        }
+    }
+
+    public class ExamAdapter extends RecyclerView.Adapter<ExamViewHolder> {
         @Override
         public void onBindViewHolder(ExamViewHolder holder, int position) {
-            holder.question_review.setText("Q No 1");
+            holder.question_review.setText("Q No " + position);
         }
 
         @Override

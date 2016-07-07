@@ -31,6 +31,7 @@ public class KeyValues {
 
     public static String udid = "UDID";
 
+    public static boolean isViewReview = false;
     //for abc@def.com
     public static Pattern emailAddress = Pattern.compile
             (

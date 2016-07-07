@@ -13,6 +13,7 @@ public class Question {
     private String correctAnswer;
     private boolean marked;
     private boolean isCorrect;
+    private boolean isSelected;
 
     public String getQuestion() {
         return question;
@@ -76,5 +77,13 @@ public class Question {
 
     public void setCorrect(boolean correct) {
         isCorrect = correct;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }
