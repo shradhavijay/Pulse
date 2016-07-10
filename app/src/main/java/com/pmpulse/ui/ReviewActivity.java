@@ -1,5 +1,7 @@
 package com.pmpulse.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import com.pmpulse.data.KeyValues;
  * Created by shradha on 21/6/16.
  */
 public class ReviewActivity extends AppCompatActivity {
+    Button submit_exam_button;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +45,14 @@ public class ReviewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.review_answer));
 
+        submit_exam_button = (Button) findViewById(R.id.submit_exam_button);
+        submit_exam_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //over the exam and submit to server
+                submitExam();
+            }
+        });
         RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -49,6 +61,18 @@ public class ReviewActivity extends AppCompatActivity {
 
         ExamAdapter adapter = new ExamAdapter();
         recList.setAdapter(adapter);
+    }
+
+    private void submitExam() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(ReviewActivity.this);
+        alert.setMessage(getString(R.string.exam_submitted));
+        alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alert.show();
     }
 
     @Override
