@@ -1,8 +1,6 @@
 package com.pmpulse.ui;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,12 +8,8 @@ import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -27,7 +21,6 @@ import com.pmpulse.R;
 import com.pmpulse.data.Exam;
 import com.pmpulse.data.KeyValues;
 import com.pmpulse.data.Question;
-import com.pmpulse.serviceutil.Parser;
 
 import java.util.ArrayList;
 
@@ -76,7 +69,7 @@ public class ExamActivity extends AppCompatActivity {
 
         //jump to question number selected from review screen
         Intent fromReview = getIntent();
-        if(fromReview!=null){
+        if (fromReview != null) {
             currentQuestionNumber = fromReview.getIntExtra(KeyValues.KEY_EXAM_NUMBER, currentQuestionNumber);
             changeQuestion();
         }
@@ -144,6 +137,7 @@ public class ExamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkForButtons();
+                toggleMark();
             }
         });
 
@@ -165,6 +159,10 @@ public class ExamActivity extends AppCompatActivity {
 
         //start exam timer
         startTimer();
+    }
+
+    private void toggleMark() {
+        Toast.makeText(ExamActivity.this, "Question " + currentQuestionNumber + " has been marked for review", Toast.LENGTH_LONG).show();
     }
 
     //load next or previous set of questions
