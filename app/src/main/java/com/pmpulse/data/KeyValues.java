@@ -18,6 +18,7 @@ public class KeyValues {
     public static String KEY_FEATURE_NAME = "KEY_FEATURE_NAME";
     public static String KEY_CHAPTER_NAME = "KEY_CHAPTER_NAME";
     public static String KEY_EXAM_NAME = "KEY_EXAM_NAME";
+    public static String KEY_EXAM_NUMBER = "KEY_EXAM_NUMBER";
 
     public static int TIMEOUT = 30000;
     public static String urlLogin = "http://pmdhwaniapi.pm-pulse.com/API/Login";

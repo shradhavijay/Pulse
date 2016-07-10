@@ -55,14 +55,13 @@ public class ExamActivity extends AppCompatActivity {
         //security feature
         if (totalTime != timeleft) {
             if (!KeyValues.isViewReview) {
-               // examFinish(getString(R.string.exam_forced_finished));
-            }else{
+                // examFinish(getString(R.string.exam_forced_finished));
+            } else {
                 KeyValues.isViewReview = false;
             }
         }
     }
 
-    //todo : submit exam
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,9 +73,17 @@ public class ExamActivity extends AppCompatActivity {
         //for back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initialise();
+
+        //jump to question number selected from review screen
+        Intent fromReview = getIntent();
+        if(fromReview!=null){
+            currentQuestionNumber = fromReview.getIntExtra(KeyValues.KEY_EXAM_NUMBER, currentQuestionNumber);
+            changeQuestion();
+        }
     }
 
     //hide previous button when user is on 1st question and hide next button when user is on last
+    //show submit button at the last question
     private void checkForButtons() {
         if (currentQuestionNumber == 0) {
             lay_prev.setVisibility(View.GONE);
@@ -155,6 +162,8 @@ public class ExamActivity extends AppCompatActivity {
                 examFinish(getString(R.string.exam_submitted));
             }
         });
+
+        //start exam timer
         startTimer();
     }
 
@@ -178,6 +187,7 @@ public class ExamActivity extends AppCompatActivity {
         Intent intent = new Intent(ExamActivity.this, ReviewActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -196,7 +206,6 @@ public class ExamActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        //todo : back not allowed
     }
 
     //start countdown timer for test
@@ -264,6 +273,18 @@ public class ExamActivity extends AppCompatActivity {
         question3.setAnswerD("Noptio cumque nihil impedit quo minus id quod maxime");
 
         ArrayList<Question> questionArrayList = new ArrayList<>();
+        questionArrayList.add(question1);
+        questionArrayList.add(question2);
+        questionArrayList.add(question3);
+        questionArrayList.add(question1);
+        questionArrayList.add(question2);
+        questionArrayList.add(question3);
+        questionArrayList.add(question1);
+        questionArrayList.add(question2);
+        questionArrayList.add(question3);
+        questionArrayList.add(question1);
+        questionArrayList.add(question2);
+        questionArrayList.add(question3);
         questionArrayList.add(question1);
         questionArrayList.add(question2);
         questionArrayList.add(question3);
