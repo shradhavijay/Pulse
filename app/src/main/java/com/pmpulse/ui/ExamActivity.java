@@ -36,7 +36,7 @@ import java.util.ArrayList;
  */
 public class ExamActivity extends AppCompatActivity {
 
-    FloatingActionButton fab_review, fab_prev, fab_mark, fab_next;
+    FloatingActionButton fab_review, fab_prev, fab_mark, fab_next, fab_submit;
     TextView tv_time_remaining;
     LinearLayout lay_prev, lay_next, lay_submit;
     TextView question_no, question_test_center;
@@ -55,7 +55,7 @@ public class ExamActivity extends AppCompatActivity {
         //security feature
         if (totalTime != timeleft) {
             if (!KeyValues.isViewReview) {
-                examFinish(getString(R.string.exam_forced_finished));
+               // examFinish(getString(R.string.exam_forced_finished));
             }else{
                 KeyValues.isViewReview = false;
             }
@@ -100,6 +100,7 @@ public class ExamActivity extends AppCompatActivity {
         fab_prev = (FloatingActionButton) findViewById(R.id.fab_prev);
         fab_mark = (FloatingActionButton) findViewById(R.id.fab_mark);
         fab_next = (FloatingActionButton) findViewById(R.id.fab_next);
+        fab_submit = (FloatingActionButton) findViewById(R.id.fab_submit);
         lay_prev = (LinearLayout) findViewById(R.id.lay_prev);
         lay_next = (LinearLayout) findViewById(R.id.lay_next);
         lay_submit = (LinearLayout) findViewById(R.id.lay_submit);
@@ -148,6 +149,12 @@ public class ExamActivity extends AppCompatActivity {
 
         });
 
+        fab_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                examFinish(getString(R.string.exam_submitted));
+            }
+        });
         startTimer();
     }
 

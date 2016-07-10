@@ -113,6 +113,7 @@
     <string name="question_demo">There are many variations of passages teration in some form, by injected humour, or randomise?</string>
     <string name="exam_over">Total duration of time is over. Exam is submitted.</string>
     <string name="exam_forced_finished">Due to invalid navigation, your exam has been submitted</string>
+    <string name="exam_submitted">Exam has been submitted</string>
     <string name="question_number">Question No.</string>
     <string name="selected_option">Selected Option</string>
     <string name="marked">Marked</string>
