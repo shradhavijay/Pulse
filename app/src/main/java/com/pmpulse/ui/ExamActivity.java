@@ -38,7 +38,7 @@ public class ExamActivity extends AppCompatActivity {
 
     FloatingActionButton fab_review, fab_prev, fab_mark, fab_next;
     TextView tv_time_remaining;
-    LinearLayout lay_prev, lay_next;
+    LinearLayout lay_prev, lay_next, lay_submit;
     TextView question_no, question_test_center;
     RadioButton answerA, answerB, answerC, answerD;
     RadioGroup answer;
@@ -52,6 +52,14 @@ public class ExamActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //security feature
+        if (totalTime != timeleft) {
+            if (!KeyValues.isViewReview) {
+                examFinish(getString(R.string.exam_forced_finished));
+            }else{
+                KeyValues.isViewReview = false;
+            }
+        }
     }
 
     //todo : submit exam
@@ -72,11 +80,14 @@ public class ExamActivity extends AppCompatActivity {
     private void checkForButtons() {
         if (currentQuestionNumber == 0) {
             lay_prev.setVisibility(View.GONE);
+            lay_submit.setVisibility(View.GONE);
         } else if (currentQuestionNumber == totalQuestion) {
             lay_next.setVisibility(View.GONE);
+            lay_submit.setVisibility(View.VISIBLE);
         } else {
             lay_next.setVisibility(View.VISIBLE);
             lay_prev.setVisibility(View.VISIBLE);
+            lay_submit.setVisibility(View.GONE);
         }
     }
 
@@ -91,6 +102,7 @@ public class ExamActivity extends AppCompatActivity {
         fab_next = (FloatingActionButton) findViewById(R.id.fab_next);
         lay_prev = (LinearLayout) findViewById(R.id.lay_prev);
         lay_next = (LinearLayout) findViewById(R.id.lay_next);
+        lay_submit = (LinearLayout) findViewById(R.id.lay_submit);
         question_no = (TextView) findViewById(R.id.question_no);
         question_test_center = (TextView) findViewById(R.id.question_test_center);
         answerA = (RadioButton) findViewById(R.id.answerA);
