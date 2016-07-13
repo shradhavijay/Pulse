@@ -17,7 +17,7 @@ import com.pmpulse.data.KeyValues;
 /**
  * Created by shradha on 13/7/16.
  */
-public class HistorySummary extends AppCompatActivity {
+public class HistorySummaryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class HistorySummary extends AppCompatActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                     WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.history_summary);
-        TypefaceUtil.overrideFont(HistorySummary.this);
+        TypefaceUtil.overrideFont(HistorySummaryActivity.this);
 
         initialise();
     }

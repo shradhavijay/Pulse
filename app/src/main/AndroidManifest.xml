@@ -80,7 +80,7 @@
             android:excludeFromRecents="true"
             />
         <activity
-            android:name=".ui.HistorySummary"
+            android:name=".ui.HistorySummaryActivity"
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true"
             />
