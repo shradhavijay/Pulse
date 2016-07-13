@@ -84,6 +84,11 @@
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true"
             />
+        <activity
+            android:name=".ui.HistoryDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            />
     </application>
 
 </manifest>
