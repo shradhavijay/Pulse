@@ -592,6 +592,13 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
                     childText.getTotalMarks() + " Total Marks   " + childText.getPassingMarks() + " Passing Marks");
             exam_details.setText("Exam Date "+childResult.getExamDate()+ "   Time Taken "+childResult.getTimeTaken() +"   Attempted " +childResult.getAttempted()
                     + "   Correct Answers "+childResult.getCorrectAnswer() + "   Score(%) "+ childResult.getScore() + "   Overall Status "+childResult.getOverallStatus());
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showHistorySummary();
+                }
+            });
             return convertView;
         }
 
@@ -654,6 +661,12 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
             TextView tv_examDetails = (TextView) convertView.findViewById(R.id.exam_history_details);
             tv_examDetails.setText(examDetails.getCategory()+" of Chapter "+examDetails.getChapter());
             return convertView;
+        }
+
+        private void showHistorySummary(){
+            Intent intent = new Intent(A2ZMainActivity.this, HistorySummary.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     }
 
