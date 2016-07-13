@@ -80,6 +80,9 @@ public class ReviewActivity extends AppCompatActivity {
         // Handle action bar item clicks here.
         switch (item.getItemId()) {
             case android.R.id.home:
+                Intent intent = new Intent(ReviewActivity.this, ExamActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
                 return true;
             default:
