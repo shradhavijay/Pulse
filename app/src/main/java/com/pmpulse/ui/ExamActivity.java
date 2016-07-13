@@ -64,7 +64,7 @@ public class ExamActivity extends AppCompatActivity {
         setContentView(R.layout.test_center_round);
         TypefaceUtil.overrideFont(ExamActivity.this);
         //for back button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         initialise();
 
         //jump to question number selected from review screen
