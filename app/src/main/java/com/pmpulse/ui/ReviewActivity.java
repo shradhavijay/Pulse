@@ -122,7 +122,8 @@ public class ReviewActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(ExamViewHolder holder, final int position) {
-            holder.question_review.setText("Q No " + position);
+            int questionNumber = position +1;
+            holder.question_review.setText("Q No " + questionNumber);
             holder.cardView.setTag(position);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
