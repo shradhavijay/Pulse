@@ -14,6 +14,7 @@ public class Question {
     private boolean marked;
     private boolean isCorrect;
     private boolean isSelected;
+    private String explanation;
 
     public String getQuestion() {
         return question;
@@ -85,5 +86,13 @@ public class Question {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
     }
 }

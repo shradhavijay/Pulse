@@ -27,9 +27,8 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
     static int currentQuestionNumber_history = 0;
     FloatingActionButton fab_prev_history, fab_next_history;
-    TextView tv_time_remaining_history;
     LinearLayout lay_prev_history, lay_next_history;
-    TextView question_no_history, question_test_center_history;
+    TextView question_no_history, question_test_center_history, explanation_history;
     RadioButton answerA_history, answerB_history, answerC_history, answerD_history;
     RadioGroup answer_history;
     Exam exam = new Exam();
@@ -71,13 +70,13 @@ public class HistoryDetailActivity extends AppCompatActivity {
         exam = generateDummyData();
         totalQuestion = exam.getQuestion().size() -1;
 
-        tv_time_remaining_history = (TextView) findViewById(R.id.tv_time_remaining_history);
         fab_prev_history = (FloatingActionButton) findViewById(R.id.fab_prev_history);
         fab_next_history = (FloatingActionButton) findViewById(R.id.fab_next_history);
         lay_prev_history = (LinearLayout) findViewById(R.id.lay_prev_history);
         lay_next_history = (LinearLayout) findViewById(R.id.lay_next_history);
         question_no_history = (TextView) findViewById(R.id.question_no_history);
         question_test_center_history = (TextView) findViewById(R.id.question_test_center_history);
+        explanation_history = (TextView) findViewById(R.id.explanation_history);
         answerA_history = (RadioButton) findViewById(R.id.answerA_history);
         answerB_history = (RadioButton) findViewById(R.id.answerB_history);
         answerC_history = (RadioButton) findViewById(R.id.answerC_history);
@@ -85,6 +84,8 @@ public class HistoryDetailActivity extends AppCompatActivity {
         answer_history = (RadioGroup) findViewById(R.id.answer_history);
 
         answerA_history.setChecked(true);
+
+        changeQuestion();
 
         fab_prev_history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +117,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         answerB_history.setText(question.getAnswerB());
         answerC_history.setText(question.getAnswerC());
         answerD_history.setText(question.getAnswerD());
+        explanation_history.setText(question.getExplanation());
     }
 
     //hide previous button when user is on 1st question and hide next button when user is on last
@@ -143,6 +145,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         question1.setAnswerB("At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis");
         question1.setAnswerC("Slestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa");
         question1.setAnswerD("U, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime");
+        question1.setExplanation("Explanation : soluta nobis est eligendi optio cumque nihil s ducimus qui");
 
         Question question2 = new Question();
         question2.setQuestion("Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium");
@@ -150,6 +153,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         question2.setAnswerB("Vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis");
         question2.setAnswerC("Excepturi sint occaecati cupiditate non provident, similique sunt in culpa");
         question2.setAnswerD("Nobis est eligendi optio cumque nihil impedit quo minus id quod maxime");
+        question2.setExplanation("Explanation : sint occaecati cupiditate non provident, similique sunt");
 
         Question question3 = new Question();
         question3.setQuestion("Uunde omnis iste natus error sit volaudantium");
@@ -157,6 +161,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         question3.setAnswerB("Geos et accusamus et iusto odio dignissimos ducimus qui blanditiis");
         question3.setAnswerC("Fccaecati cupiditate non provident, similique sunt in culpa");
         question3.setAnswerD("Noptio cumque nihil impedit quo minus id quod maxime");
+        question3.setExplanation("Explanation : impedit occaecati cupiditate non ducimus milique sunt");
 
         ArrayList<Question> questionArrayList = new ArrayList<>();
         questionArrayList.add(question1);
