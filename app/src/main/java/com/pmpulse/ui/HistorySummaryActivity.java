@@ -62,8 +62,9 @@ public class HistorySummaryActivity extends AppCompatActivity {
     }
 
     //show detailed view of question
-    private void showExamDetail(){
+    private void showExamDetail(int position){
         Intent intent = new Intent(HistorySummaryActivity.this, HistoryDetailActivity.class);
+        intent.putExtra(KeyValues.KEY_EXAM_NUMBER_HISTORY, position);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
@@ -83,12 +84,13 @@ public class HistorySummaryActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(HistorySummaryHolder holder, final int position) {
-            holder.question_review.setText("Q No " + position);
+            int questionNumber = position +1;
+            holder.question_review.setText("Q No " + questionNumber);
             holder.cardView.setTag(position);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showExamDetail();
+                    showExamDetail(position);
                 }
             });
         }

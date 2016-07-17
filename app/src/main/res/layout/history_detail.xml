@@ -1,6 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/marginStar"
+    android:paddingRight="@dimen/marginStar">
 
-</LinearLayout>
+    <ScrollView
+        android:id="@+id/scroll_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lay_history">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/marginStar"
+                android:layout_marginTop="@dimen/marginStar"
+                android:text="@string/exam_name"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@color/colorButton"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/marginSmall"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/marginStar"
+                android:paddingRight="@dimen/marginStar">
+
+                <TextView
+                    android:id="@+id/question_no_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/marginStar"
+                    android:layout_marginTop="@dimen/marginStar"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/question"
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/divider_history"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/question_test_center_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marginStar"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/marginStar"
+                android:paddingRight="@dimen/marginStar"
+                android:text="@string/question_demo"
+                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textColor="@color/colorButton"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <RadioGroup
+                android:id="@+id/answer_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginSmall">
+
+                <RadioButton
+                    android:id="@+id/answerA_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintv"
+                    android:clickable="false"
+                    android:text="The standard chunk of Lorem Ipsum used "
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+
+                <RadioButton
+                    android:id="@+id/answerB_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintv"
+                    android:clickable="false"
+                    android:text="The standard chunk of Lorem Ipsum used "
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+
+                <RadioButton
+                    android:id="@+id/answerC_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintv"
+                    android:clickable="false"
+                    android:text="The standard chunk of Lorem Ipsum used "
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+
+                <RadioButton
+                    android:id="@+id/answerD_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintv"
+                    android:clickable="false"
+                    android:text="The standard chunk of Lorem Ipsum used "
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/lay_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/marginSmall"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/lay_prev_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_prev_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@android:drawable/ic_media_previous" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lay_next_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_next_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@android:drawable/ic_media_next" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
