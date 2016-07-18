@@ -15,6 +15,7 @@ public class Question {
     private boolean isCorrect;
     private boolean isSelected;
     private String explanation;
+    private String markedOption;
 
     public String getQuestion() {
         return question;
@@ -94,5 +95,13 @@ public class Question {
 
     public void setExplanation(String explanation) {
         this.explanation = explanation;
+    }
+
+    public String getMarkedOption() {
+        return markedOption;
+    }
+
+    public void setMarkedOption(String markedOption) {
+        this.markedOption = markedOption;
     }
 }

@@ -21,6 +21,7 @@ import com.pmpulse.R;
 import com.pmpulse.data.Exam;
 import com.pmpulse.data.KeyValues;
 import com.pmpulse.data.Question;
+import com.pmpulse.database.A2ZDBQuery;
 
 import java.util.ArrayList;
 
@@ -128,6 +129,7 @@ public class ExamActivity extends AppCompatActivity {
         fab_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveAnswer();
                 currentQuestionNumber++;
                 changeQuestion();
             }
@@ -228,6 +230,32 @@ public class ExamActivity extends AppCompatActivity {
         };
 
         countDownTimer.start();
+    }
+
+    private void saveAnswer(){
+        A2ZDBQuery a2ZDBQuery = new A2ZDBQuery(ExamActivity.this);
+        a2ZDBQuery.addAnswer(currentQuestionNumber,getAnswerMarked() , false);
+    }
+
+    private String getAnswerMarked(){
+        String optionMarked;
+        switch (answer.getCheckedRadioButtonId()) {
+            case R.id.answerA:
+                optionMarked = "A";
+                break;
+            case R.id.answerB:
+                optionMarked = "B";
+                break;
+            case R.id.answerC:
+                optionMarked = "C";
+                break;
+            case R.id.answerD:
+                optionMarked = "D";
+                break;
+            default:
+                optionMarked = "None";
+        }
+        return optionMarked;
     }
 
     //over the exam and submit to server
