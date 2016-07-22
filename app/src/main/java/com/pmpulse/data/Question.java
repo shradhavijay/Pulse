@@ -5,6 +5,7 @@ package com.pmpulse.data;
  */
 public class Question {
 
+    private int questionNumber;
     private String question;
     private String answerA;
     private String answerB;
@@ -16,6 +17,14 @@ public class Question {
     private boolean isSelected;
     private String explanation;
     private String markedOption;
+
+    public int getQuestionNumber() {
+        return questionNumber;
+    }
+
+    public void setQuestionNumber(int questionNumber) {
+        this.questionNumber = questionNumber;
+    }
 
     public String getQuestion() {
         return question;
