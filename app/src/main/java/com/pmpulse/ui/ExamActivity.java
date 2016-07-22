@@ -234,7 +234,7 @@ public class ExamActivity extends AppCompatActivity {
 
     private void saveAnswer(){
         A2ZDBQuery a2ZDBQuery = new A2ZDBQuery(ExamActivity.this);
-        a2ZDBQuery.addAnswer(currentQuestionNumber,getAnswerMarked() , false);
+        a2ZDBQuery.addAnswerDB(currentQuestionNumber,getAnswerMarked() , false);
     }
 
     private String getAnswerMarked(){
