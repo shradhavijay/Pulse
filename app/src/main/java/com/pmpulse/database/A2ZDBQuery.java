@@ -24,7 +24,7 @@ public class A2ZDBQuery {
     }
 
     //add answer in db
-    private long addAnswer(int questionNumber, String answer, boolean isMarked) {
+    public long addAnswer(int questionNumber, String answer, boolean isMarked) {
         long x = 0;
         try {
             A2ZDBCreate a2ZDBCreate = new A2ZDBCreate(context);
@@ -52,7 +52,7 @@ public class A2ZDBQuery {
         return x;
     }
 
-    //add or update answer and properties in db
+   /* //add or update answer and properties in db
     public boolean addAnswerDB(int questionNumber, String answer, boolean isMarked) {
         if (isAnswerAdded(questionNumber)) {
             updateAnswer(questionNumber, answer, isMarked);
@@ -60,10 +60,10 @@ public class A2ZDBQuery {
             addAnswer(questionNumber, answer, isMarked);
         }
         return false;
-    }
+    }*/
 
     //check answers added or not
-    private boolean isAnswerAdded(int questionNumber) {
+    public boolean isAnswerAdded(int questionNumber) {
         try {
             A2ZDBCreate a2ZDBCreate = new A2ZDBCreate(context);
             SQLiteDatabase db = a2ZDBCreate.getReadableDatabase();
@@ -81,7 +81,7 @@ public class A2ZDBQuery {
     }
 
     //update answer properties
-    private void updateAnswer(int questionNumber, String answer, boolean isMarked) {
+    public void updateAnswer(int questionNumber, String answer, boolean isMarked) {
         try {
             A2ZDBCreate a2ZDBCreate = new A2ZDBCreate(context);
             SQLiteDatabase db = a2ZDBCreate.getWritableDatabase();
@@ -101,7 +101,7 @@ public class A2ZDBQuery {
     }
 
 
-    public Exam getAnswerProperties() {
+    public Exam getAllAnswerProperties() {
         Exam exam = new Exam();
         ArrayList<Question> questionArrayList = new ArrayList<>();
         try {
@@ -110,7 +110,7 @@ public class A2ZDBQuery {
             Cursor cr = db.rawQuery("SELECT " + a2ZDBCreate.KEY_QUESTION_NUMBER + "," + a2ZDBCreate.KEY_ANSWER + "," + a2ZDBCreate.KEY_IS_MARKED + " FROM " + a2ZDBCreate.TABLE_EXAM, null);
             StringBuffer sb = new StringBuffer();
             if (KeyValues.isDebug)
-                System.out.println(cr.getCount() + " getAnswerProperties ");
+                System.out.println(cr.getCount() + " getAllAnswerProperties ");
             if (cr.getCount() > 0) {
                 while (cr.moveToNext()) {
                     Question question = new Question();
@@ -126,9 +126,37 @@ public class A2ZDBQuery {
         } catch (Exception e) {
             e.printStackTrace();
             if (KeyValues.isDebug)
-                System.out.println("Exception in getAnswerProperties " + e);
+                System.out.println("Exception in getAllAnswerProperties " + e);
         }
         return exam;
+    }
+
+    public Question getAnswerProperties(int questionNumber) {
+        Question question = new Question();
+        question.setMarkedOption("N");
+        try {
+            A2ZDBCreate a2ZDBCreate = new A2ZDBCreate(context);
+            SQLiteDatabase db = a2ZDBCreate.getReadableDatabase();
+            Cursor cr = db.rawQuery("SELECT " + a2ZDBCreate.KEY_QUESTION_NUMBER + "," + a2ZDBCreate.KEY_ANSWER + "," + a2ZDBCreate.KEY_IS_MARKED + " FROM " + a2ZDBCreate.TABLE_EXAM +" WHERE "+ a2ZDBCreate.KEY_QUESTION_NUMBER +"="+ questionNumber, null);
+            StringBuffer sb = new StringBuffer();
+            if (KeyValues.isDebug)
+                System.out.println(cr.getCount() + " getAnswerProperties ");
+            if (cr.getCount() > 0) {
+                while (cr.moveToNext()) {
+                    question.setQuestionNumber(cr.getInt(0));
+                    question.setMarkedOption(cr.getString(1));
+                    question.setMarked(Boolean.parseBoolean(cr.getString(2)));
+                    sb.append(cr.getString(0) + " " + Boolean.parseBoolean(cr.getString(2)) + " " + cr.getString(1) + "\n");
+                }
+            }
+            if (KeyValues.isDebug)
+                System.out.println(sb);
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (KeyValues.isDebug)
+                System.out.println("Exception in getAnswerProperties " + e);
+        }
+        return question;
     }
 
     public boolean deleteExamDetails() {
