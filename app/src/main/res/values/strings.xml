@@ -121,5 +121,6 @@
     <string name="correct_option">Correct Option</string>
     <string name="review_answer">Review Answers</string>
     <string name="answer_saved">Answer saved successfully</string>
+    <string name="marked_for_review">Marked for review</string>
 
 </resources>

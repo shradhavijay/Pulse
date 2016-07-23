@@ -75,11 +75,28 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:id="@+id/tv_marked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/marginSmall"
+                android:layout_marginTop="@dimen/marginSmall"
+                android:background="@color/marked_yellow"
+                android:paddingLeft="@dimen/marginStar"
+                android:paddingRight="@dimen/marginStar"
+                android:paddingTop="@dimen/marginSmall"
+                android:paddingBottom="@dimen/marginSmall"
+                android:text="@string/marked_for_review"
+                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textColor="@color/colorButton"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <TextView
                 android:id="@+id/question_test_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/marginStar"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/marginStar"
                 android:paddingRight="@dimen/marginStar"
                 android:text="@string/question_demo"

@@ -8,6 +8,7 @@
 
     <color name="highlightRed">#c74759</color>
 
+    <color name="marked_yellow">#FFEB00</color>
     <!--  <color name="colorPrimary">#3F51B5</color>
       <color name="colorPrimaryDark">#303F9F</color>-->
     <!--    <color name="colorAccent">#FF4081</color>-->

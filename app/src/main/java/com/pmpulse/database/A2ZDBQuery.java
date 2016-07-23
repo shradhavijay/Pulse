@@ -24,7 +24,8 @@ public class A2ZDBQuery {
     }
 
     //add answer in db
-    public long addAnswer(int questionNumber, String answer, boolean isMarked) {
+    public long addAnswer(int questionNumber, String answer, String isMarked) {
+        System.out.println( isMarked+"isMarked" +" add");
         long x = 0;
         try {
             A2ZDBCreate a2ZDBCreate = new A2ZDBCreate(context);
@@ -81,7 +82,8 @@ public class A2ZDBQuery {
     }
 
     //update answer properties
-    public void updateAnswer(int questionNumber, String answer, boolean isMarked) {
+    public void updateAnswer(int questionNumber, String answer, String isMarked) {
+        System.out.println( isMarked+"isMarked" +" update");
         try {
             A2ZDBCreate a2ZDBCreate = new A2ZDBCreate(context);
             SQLiteDatabase db = a2ZDBCreate.getWritableDatabase();

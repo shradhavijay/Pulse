@@ -32,12 +32,12 @@ import java.util.ArrayList;
 public class ExamActivity extends AppCompatActivity {
 
     FloatingActionButton fab_review, fab_prev, fab_mark, fab_next, fab_submit;
-    TextView tv_time_remaining;
+    TextView tv_time_remaining, tv_marked;
     LinearLayout lay_prev, lay_next, lay_submit;
     TextView question_no, question_test_center;
     RadioButton answerA, answerB, answerC, answerD;
     RadioGroup answer;
-    Boolean isMarked = false;
+    static Boolean isMarked = false;
     static int currentQuestionNumber = 0;
     static long totalTime = 600000, timeLeft = 600000;
     //static boolean isReviewClicked = false;
@@ -97,9 +97,11 @@ public class ExamActivity extends AppCompatActivity {
     //initialise my page
     private void initialise() {
         getSupportActionBar().setTitle(getString(R.string.a2z_test_center));
+
         a2ZDBQuery = new A2ZDBQuery(ExamActivity.this);
         fab_review = (FloatingActionButton) findViewById(R.id.fab_review);
         tv_time_remaining = (TextView) findViewById(R.id.tv_time_remaining);
+        tv_marked = (TextView) findViewById(R.id.tv_marked);
         fab_prev = (FloatingActionButton) findViewById(R.id.fab_prev);
         fab_mark = (FloatingActionButton) findViewById(R.id.fab_mark);
         fab_next = (FloatingActionButton) findViewById(R.id.fab_next);
@@ -168,9 +170,15 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     private void toggleMark() {
-        if (isMarked) isMarked = false;
-        else isMarked = true;
-        Toast.makeText(ExamActivity.this, "Question " + currentQuestionNumber + " has been marked for review", Toast.LENGTH_LONG).show();
+        if (isMarked) {
+            isMarked = false;
+            tv_marked.setVisibility(View.GONE);
+        }
+        else {
+            isMarked = true;
+            tv_marked.setVisibility(View.VISIBLE);
+        }
+        //Toast.makeText(ExamActivity.this, "Question " + currentQuestionNumber + " has been marked for review", Toast.LENGTH_LONG).show();
     }
 
     //load next or previous set of questions
@@ -189,7 +197,15 @@ public class ExamActivity extends AppCompatActivity {
 
         //load answer properties from db
         Question questionProperties = a2ZDBQuery.getAnswerProperties(current);
-        //questionProperties.isMarked();
+        a2ZDBQuery.getAllAnswerProperties();
+        System.out.println( questionProperties.isMarked()+"isMarked" +" change");
+        if(questionProperties.isMarked()){
+            isMarked = true;
+            tv_marked.setVisibility(View.VISIBLE);
+        }else {
+            isMarked = false;
+            tv_marked.setVisibility(View.GONE);
+        }
        setAnswerMarked(questionProperties.getMarkedOption());
     }
 
@@ -245,11 +261,12 @@ public class ExamActivity extends AppCompatActivity {
 
     private void saveAnswer() {
         int ques = currentQuestionNumber + 1;
+        System.out.println( isMarked+"isMarked");
         if (a2ZDBQuery.isAnswerAdded(ques)) {
-            a2ZDBQuery.updateAnswer(ques, getAnswerMarked(), isMarked);
+            a2ZDBQuery.updateAnswer(ques, getAnswerMarked(), isMarked.toString());
             Toast.makeText(ExamActivity.this, "Answer " + ques + " updated successfully", Toast.LENGTH_SHORT).show();
         } else {
-            a2ZDBQuery.addAnswer(ques, getAnswerMarked(), isMarked);
+            a2ZDBQuery.addAnswer(ques, getAnswerMarked(), isMarked.toString());
             Toast.makeText(ExamActivity.this, "Answer " + ques + " saved successfully", Toast.LENGTH_SHORT).show();
         }
         // a2ZDBQuery.addAnswerDB(currentQuestionNumber,getAnswerMarked() , false);
