@@ -50,7 +50,7 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //over the exam and submit to server
-                submitExam();
+                submitExam(getString(R.string.do_you_want_to_submit_exam));
             }
         });
         RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
@@ -63,13 +63,16 @@ public class ReviewActivity extends AppCompatActivity {
         recList.setAdapter(adapter);
     }
 
-    private void submitExam() {
+    private void submitExam(final String message) {
         final AlertDialog.Builder alert = new AlertDialog.Builder(ReviewActivity.this);
-        alert.setMessage(getString(R.string.exam_submitted));
+        alert.setMessage(message);
         alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
+                if (message.equals(getString(R.string.do_you_want_to_submit_exam)))
+                    submitExam(getString(R.string.exam_submitted));
+                else
+                    finish();
             }
         });
         alert.show();
