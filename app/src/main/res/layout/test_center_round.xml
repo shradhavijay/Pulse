@@ -75,6 +75,7 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_marked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

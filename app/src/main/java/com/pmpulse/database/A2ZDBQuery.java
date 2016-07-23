@@ -33,9 +33,9 @@ public class A2ZDBQuery {
             ContentValues values = new ContentValues();
             for (int i = 1; i < totalQuestions+1; i++) {
                 if (isAnswerAdded(i)) {
-                    updateAnswer(i, "NA", "false");
+                    updateAnswer(i, "-", "false");
                   } else {
-                    addAnswer(i, "NA", "false");
+                    addAnswer(i, "-", "false");
                  }
             }
         } catch (Exception e) {

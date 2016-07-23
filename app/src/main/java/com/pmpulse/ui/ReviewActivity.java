@@ -3,6 +3,7 @@ package com.pmpulse.ui;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class ReviewActivity extends AppCompatActivity {
     Button submit_exam_button;
     A2ZDBQuery a2ZDBQuery;
     // Exam exam;
+    int questionNumberSelected = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +70,12 @@ public class ReviewActivity extends AppCompatActivity {
         ExamAdapter adapter = new ExamAdapter();
         recList.setAdapter(adapter);
 
+        //jump to question number selected from review screen
+        Intent fromExamActivity = getIntent();
+        if (fromExamActivity != null) {
+            questionNumberSelected = fromExamActivity.getIntExtra(KeyValues.KEY_EXAM_NUMBER_SELECTED, questionNumberSelected);
+        }
+        System.out.println(questionNumberSelected + "   2222");
     }
 
     private void submitExam(final String message) {
@@ -126,24 +134,37 @@ public class ReviewActivity extends AppCompatActivity {
             super(v);
             question_review = (TextView) v.findViewById(R.id.question_review);
             selected_answer_review = (TextView) v.findViewById(R.id.selected_answer_review);
-            marked_answer_review = (TextView) v.findViewById(R.id.marked_answer_review);
+            //  marked_answer_review = (TextView) v.findViewById(R.id.marked_answer_review);
             cardView = v.findViewById(R.id.card_view);
         }
     }
 
     public class ExamAdapter extends RecyclerView.Adapter<ExamViewHolder> {
         A2ZDBQuery a2ZDBQuery = new A2ZDBQuery(ReviewActivity.this);
-        Exam exam  = a2ZDBQuery.getAllAnswerProperties();
+        Exam exam = a2ZDBQuery.getAllAnswerProperties();
 
         @Override
         public void onBindViewHolder(ExamViewHolder holder, final int position) {
             int questionNumber = position + 1;
             holder.question_review.setText("Q No : " + questionNumber);
             holder.selected_answer_review.setText("Selected : " + exam.getQuestion().get(position).getMarkedOption());
-            if(exam.getQuestion().get(position).isMarked()){
-                holder.marked_answer_review.setText("Marked");
-            }else
-            holder.marked_answer_review.setText("Not Marked");
+            if (exam.getQuestion().get(position).isMarked()) {
+                /*if (questionNumberSelected == position) {
+                    holder.question_review.setTextColor(Color.parseColor("#c70923"));
+                    holder.selected_answer_review.setTextColor(Color.parseColor("#c70923"));
+                    //  holder.cardView.setBackgroundColor(Color.parseColor("#7981ac"));
+                } else*/ {
+                    holder.cardView.setBackgroundColor(Color.parseColor("#FFEB00"));
+                }
+            } else {
+                /*if (questionNumberSelected == position) {
+                    holder.question_review.setTextColor(Color.parseColor("#c70923"));
+                    holder.selected_answer_review.setTextColor(Color.parseColor("#c70923"));
+                    //holder.cardView.setBackgroundColor(Color.parseColor("#7981ac"));
+                } else*/ {
+                    holder.cardView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                }
+            }
             holder.cardView.setTag(position);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -151,6 +172,7 @@ public class ReviewActivity extends AppCompatActivity {
                     jumpQuestion(position);
                 }
             });
+
         }
 
         @Override

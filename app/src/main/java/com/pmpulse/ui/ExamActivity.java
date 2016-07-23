@@ -3,6 +3,7 @@ package com.pmpulse.ui;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
@@ -101,7 +102,7 @@ public class ExamActivity extends AppCompatActivity {
         a2ZDBQuery = new A2ZDBQuery(ExamActivity.this);
         fab_review = (FloatingActionButton) findViewById(R.id.fab_review);
         tv_time_remaining = (TextView) findViewById(R.id.tv_time_remaining);
-        tv_marked = (TextView) findViewById(R.id.tv_marked);
+       // tv_marked = (TextView) findViewById(R.id.tv_marked);
         fab_prev = (FloatingActionButton) findViewById(R.id.fab_prev);
         fab_mark = (FloatingActionButton) findViewById(R.id.fab_mark);
         fab_next = (FloatingActionButton) findViewById(R.id.fab_next);
@@ -143,7 +144,7 @@ public class ExamActivity extends AppCompatActivity {
         fab_mark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveAnswer();
+                //saveAnswer();
                 checkForButtons();
                 toggleMark();
             }
@@ -152,8 +153,8 @@ public class ExamActivity extends AppCompatActivity {
         fab_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkForButtons();
                 saveAnswer();
+                checkForButtons();
                 showReview();
             }
 
@@ -174,11 +175,13 @@ public class ExamActivity extends AppCompatActivity {
     private void toggleMark() {
         if (isMarked) {
             isMarked = false;
-            tv_marked.setVisibility(View.GONE);
+            question_test_center.setBackgroundColor((Color.parseColor("#FFFFFF")));
+            //tv_marked.setVisibility(View.GONE);
         }
         else {
+            question_test_center.setBackgroundColor((Color.parseColor("#FFEB00")));
             isMarked = true;
-            tv_marked.setVisibility(View.VISIBLE);
+            //tv_marked.setVisibility(View.VISIBLE);
         }
         //Toast.makeText(ExamActivity.this, "Question " + currentQuestionNumber + " has been marked for review", Toast.LENGTH_LONG).show();
     }
@@ -202,10 +205,12 @@ public class ExamActivity extends AppCompatActivity {
         a2ZDBQuery.getAllAnswerProperties();
         if(questionProperties.isMarked()){
             isMarked = true;
-            tv_marked.setVisibility(View.VISIBLE);
+           // tv_marked.setVisibility(View.VISIBLE);
+            question_test_center.setBackgroundColor((Color.parseColor("#FFEB00")));
         }else {
             isMarked = false;
-            tv_marked.setVisibility(View.GONE);
+          //  tv_marked.setVisibility(View.GONE);
+            question_test_center.setBackgroundColor((Color.parseColor("#FFFFFF")));
         }
        setAnswerMarked(questionProperties.getMarkedOption());
     }
@@ -213,6 +218,7 @@ public class ExamActivity extends AppCompatActivity {
     //show small summary
     private void showReview() {
         Intent intent = new Intent(ExamActivity.this, ReviewActivity.class);
+        intent.putExtra(KeyValues.KEY_EXAM_NUMBER_SELECTED, currentQuestionNumber);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
@@ -288,7 +294,7 @@ public class ExamActivity extends AppCompatActivity {
                 optionMarked = "D";
                 break;
             default:
-                optionMarked = "None";
+                optionMarked = "-";
         }
         return optionMarked;
     }

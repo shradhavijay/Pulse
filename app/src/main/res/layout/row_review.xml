@@ -9,7 +9,6 @@
     android:layout_marginLeft="@dimen/fab_margin"
     android:layout_marginRight="@dimen/fab_margin"
     android:layout_marginTop="@dimen/marginSmall"
-    android:background="@android:color/transparent"
     card_view:cardCornerRadius="@dimen/marginStar"
     card_view:cardElevation="@dimen/fab_margin">
 
@@ -19,10 +18,12 @@
         android:layout_margin="@dimen/marginStar"
         android:background="@drawable/rowselect"
         android:orientation="horizontal"
-        android:weightSum="3"
+        android:weightSum="2"
+        android:layout_gravity="center"
         tools:context="com.pmpulse.ui.ReviewActivity">
 
         <TextView
+            android:gravity="center"
             android:id="@+id/question_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,6 +33,7 @@
             android:textColor="@color/colorButton" />
 
         <TextView
+            android:gravity="center"
             android:id="@+id/selected_answer_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,13 +42,13 @@
             android:textAppearance="?android:textAppearanceListItemSmall"
             android:textColor="@color/colorButton" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/marked_answer_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Marked"
             android:textAppearance="?android:textAppearanceListItemSmall"
-            android:textColor="@color/colorButton" />
+            android:textColor="@color/colorButton" />-->
     </LinearLayout>
 </android.support.v7.widget.CardView>
