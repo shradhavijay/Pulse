@@ -21,12 +21,16 @@ import android.widget.Toast;
 import com.pmpulse.R;
 import com.pmpulse.data.Exam;
 import com.pmpulse.data.KeyValues;
+import com.pmpulse.data.Question;
+import com.pmpulse.database.A2ZDBQuery;
 
 /**
  * Created by shradha on 21/6/16.
  */
 public class ReviewActivity extends AppCompatActivity {
     Button submit_exam_button;
+    A2ZDBQuery a2ZDBQuery;
+    // Exam exam;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +49,8 @@ public class ReviewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.review_answer));
 
+        a2ZDBQuery = new A2ZDBQuery(ReviewActivity.this);
+
         submit_exam_button = (Button) findViewById(R.id.submit_exam_button);
         submit_exam_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +67,7 @@ public class ReviewActivity extends AppCompatActivity {
 
         ExamAdapter adapter = new ExamAdapter();
         recList.setAdapter(adapter);
+
     }
 
     private void submitExam(final String message) {
@@ -69,9 +76,10 @@ public class ReviewActivity extends AppCompatActivity {
         alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (message.equals(getString(R.string.do_you_want_to_submit_exam)))
+                if (message.equals(getString(R.string.do_you_want_to_submit_exam))) {
                     submitExam(getString(R.string.exam_submitted));
-                else
+                    a2ZDBQuery.deleteExamDetails();
+                } else
                     finish();
             }
         });
@@ -110,35 +118,44 @@ public class ReviewActivity extends AppCompatActivity {
         finish();
     }
 
-    public static class ExamViewHolder extends RecyclerView.ViewHolder {
-        protected TextView question_review;
+    public class ExamViewHolder extends RecyclerView.ViewHolder {
+        protected TextView question_review, selected_answer_review, marked_answer_review;
         public View cardView;
 
         public ExamViewHolder(View v) {
             super(v);
             question_review = (TextView) v.findViewById(R.id.question_review);
-            cardView =  v.findViewById(R.id.card_view);
+            selected_answer_review = (TextView) v.findViewById(R.id.selected_answer_review);
+            marked_answer_review = (TextView) v.findViewById(R.id.marked_answer_review);
+            cardView = v.findViewById(R.id.card_view);
         }
     }
 
     public class ExamAdapter extends RecyclerView.Adapter<ExamViewHolder> {
+        A2ZDBQuery a2ZDBQuery = new A2ZDBQuery(ReviewActivity.this);
+        Exam exam  = a2ZDBQuery.getAllAnswerProperties();
 
         @Override
         public void onBindViewHolder(ExamViewHolder holder, final int position) {
-            int questionNumber = position +1;
-            holder.question_review.setText("Q No " + questionNumber);
+            int questionNumber = position + 1;
+            holder.question_review.setText("Q No : " + questionNumber);
+            holder.selected_answer_review.setText("Selected : " + exam.getQuestion().get(position).getMarkedOption());
+            if(exam.getQuestion().get(position).isMarked()){
+                holder.marked_answer_review.setText("Marked");
+            }else
+            holder.marked_answer_review.setText("Not Marked");
             holder.cardView.setTag(position);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   jumpQuestion(position);
+                    jumpQuestion(position);
                 }
             });
         }
 
         @Override
         public int getItemCount() {
-            return 18;
+            return exam.getTotalQuestion();
         }
 
         @Override

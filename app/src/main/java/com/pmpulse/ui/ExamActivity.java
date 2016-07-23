@@ -143,6 +143,7 @@ public class ExamActivity extends AppCompatActivity {
         fab_mark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveAnswer();
                 checkForButtons();
                 toggleMark();
             }
@@ -152,6 +153,7 @@ public class ExamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkForButtons();
+                saveAnswer();
                 showReview();
             }
 
@@ -198,7 +200,6 @@ public class ExamActivity extends AppCompatActivity {
         //load answer properties from db
         Question questionProperties = a2ZDBQuery.getAnswerProperties(current);
         a2ZDBQuery.getAllAnswerProperties();
-        System.out.println( questionProperties.isMarked()+"isMarked" +" change");
         if(questionProperties.isMarked()){
             isMarked = true;
             tv_marked.setVisibility(View.VISIBLE);
@@ -261,13 +262,12 @@ public class ExamActivity extends AppCompatActivity {
 
     private void saveAnswer() {
         int ques = currentQuestionNumber + 1;
-        System.out.println( isMarked+"isMarked");
         if (a2ZDBQuery.isAnswerAdded(ques)) {
             a2ZDBQuery.updateAnswer(ques, getAnswerMarked(), isMarked.toString());
-            Toast.makeText(ExamActivity.this, "Answer " + ques + " updated successfully", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(ExamActivity.this, "Answer " + ques + " updated successfully", Toast.LENGTH_SHORT).show();
         } else {
             a2ZDBQuery.addAnswer(ques, getAnswerMarked(), isMarked.toString());
-            Toast.makeText(ExamActivity.this, "Answer " + ques + " saved successfully", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(ExamActivity.this, "Answer " + ques + " saved successfully", Toast.LENGTH_SHORT).show();
         }
         // a2ZDBQuery.addAnswerDB(currentQuestionNumber,getAnswerMarked() , false);
     }

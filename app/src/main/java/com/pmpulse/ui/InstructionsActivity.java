@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.pmpulse.R;
 import com.pmpulse.data.KeyValues;
+import com.pmpulse.database.A2ZDBQuery;
 import com.pmpulse.serviceutil.Parser;
 
 /**
@@ -52,6 +53,8 @@ public class InstructionsActivity extends AppCompatActivity {
         take_exam_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                A2ZDBQuery a2ZDBQuery = new A2ZDBQuery(InstructionsActivity.this);
+                a2ZDBQuery.initialiseAnswers(18);
                 Intent intent = new Intent(InstructionsActivity.this, ExamActivity.class);;
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 finish();

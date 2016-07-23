@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import com.pmpulse.data.Exam;
 import com.pmpulse.data.KeyValues;
@@ -23,9 +24,29 @@ public class A2ZDBQuery {
         this.context = context;
     }
 
+    public void initialiseAnswers(int totalQuestions) {
+        long x = 0;
+        try {
+            A2ZDBCreate a2ZDBCreate = new A2ZDBCreate(context);
+            SQLiteDatabase db = a2ZDBCreate.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+            for (int i = 1; i < totalQuestions+1; i++) {
+                if (isAnswerAdded(i)) {
+                    updateAnswer(i, "NA", "false");
+                  } else {
+                    addAnswer(i, "NA", "false");
+                 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (KeyValues.isDebug)
+                System.out.println("Exception in initialiseAnswers " + e);
+        }
+    }
+
     //add answer in db
     public long addAnswer(int questionNumber, String answer, String isMarked) {
-        System.out.println( isMarked+"isMarked" +" add");
         long x = 0;
         try {
             A2ZDBCreate a2ZDBCreate = new A2ZDBCreate(context);
@@ -83,7 +104,6 @@ public class A2ZDBQuery {
 
     //update answer properties
     public void updateAnswer(int questionNumber, String answer, String isMarked) {
-        System.out.println( isMarked+"isMarked" +" update");
         try {
             A2ZDBCreate a2ZDBCreate = new A2ZDBCreate(context);
             SQLiteDatabase db = a2ZDBCreate.getWritableDatabase();
@@ -111,6 +131,7 @@ public class A2ZDBQuery {
             SQLiteDatabase db = a2ZDBCreate.getReadableDatabase();
             Cursor cr = db.rawQuery("SELECT " + a2ZDBCreate.KEY_QUESTION_NUMBER + "," + a2ZDBCreate.KEY_ANSWER + "," + a2ZDBCreate.KEY_IS_MARKED + " FROM " + a2ZDBCreate.TABLE_EXAM, null);
             StringBuffer sb = new StringBuffer();
+            exam.setTotalQuestion(cr.getCount());
             if (KeyValues.isDebug)
                 System.out.println(cr.getCount() + " getAllAnswerProperties ");
             if (cr.getCount() > 0) {
@@ -123,6 +144,7 @@ public class A2ZDBQuery {
                     sb.append(cr.getString(0) + " " + Boolean.parseBoolean(cr.getString(2)) + " " + cr.getString(1) + "\n");
                 }
             }
+            exam.setQuestion(questionArrayList);
             if (KeyValues.isDebug)
                 System.out.println(sb);
         } catch (Exception e) {
@@ -139,7 +161,7 @@ public class A2ZDBQuery {
         try {
             A2ZDBCreate a2ZDBCreate = new A2ZDBCreate(context);
             SQLiteDatabase db = a2ZDBCreate.getReadableDatabase();
-            Cursor cr = db.rawQuery("SELECT " + a2ZDBCreate.KEY_QUESTION_NUMBER + "," + a2ZDBCreate.KEY_ANSWER + "," + a2ZDBCreate.KEY_IS_MARKED + " FROM " + a2ZDBCreate.TABLE_EXAM +" WHERE "+ a2ZDBCreate.KEY_QUESTION_NUMBER +"="+ questionNumber, null);
+            Cursor cr = db.rawQuery("SELECT " + a2ZDBCreate.KEY_QUESTION_NUMBER + "," + a2ZDBCreate.KEY_ANSWER + "," + a2ZDBCreate.KEY_IS_MARKED + " FROM " + a2ZDBCreate.TABLE_EXAM + " WHERE " + a2ZDBCreate.KEY_QUESTION_NUMBER + "=" + questionNumber, null);
             StringBuffer sb = new StringBuffer();
             if (KeyValues.isDebug)
                 System.out.println(cr.getCount() + " getAnswerProperties ");
