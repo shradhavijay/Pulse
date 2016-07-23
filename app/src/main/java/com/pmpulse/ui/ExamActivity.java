@@ -21,6 +21,7 @@ import com.pmpulse.R;
 import com.pmpulse.data.Exam;
 import com.pmpulse.data.KeyValues;
 import com.pmpulse.data.Question;
+import com.pmpulse.database.A2ZDBCreate;
 import com.pmpulse.database.A2ZDBQuery;
 
 import java.util.ArrayList;
@@ -36,18 +37,19 @@ public class ExamActivity extends AppCompatActivity {
     TextView question_no, question_test_center;
     RadioButton answerA, answerB, answerC, answerD;
     RadioGroup answer;
-
+    Boolean isMarked = false;
     static int currentQuestionNumber = 0;
-    static long totalTime = 600000, timeleft = 600000;
+    static long totalTime = 600000, timeLeft = 600000;
     //static boolean isReviewClicked = false;
     int totalQuestion;
     Exam exam = new Exam();
+    A2ZDBQuery a2ZDBQuery;
 
     @Override
     protected void onResume() {
         super.onResume();
         //security feature
-        if (totalTime != timeleft) {
+        if (totalTime != timeLeft) {
             if (!KeyValues.isViewReview) {
                 // examFinish(getString(R.string.exam_forced_finished));
             } else {
@@ -95,7 +97,7 @@ public class ExamActivity extends AppCompatActivity {
     //initialise my page
     private void initialise() {
         getSupportActionBar().setTitle(getString(R.string.a2z_test_center));
-
+        a2ZDBQuery = new A2ZDBQuery(ExamActivity.this);
         fab_review = (FloatingActionButton) findViewById(R.id.fab_review);
         tv_time_remaining = (TextView) findViewById(R.id.tv_time_remaining);
         fab_prev = (FloatingActionButton) findViewById(R.id.fab_prev);
@@ -121,6 +123,7 @@ public class ExamActivity extends AppCompatActivity {
         fab_prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveAnswer();
                 currentQuestionNumber--;
                 changeQuestion();
             }
@@ -155,7 +158,8 @@ public class ExamActivity extends AppCompatActivity {
         fab_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                examFinish(getString(R.string.exam_submitted));
+                a2ZDBQuery.deleteExamDetails();
+                examFinish(getString(R.string.do_you_want_to_submit_exam));
             }
         });
 
@@ -164,6 +168,8 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     private void toggleMark() {
+        if (isMarked) isMarked = false;
+        else isMarked = true;
         Toast.makeText(ExamActivity.this, "Question " + currentQuestionNumber + " has been marked for review", Toast.LENGTH_LONG).show();
     }
 
@@ -180,6 +186,11 @@ public class ExamActivity extends AppCompatActivity {
         answerB.setText(question.getAnswerB());
         answerC.setText(question.getAnswerC());
         answerD.setText(question.getAnswerD());
+
+        //load answer properties from db
+        Question questionProperties = a2ZDBQuery.getAnswerProperties(current);
+        //questionProperties.isMarked();
+       setAnswerMarked(questionProperties.getMarkedOption());
     }
 
     //show small summary
@@ -215,7 +226,7 @@ public class ExamActivity extends AppCompatActivity {
         CountDownTimer countDownTimer = new CountDownTimer(exam.getTotalDuration(), 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                timeleft = millisUntilFinished;
+                timeLeft = millisUntilFinished;
                 long seconds = millisUntilFinished / 1000;
                 long s = seconds % 60;
                 long m = (seconds / 60) % 60;
@@ -232,12 +243,19 @@ public class ExamActivity extends AppCompatActivity {
         countDownTimer.start();
     }
 
-    private void saveAnswer(){
-        A2ZDBQuery a2ZDBQuery = new A2ZDBQuery(ExamActivity.this);
-        a2ZDBQuery.addAnswerDB(currentQuestionNumber,getAnswerMarked() , false);
+    private void saveAnswer() {
+        int ques = currentQuestionNumber + 1;
+        if (a2ZDBQuery.isAnswerAdded(ques)) {
+            a2ZDBQuery.updateAnswer(ques, getAnswerMarked(), isMarked);
+            Toast.makeText(ExamActivity.this, "Answer " + ques + " updated successfully", Toast.LENGTH_SHORT).show();
+        } else {
+            a2ZDBQuery.addAnswer(ques, getAnswerMarked(), isMarked);
+            Toast.makeText(ExamActivity.this, "Answer " + ques + " saved successfully", Toast.LENGTH_SHORT).show();
+        }
+        // a2ZDBQuery.addAnswerDB(currentQuestionNumber,getAnswerMarked() , false);
     }
 
-    private String getAnswerMarked(){
+    private String getAnswerMarked() {
         String optionMarked;
         switch (answer.getCheckedRadioButtonId()) {
             case R.id.answerA:
@@ -258,14 +276,35 @@ public class ExamActivity extends AppCompatActivity {
         return optionMarked;
     }
 
+    private void setAnswerMarked(String answer) {
+        switch (answer) {
+            case "A":
+                answerA.setChecked(true);
+                break;
+            case "B":
+                answerB.setChecked(true);
+                break;
+            case "C":
+                answerC.setChecked(true);
+                break;
+            case "D":
+                answerD.setChecked(true);
+                break;
+            default:
+        }
+    }
+
     //over the exam and submit to server
-    private void examFinish(String message) {
+    private void examFinish(final String message) {
         final AlertDialog.Builder alert = new AlertDialog.Builder(ExamActivity.this);
         alert.setMessage(message);
         alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
+                if (message.equals(getString(R.string.do_you_want_to_submit_exam)))
+                    examFinish(getString(R.string.exam_submitted));
+                else
+                    finish();
             }
         });
         alert.show();

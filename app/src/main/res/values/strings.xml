@@ -28,7 +28,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <string name="message_logout">Are you sure you want to logout from PM-Dhwani</string>
-    <string name="message_logout_a2Z">Are you sure you want to logout from A2Z-PM</string>
+    <string name="message_logout_a2Z">logout from A2Z-PM?</string>
 
     <string name="error_playlist_already_added">Playlist is already added. Please enter a different name.</string>
     <string name="error_no_playlist_found">No playlist found. Do you want to create a new playlist?</string>
@@ -114,10 +114,12 @@
     <string name="exam_over">Total duration of time is over. Exam is submitted.</string>
     <string name="exam_forced_finished">Due to invalid navigation, your exam has been submitted</string>
     <string name="exam_submitted">Exam has been submitted</string>
+    <string name="do_you_want_to_submit_exam">Do you want to submit exam?</string>
     <string name="question_number">Question No.</string>
     <string name="selected_option">Selected Option</string>
     <string name="marked">Marked</string>
     <string name="correct_option">Correct Option</string>
     <string name="review_answer">Review Answers</string>
+    <string name="answer_saved">Answer saved successfully</string>
 
 </resources>
