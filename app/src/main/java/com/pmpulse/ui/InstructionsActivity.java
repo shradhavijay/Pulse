@@ -55,7 +55,7 @@ public class InstructionsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 A2ZDBQuery a2ZDBQuery = new A2ZDBQuery(InstructionsActivity.this);
                 a2ZDBQuery.initialiseAnswers(18);
-                Intent intent = new Intent(InstructionsActivity.this, ExamActivity.class);;
+                Intent intent = new Intent(InstructionsActivity.this, TakeExamActivity.class);;
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 finish();
                 startActivity(intent);
