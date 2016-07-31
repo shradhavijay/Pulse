@@ -261,7 +261,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
     }
 
     private void initializeContactUs() {
-        TextView email_feedback = (TextView) findViewById(R.id.email_fedback);
+        LinearLayout email_feedback = (LinearLayout) findViewById(R.id.email_feedback);
         email_feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -269,7 +269,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
             }
         });
 
-        TextView email_admin = (TextView) findViewById(R.id.email_admin);
+        LinearLayout email_admin = (LinearLayout) findViewById(R.id.email_admin);
         email_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

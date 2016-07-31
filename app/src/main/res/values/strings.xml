@@ -89,17 +89,17 @@
     <string name="contact_feedback">For Feedback</string>
     <string name="contact_account">For Account or Test-Related Issues or Sign-Up for New Account</string>
     <string name="contact_technical">For Technical Assistance</string>
-    <string name="email_feedback">feedback@a2zpm.com</string>
+    <string name="email_feedback">Write us : <i><u>feedback@a2zpm.com</u></i></string>
     <string name="subject_feedback">Feedback</string>
-    <string name="email_admin">admin@a2zpm.com</string>
+    <string name="email_admin">Write us : <i><u>admin@a2zpm.com</u></i></string>
     <string name="subject_admin">Require Assistance</string>
     <string name="dear_admin">Dear Admin,</string>
-    <string name="email_technical">ajit1919@gmail.com</string>
+    <string name="email_technical">Write us : <i><u>ajit1919@gmail.com</u></i></string>
     <string name="subject_technical">Require Technical Assistance</string>
     <string name="body_email">Dear Team,</string>
     <string name="send_mail">Send mail...</string>
     <string name="no_emailclients">There are no email clients installed</string>
-    <string name="mobile_technical">+91-9873880750</string>
+    <string name="mobile_technical">Call us : <i><u>+91-9873880750</u></i></string>
 
     <!--Instructions for exam-->
     <string name="topic_covered">This test will cover the following topics:</string>
