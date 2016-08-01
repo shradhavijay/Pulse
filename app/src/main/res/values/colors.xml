@@ -22,4 +22,5 @@
 
     <color name="audioClicked">#7981ac</color>
     <color name="darkBlue">#02023b</color>
+    <color name="questionBackground">#F5F5F5</color>
 </resources>

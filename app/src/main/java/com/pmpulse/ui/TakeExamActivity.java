@@ -53,7 +53,8 @@ public class TakeExamActivity extends AppCompatActivity {
     }
 
     private void initialise(){
-        getSupportActionBar().setTitle(getString(R.string.a2z_test_center));
+    //    getSupportActionBar().setTitle(getString(R.string.a2z_test_center));
+        getSupportActionBar().setTitle("PMP-Ninja-KA-Communications");
         RecyclerView examCardList  = (RecyclerView) findViewById(R.id.examCardList);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);

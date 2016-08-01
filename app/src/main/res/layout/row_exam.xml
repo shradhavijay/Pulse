@@ -3,13 +3,14 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view_exam"
-    android:layout_width="match_parent"
+    card_view:cardBackgroundColor="@color/questionBackground"
+        android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/fab_margin"
     android:layout_marginLeft="@dimen/marginStar"
     android:layout_marginRight="@dimen/marginStar"
     android:layout_marginTop="@dimen/marginSmall"
-    card_view:cardElevation="@dimen/marginSmall">
+    card_view:cardElevation="@dimen/marginStar">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
             android:paddingLeft="@dimen/marginStar"
             android:paddingRight="@dimen/marginStar"
             android:text="@string/question"
-            android:textAppearance="?android:textAppearanceListItemSmall"
+            android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/colorButton"
             android:textStyle="bold"
             android:typeface="serif" />
@@ -39,7 +40,7 @@
             android:paddingLeft="@dimen/marginStar"
             android:paddingRight="@dimen/marginStar"
             android:text="@string/question_demo"
-            android:textAppearance="?android:textAppearanceListItemSmall"
+            android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/colorButton"
             android:textStyle="bold"
             android:typeface="serif" />
@@ -48,14 +49,15 @@
             android:id="@+id/answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginSmall">
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginStar">
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintv"
                 android:text="The standard chunk of Lorem Ipsum used "
-                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorButton" />
 
             <RadioButton
@@ -63,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintv"
                 android:text="The standard chunk of Lorem Ipsum used "
-                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorButton" />
 
             <RadioButton
@@ -71,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintv"
                 android:text="The standard chunk of Lorem Ipsum used "
-                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorButton" />
 
             <RadioButton
@@ -79,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintv"
                 android:text="The standard chunk of Lorem Ipsum used "
-                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorButton" />
 
         </RadioGroup>
