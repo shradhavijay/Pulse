@@ -72,97 +72,134 @@
                 android:layout_height="2dp"
                 android:background="@android:color/darker_gray" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/marginStar"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/marginStar"
-                android:paddingRight="@dimen/marginStar"
-                android:text="@string/question_demo"
-                android:textAppearance="?android:textAppearanceListItemSmall"
-                android:textColor="@color/colorButton"
-                android:textStyle="bold"
-                android:typeface="serif" />
 
-            <RadioGroup
-                android:id="@+id/answer"
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_question"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/marginSmall">
+                android:layout_height="wrap_content">
 
-                <RadioButton
+                <LinearLayout
+                    android:id="@+id/ll_question"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margintv"
-                    android:text="The standard chunk of Lorem Ipsum used "
-                    android:textAppearance="?android:textAppearanceListItemSmall"
-                    android:textColor="@color/colorButton" />
-
-                <RadioButton
+                    android:orientation="horizontal"
+                    >
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margintv"
-                    android:text="The standard chunk of Lorem Ipsum used "
-                    android:textAppearance="?android:textAppearanceListItemSmall"
-                    android:textColor="@color/colorButton" />
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/marginStar"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:paddingLeft="@dimen/marginStar"
+                        android:paddingRight="@dimen/marginStar"
+                        android:text="@string/question_demo"
+                        android:textAppearance="?android:textAppearanceListItemSmall"
+                        android:textColor="@color/colorButton"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+                    <RadioGroup
+                        android:id="@+id/answer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginSmall">
 
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margintv"
-                    android:text="The standard chunk of Lorem Ipsum used "
-                    android:textAppearance="?android:textAppearanceListItemSmall"
-                    android:textColor="@color/colorButton" />
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margintv"
+                            android:text="The standard chunk of Lorem Ipsum used "
+                            android:textAppearance="?android:textAppearanceListItemSmall"
+                            android:textColor="@color/colorButton" />
 
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margintv"
-                    android:text="The standard chunk of Lorem Ipsum used "
-                    android:textAppearance="?android:textAppearanceListItemSmall"
-                    android:textColor="@color/colorButton" />
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margintv"
+                            android:text="The standard chunk of Lorem Ipsum used "
+                            android:textAppearance="?android:textAppearanceListItemSmall"
+                            android:textColor="@color/colorButton" />
 
-            </RadioGroup>
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margintv"
+                            android:text="The standard chunk of Lorem Ipsum used "
+                            android:textAppearance="?android:textAppearanceListItemSmall"
+                            android:textColor="@color/colorButton" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ic_height"
-                android:orientation="horizontal">
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margintv"
+                            android:text="The standard chunk of Lorem Ipsum used "
+                            android:textAppearance="?android:textAppearanceListItemSmall"
+                            android:textColor="@color/colorButton" />
 
-                <Button
-                    android:id="@+id/button_mark"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_weight="1"
-                    android:background="@drawable/buttonred"
-                    android:text="@string/action_mark"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:typeface="serif" />
+                    </RadioGroup>
+                    </LinearLayout>
 
-                <Button
-                    android:id="@+id/button_review"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_weight="1"
-                    android:background="@drawable/buttonred"
-                    android:text="@string/action_review"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:typeface="serif" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/marginStar"
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:paddingLeft="@dimen/marginStar"
+                            android:paddingRight="@dimen/marginStar"
+                            android:text="@string/question_demo"
+                            android:textAppearance="?android:textAppearanceListItemSmall"
+                            android:textColor="@color/colorButton"
+                            android:textStyle="bold"
+                            android:typeface="serif" />
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginSmall">
+
+                            <RadioButton
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margintv"
+                                android:text="The standard chunk of Lorem Ipsum used "
+                                android:textAppearance="?android:textAppearanceListItemSmall"
+                                android:textColor="@color/colorButton" />
+
+                            <RadioButton
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margintv"
+                                android:text="The standard chunk of Lorem Ipsum used "
+                                android:textAppearance="?android:textAppearanceListItemSmall"
+                                android:textColor="@color/colorButton" />
+
+                            <RadioButton
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margintv"
+                                android:text="The standard chunk of Lorem Ipsum used "
+                                android:textAppearance="?android:textAppearanceListItemSmall"
+                                android:textColor="@color/colorButton" />
+
+                            <RadioButton
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margintv"
+                                android:text="The standard chunk of Lorem Ipsum used "
+                                android:textAppearance="?android:textAppearanceListItemSmall"
+                                android:textColor="@color/colorButton" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
         </LinearLayout>
     </ScrollView>
 
@@ -183,7 +220,7 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
             android:background="@drawable/buttonred"
-            android:text="@string/action_previous"
+            android:text="@string/action_mark"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:typeface="serif" />
@@ -198,7 +235,7 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
             android:background="@drawable/buttonred"
-            android:text="@string/action_next"
+            android:text="@string/action_review"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:typeface="serif" />

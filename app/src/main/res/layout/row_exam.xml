@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view_exam"
+    card_view:cardBackgroundColor="@color/questionBackground"
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/fab_margin"
+    android:layout_marginLeft="@dimen/marginStar"
+    android:layout_marginRight="@dimen/marginStar"
+    android:layout_marginTop="@dimen/marginSmall"
+    card_view:cardElevation="@dimen/marginStar">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="@dimen/marginStar"
+            android:layout_marginTop="@dimen/marginStar"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/marginStar"
+            android:paddingRight="@dimen/marginStar"
+            android:text="@string/question"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/colorButton"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/marginStar"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/marginStar"
+            android:paddingRight="@dimen/marginStar"
+            android:text="@string/question_demo"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/colorButton"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+        <RadioGroup
+            android:id="@+id/answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginStar">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margintv"
+                android:text="The standard chunk of Lorem Ipsum used "
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorButton" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margintv"
+                android:text="The standard chunk of Lorem Ipsum used "
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorButton" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margintv"
+                android:text="The standard chunk of Lorem Ipsum used "
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorButton" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margintv"
+                android:text="The standard chunk of Lorem Ipsum used "
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorButton" />
+
+        </RadioGroup>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
