@@ -58,13 +58,31 @@
                 android:layout_height="2dp"
                 android:background="@android:color/darker_gray" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/examCardList"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/marginSmall"
-                android:layout_marginTop="@dimen/marginSmall"
-                android:paddingBottom="@dimen/activity_margin_top" />
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/examCardList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/marginSmall"
+                    android:layout_marginTop="@dimen/marginSmall"
+                    android:layout_weight="4"
+                    android:paddingBottom="@dimen/activity_margin_top" />
+
+                <ProgressBar
+                    android:id="@+id/exam_progress"
+                    style="?android:attr/progressBarStyleSmallInverse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:theme="@style/AppTheme.Progress"
+                    android:visibility="gone" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
@@ -92,7 +110,7 @@
             android:typeface="serif" />
 
         <Button
-            android:id="@+id/button_next"
+            android:id="@+id/button_review"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
