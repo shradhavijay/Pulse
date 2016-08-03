@@ -54,6 +54,7 @@
             android:layout_marginBottom="@dimen/marginStar">
 
             <RadioButton
+                android:background="@drawable/examselect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintv"
@@ -62,6 +63,7 @@
                 android:textColor="@color/colorButton" />
 
             <RadioButton
+                android:background="@drawable/examselect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintv"
@@ -70,6 +72,7 @@
                 android:textColor="@color/colorButton" />
 
             <RadioButton
+                android:background="@drawable/examselect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintv"
@@ -78,6 +81,7 @@
                 android:textColor="@color/colorButton" />
 
             <RadioButton
+                android:background="@drawable/examselect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintv"

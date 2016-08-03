@@ -24,4 +24,5 @@
     <color name="darkBlue">#02023b</color>
     <color name="contactUs">#DA2647</color>
     <color name="questionBackground">#F5F5F5</color>
+    <color name="examClicked">#93CCEA</color>
 </resources>
