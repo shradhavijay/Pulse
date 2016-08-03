@@ -1,9 +1,12 @@
 package com.pmpulse.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -31,14 +34,14 @@ import com.pmpulse.serviceutil.ConnectionMaker;
  * Created by shradha on 30/7/16.
  */
 public class TakeExamActivity extends AppCompatActivity {
-    HorizontalScrollView hsv_question;
-    LinearLayout ll_question;
     ExamAdapter1 adapter;
     RecyclerView examCardList;
     static int staticsizw;
     ProgressBar exam_progress;
     LoadMoreTask loadMoreTask = new LoadMoreTask();
-    int totalQues = 20;
+    Exam exam = new Exam();
+    static long timeLeft = 600000;
+    TextView tv_time_remaining_exam;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class TakeExamActivity extends AppCompatActivity {
         if (!KeyValues.isDebug)
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                     WindowManager.LayoutParams.FLAG_SECURE);
-        // setContentView(R.layout.test_center);
+
         setContentView(R.layout.exam);
         TypefaceUtil.overrideFont(TakeExamActivity.this);
         //for back button
@@ -66,6 +69,7 @@ public class TakeExamActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("PMP-Ninja-KA-Communications");
         examCardList = (RecyclerView) findViewById(R.id.examCardList);
         exam_progress = (ProgressBar) findViewById(R.id.exam_progress);
+        tv_time_remaining_exam = (TextView) findViewById(R.id.tv_time_remaining_exam);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -73,9 +77,49 @@ public class TakeExamActivity extends AppCompatActivity {
 
         adapter = new ExamAdapter1(1);
         examCardList.setAdapter(adapter);
+        startTimer();
 
         staticsizw = 0;
         loadMoreTask.execute();
+    }
+
+    //start countdown timer for test
+    private void startTimer() {
+
+        CountDownTimer countDownTimer = new CountDownTimer(600000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeft = millisUntilFinished;
+                long seconds = millisUntilFinished / 1000;
+                long s = seconds % 60;
+                long m = (seconds / 60) % 60;
+                long h = (seconds / (60 * 60)) % 24;
+                tv_time_remaining_exam.setText("Time Remaining " + String.format("%d:%02d:%02d", h, m, s));
+            }
+
+            @Override
+            public void onFinish() {
+                examFinish(getString(R.string.exam_over));
+            }
+        };
+
+        countDownTimer.start();
+    }
+
+    //over the exam and submit to server
+    private void examFinish(final String message) {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(TakeExamActivity.this);
+        alert.setMessage(message);
+        alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (message.equals(getString(R.string.do_you_want_to_submit_exam)))
+                    examFinish(getString(R.string.exam_submitted));
+                else
+                    finish();
+            }
+        });
+        alert.show();
     }
 
     private class ExamViewHolder1 extends RecyclerView.ViewHolder {
@@ -173,7 +217,7 @@ public class TakeExamActivity extends AppCompatActivity {
             System.out.println("vvvv "+new ExamAdapter1(staticsizw).getItemId(staticsizw) );
            //if current question number == totalsize , then if all question not loaded, load next
             if(adapter.getItemId(staticsizw) == adapter.getItemCount()) {
-
+                if(staticsizw<10)
                 new LoadMoreTask().execute();
             }
             super.onPostExecute(aVoid);
