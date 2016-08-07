@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  */
 public class KeyValues {
 
-    public static boolean isDebug = true;
+    public static boolean isDebug = false   ;
 
     //for service
     public static String TYPE_FREE_AUDIO = "FREE_AUDIO";

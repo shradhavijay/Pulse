@@ -48,6 +48,7 @@ public class Parser {
     String category = "Category";
     String audioName = "AudioName";
     String fileURL = "FileURL";
+    String domainName = "DomainName";
     String audioId = "AudioID";
     String isLoggedIn = "IsLoggedIn";
     String trainingID = "TrainingID";
@@ -108,7 +109,14 @@ public class Parser {
             for (int countAudio = 0; countAudio < parse.length(); countAudio++) {
                 ChapterAudio chapterAudio = new ChapterAudio();
                 chapterAudio.setMainCategoryName(((JSONObject) parse.get(countAudio)).getString(mainCategoryName));
-                chapterAudio.setAudioPath(((JSONObject) parse.get(countAudio)).getString(audioPath));
+
+                String fileUrl = "";
+                String domain = ((JSONObject) parse.get(countAudio)).getString(domainName);
+                String name = ((JSONObject) parse.get(countAudio)).getString(audioPath);
+                name = name.substring(0, name.length()-19);
+                fileUrl = domain+"Audios/2c334da84b9f/"+name+".mp3";
+                chapterAudio.setAudioPath(fileUrl);
+
                 chapterAudio.setIsPlayed(((JSONObject) parse.get(countAudio)).getBoolean(isPlayed));
                 chapterAudio.setUserRating(((JSONObject) parse.get(countAudio)).getString(userRating));
                 chapterAudio.setAudioId(((JSONObject) parse.get(countAudio)).getString(audioId));
@@ -169,10 +177,15 @@ public class Parser {
                 FreeAudios freeAudios = new FreeAudios();
                 freeAudios.setAudioName(((JSONObject) parse.get(countFreeAudio)).getString(audioName));
                 freeAudios.setCategory(((JSONObject) parse.get(countFreeAudio)).getString(category));
-                freeAudios.setFileURL(((JSONObject) parse.get(countFreeAudio)).getString(fileURL));
+
+                String fileUrl = "";
+                String domain = ((JSONObject) parse.get(countFreeAudio)).getString(domainName);
+                String name = ((JSONObject) parse.get(countFreeAudio)).getString(fileURL);
+                name = name.substring(0, name.length()-19);
+                fileUrl = domain+"FreeAudio/"+name+".mp3";
+                freeAudios.setFileURL(fileUrl);
                 freeAudio.add(freeAudios);
             }
-
         } catch (JSONException e) {
             if(KeyValues.isDebug)
             System.out.println("freeAudioParser catch :" + e.getMessage());
