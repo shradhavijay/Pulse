@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -42,6 +43,7 @@ public class TakeExamActivity extends AppCompatActivity {
     Exam exam = new Exam();
     static long timeLeft = 600000;
     TextView tv_time_remaining_exam;
+    Button marked,reviewList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +72,8 @@ public class TakeExamActivity extends AppCompatActivity {
         examCardList = (RecyclerView) findViewById(R.id.examCardList);
         exam_progress = (ProgressBar) findViewById(R.id.exam_progress);
         tv_time_remaining_exam = (TextView) findViewById(R.id.tv_time_remaining_exam);
+        marked = (Button) findViewById(R.id.marked);
+        reviewList = (Button) findViewById(R.id.reviewList);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -81,6 +85,7 @@ public class TakeExamActivity extends AppCompatActivity {
 
         staticsizw = 0;
         loadMoreTask.execute();
+
     }
 
     //start countdown timer for test
@@ -120,6 +125,12 @@ public class TakeExamActivity extends AppCompatActivity {
             }
         });
         alert.show();
+    }
+
+    //mark question for review
+    public void markQuestion(View view){
+        System.out.println("fnejhfjhd");
+
     }
 
     private class ExamViewHolder1 extends RecyclerView.ViewHolder {
