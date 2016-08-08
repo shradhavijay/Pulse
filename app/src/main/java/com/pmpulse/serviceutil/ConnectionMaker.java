@@ -80,7 +80,7 @@ public class ConnectionMaker {
         return null;
     }
 
-   /* public String serviceA2Z(String url, String methodType) {
+    public String serviceA2Z(String url, String methodType) {
 
         if(KeyValues.isDebug)
             System.out.println("url "+url);
@@ -137,8 +137,8 @@ public class ConnectionMaker {
             }
         }
         return null;
-    }*/
-    public String serviceA2Z(String url, String methodType) {
+    }
+   /* public String serviceA2Z(String url, String methodType) {
 
         if(KeyValues.isDebug)
             System.out.println("url "+url);
@@ -194,36 +194,5 @@ public class ConnectionMaker {
             }
         }
         return null;
-    }
-
-
-   /* public Users AuthenticateUser(string UserID, string Pwd)
-    {
-        HttpWebRequest req = null;
-        HttpWebResponse res = null;
-        //string url = "http://localhost:57814/A2ZService.svc/Rest/UserAuthentication/" + UserID + "/" + Pwd + "/" + Session.SessionID;
-        string url = "http://a2zservice.pm-pulse.com/A2ZService.svc/Rest/UserAuthentication/" + UserID + "/" + Pwd + "/" + Session.SessionID;
-        req = (HttpWebRequest)WebRequest.Create(url);
-        req.Method = "GET";
-        req.ContentType = "application/json; charset=utf-8";
-
-        req.Headers["ABC"] = "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(UserID + ":" + Pwd + ":check"));
-        string str = Convert.ToString(req.Headers["ABC"]);
-        res = (HttpWebResponse)req.GetResponse();
-        Stream responseStream = res.GetResponseStream();
-        var streamReader = new StreamReader(responseStream);
-
-        string txt = streamReader.ReadToEnd();
-        streamReader.Close();
-        streamReader.Dispose();
-
-        responseStream.Close();
-        responseStream.Dispose();
-
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        Users usr =  (Users)js.Deserialize(txt, typeof(Users));
-        Session["LoggedInUser"] = usr;
-        return usr;
-
     }*/
 }
