@@ -24,7 +24,7 @@ import com.pmpulse.serviceutil.Parser;
  */
 public class FeaturesActivity extends AppCompatActivity {
 
-    Button btn_feature_pmfreeaudio, btn_feature_audiotraining;
+    Button btn_feature_pmfreeaudio, btn_feature_audioTraining, btn_feature_a2ztraining;
     LinearLayout feature_content;
     View feature_progress;
 
@@ -40,11 +40,11 @@ public class FeaturesActivity extends AppCompatActivity {
 
         feature_content = (LinearLayout) findViewById(R.id.feature_content);
         feature_progress = findViewById(R.id.feature_progress);
-        btn_feature_audiotraining = (Button) findViewById(R.id.btn_feature_audiotraining);
+        btn_feature_audioTraining = (Button) findViewById(R.id.btn_feature_audiotraining);
         btn_feature_pmfreeaudio = (Button) findViewById(R.id.btn_feature_pmfreeaudio);
-      //  btn_feature_a2ztraining = (Button) findViewById(R.id.btn_feature_a2ztraining);
+        btn_feature_a2ztraining = (Button) findViewById(R.id.btn_feature_a2ztraining);
 
-        btn_feature_audiotraining.setOnClickListener(new View.OnClickListener() {
+        btn_feature_audioTraining.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 transferLogin();
@@ -62,7 +62,7 @@ public class FeaturesActivity extends AppCompatActivity {
             }
         });
 
-        /*btn_feature_a2ztraining.setOnClickListener(new View.OnClickListener() {
+        btn_feature_a2ztraining.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (new ConnectionMaker().isConnected(FeaturesActivity.this)) {
@@ -71,7 +71,7 @@ public class FeaturesActivity extends AppCompatActivity {
                     showAlert(getString(R.string.error_no_net));
                 }
             }
-        });*/
+        });
     }
 
     private void transferFreeAudio() {
@@ -90,7 +90,7 @@ public class FeaturesActivity extends AppCompatActivity {
         finish();
     }
 
-    private void  transferA2Z(){
+    private void transferA2Z() {
         Intent intent = new Intent(FeaturesActivity.this, A2ZLoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(KeyValues.KEY_FEATURE_NAME, getString(R.string.nav_a2zpm));
