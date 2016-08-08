@@ -198,12 +198,11 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
         //highlight selected menu item
         String title = (getSupportActionBar().getTitle().toString());
         if (title.equals(getResources().getString(R.string.nav_take_exam))) {
-            navigationView.getMenu().findItem(R.id.nav_takeexam_a2z).setChecked(true);
+            //   navigationView.getMenu().findItem(R.id.nav_takeexam_a2z).setChecked(true);
         } else if (title.equals(getResources().getString(R.string.nav_exam_history))) {
-            navigationView.getMenu().findItem(R.id.nav_examhistory).setChecked(true);
+            //   navigationView.getMenu().findItem(R.id.nav_examhistory).setChecked(true);
         } else if (title.equals(getResources().getString(R.string.nav_contactus))) {
-            System.out.println("hih");
-            navigationView.getMenu().findItem(R.id.nav_contact).setChecked(true);
+            // navigationView.getMenu().findItem(R.id.nav_contact).setChecked(true);
         }
     }
 
@@ -242,6 +241,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
                 inflateHistory();
             } else if (id == R.id.nav_contact) {
                 getSupportActionBar().setTitle(getString(R.string.nav_contactus));
+                navigationView.getMenu().findItem(R.id.nav_contact).setChecked(true);
                 inflateContact();
             }
         } else {
@@ -326,7 +326,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
         //for temp data
         loadTempData();
         //todo handle for no data
-        navigationView.getMenu().findItem(R.id.nav_takeexam_a2z).setChecked(true);
+        //   navigationView.getMenu().findItem(R.id.nav_takeexam_a2z).setChecked(true);
         getSupportActionBar().setTitle(getString(R.string.nav_take_exam));
         myLayout.removeAllViews();
         hiddenInfo = getLayoutInflater().inflate(R.layout.module_take_exam, myLayout, false);
@@ -348,10 +348,10 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
 
 
     private void inflateHistory() {
-        navigationView.getMenu().findItem(R.id.nav_examhistory).setChecked(true);
+        //navigationView.getMenu().findItem(R.id.nav_examhistory).setChecked(true);
         loadtempHistory();
         if (examHistory.size() > 0) {
-            navigationView.getMenu().findItem(R.id.nav_takeexam_a2z).setChecked(true);
+            //navigationView.getMenu().findItem(R.id.nav_takeexam_a2z).setChecked(true);
             getSupportActionBar().setTitle(getString(R.string.nav_exam_history));
             myLayout.removeAllViews();
             hiddenInfo = getLayoutInflater().inflate(R.layout.module_take_exam, myLayout, false);
@@ -564,13 +564,14 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
         });
         alert.show();
     }
+
     private class ExamHistoryAdapter extends BaseExpandableListAdapter {
 
         private Context context;
         private List<ExamDetails> examName;
         private HashMap<ExamDetails, ExamResult> examDetails;
 
-        public ExamHistoryAdapter(Context context,List<ExamDetails> examName, HashMap<ExamDetails, ExamResult> examDetails) {
+        public ExamHistoryAdapter(Context context, List<ExamDetails> examName, HashMap<ExamDetails, ExamResult> examDetails) {
             this.context = context;
             this.examName = examName;
             this.examDetails = examDetails;
@@ -590,8 +591,8 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
             TextView exam_score_details = (TextView) convertView.findViewById(R.id.exam_history_score);
             exam_score_details.setText(childText.getDuration() + " Duration   " + childText.getTotalQuestion() + " Questions   " +
                     childText.getTotalMarks() + " Total Marks   " + childText.getPassingMarks() + " Passing Marks");
-            exam_details.setText("Exam Date "+childResult.getExamDate()+ "   Time Taken "+childResult.getTimeTaken() +"   Attempted " +childResult.getAttempted()
-                    + "   Correct Answers "+childResult.getCorrectAnswer() + "   Score(%) "+ childResult.getScore() + "   Overall Status "+childResult.getOverallStatus());
+            exam_details.setText("Exam Date " + childResult.getExamDate() + "   Time Taken " + childResult.getTimeTaken() + "   Attempted " + childResult.getAttempted()
+                    + "   Correct Answers " + childResult.getCorrectAnswer() + "   Score(%) " + childResult.getScore() + "   Overall Status " + childResult.getOverallStatus());
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -659,11 +660,11 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
             lblListHeader.setText(examDetails.getExamName());
 
             TextView tv_examDetails = (TextView) convertView.findViewById(R.id.exam_history_details);
-            tv_examDetails.setText(examDetails.getCategory()+" of Chapter "+examDetails.getChapter());
+            tv_examDetails.setText(examDetails.getCategory() + " of Chapter " + examDetails.getChapter());
             return convertView;
         }
 
-        private void showHistorySummary(){
+        private void showHistorySummary() {
             Intent intent = new Intent(A2ZMainActivity.this, HistorySummaryActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
