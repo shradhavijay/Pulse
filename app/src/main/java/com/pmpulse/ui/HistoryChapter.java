@@ -75,8 +75,8 @@ public class HistoryChapter extends AppCompatActivity {
 
         public HistorySummaryHolder(View v) {
             super(v);
-            question_review = (TextView) v.findViewById(R.id.question_review);
-            cardView = v.findViewById(R.id.card_view);
+         //   question_review = (TextView) v.findViewById(R.id.question_review);
+            cardView = v.findViewById(R.id.card_view_history_chapter);
         }
     }
 
@@ -85,12 +85,12 @@ public class HistoryChapter extends AppCompatActivity {
         @Override
         public void onBindViewHolder(HistorySummaryHolder holder, final int position) {
             int questionNumber = position + 1;
-            holder.question_review.setText("Q No " + questionNumber);
+         //   holder.question_review.setText("Q No " + questionNumber);
             holder.cardView.setTag(position);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showExamDetail(position);
+               //     showExamDetail(position);
                 }
             });
         }

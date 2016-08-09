@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_view"
+    android:id="@+id/card_view_history_chapter"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/marginSmall"
@@ -10,44 +10,174 @@
     android:layout_marginRight="@dimen/fab_margin"
     android:layout_marginTop="@dimen/marginSmall"
     android:background="@android:color/transparent"
-    card_view:cardCornerRadius="@dimen/marginStar"
     card_view:cardElevation="@dimen/fab_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/marginStar"
+        android:layout_marginLeft="@dimen/marginStar"
+        android:layout_marginRight="@dimen/marginStar"
         android:background="@drawable/rowselect"
-
         android:orientation="horizontal"
         android:weightSum="3"
         tools:context="com.pmpulse.ui.ReviewActivity">
 
-        <TextView
-            android:id="@+id/question_review"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@string/exam_name"
-            android:textAppearance="?android:textAppearanceListItemSmall"
-            android:textColor="@color/colorButton" />
+            android:orientation="vertical"
+            android:weightSum="1">
 
-        <TextView
-            android:id="@+id/selected_answer_review"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Selected : A"
-            android:textAppearance="?android:textAppearanceListItemSmall"
-            android:textColor="@color/colorButton" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@string/chapter_name"
+                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textColor="@color/colorButton" />
 
-        <TextView
-            android:id="@+id/correct_answer_review"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/chapterName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Scope"
+                android:textAppearance="?android:textAppearanceListItemSmall"
+                android:textColor="@color/colorButton" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginStar"
+            android:layout_marginRight="@dimen/marginStar"
             android:layout_weight="1"
-            android:text="Corrected : D"
-            android:textAppearance="?android:textAppearanceListItemSmall"
-            android:textColor="@color/colorButton" />
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/total_questions"
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+
+                <TextView
+                    android:id="@+id/totalQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="450"
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/attempted"
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+
+                <TextView
+                    android:id="@+id/attempted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="134"
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginStar"
+            android:layout_marginRight="@dimen/marginStar"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/correct_answers"
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+
+                <TextView
+                    android:id="@+id/correctAnswer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="89"
+                    android:textAppearance="?android:textAppearanceListItemSmall"
+                    android:textColor="@color/colorButton" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/score"
+                        android:textAppearance="?android:textAppearanceListItemSmall"
+                        android:textColor="@color/colorButton" />
+
+                    <TextView
+                        android:id="@+id/score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="58"
+                        android:textAppearance="?android:textAppearanceListItemSmall"
+                        android:textColor="@color/colorButton" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>
