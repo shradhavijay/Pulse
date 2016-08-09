@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.pmpulse.R;
@@ -20,6 +21,8 @@ import com.pmpulse.data.KeyValues;
  * Created by shradha on 9/8/16.
  */
 public class HistoryChapter extends AppCompatActivity {
+
+    Button button_review_list;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,20 +54,29 @@ public class HistoryChapter extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.review_answer));
 
-            RecyclerView recList = (RecyclerView) findViewById(R.id.cardHistoryChapter);
+        button_review_list = (Button) findViewById(R.id.button_review_list);
+
+        RecyclerView recList = (RecyclerView) findViewById(R.id.cardHistoryChapter);
         recList.setHasFixedSize(true);
+
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
         ExamAdapter adapter = new ExamAdapter();
         recList.setAdapter(adapter);
+
+        button_review_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showReviewList();
+            }
+        });
     }
 
     //show detailed view of question
-    private void showExamDetail(int position) {
-        Intent intent = new Intent(HistoryChapter.this, HistoryDetailActivity.class);
-        intent.putExtra(KeyValues.KEY_EXAM_NUMBER_HISTORY, position);
+    private void showReviewList() {
+        Intent intent = new Intent(HistoryChapter.this, HistorySummaryActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
@@ -75,7 +87,7 @@ public class HistoryChapter extends AppCompatActivity {
 
         public HistorySummaryHolder(View v) {
             super(v);
-         //   question_review = (TextView) v.findViewById(R.id.question_review);
+            //   question_review = (TextView) v.findViewById(R.id.question_review);
             cardView = v.findViewById(R.id.card_view_history_chapter);
         }
     }
@@ -84,15 +96,13 @@ public class HistoryChapter extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(HistorySummaryHolder holder, final int position) {
-            int questionNumber = position + 1;
-         //   holder.question_review.setText("Q No " + questionNumber);
-            holder.cardView.setTag(position);
+           /* holder.cardView.setTag(position);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-               //     showExamDetail(position);
+                    //     showExamDetail(position);
                 }
-            });
+            });*/
         }
 
         @Override
