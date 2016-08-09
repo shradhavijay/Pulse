@@ -665,7 +665,7 @@ public class A2ZMainActivity extends AppCompatActivity implements NavigationView
         }
 
         private void showHistorySummary() {
-            Intent intent = new Intent(A2ZMainActivity.this, HistorySummaryActivity.class);
+            Intent intent = new Intent(A2ZMainActivity.this, HistoryChapter.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }

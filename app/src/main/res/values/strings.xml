@@ -13,6 +13,7 @@
     <string name="action_review">Review</string>
     <string name="action_mark">Marked</string>
     <string name="action_submit_exam">Submit Exam</string>
+    <string name="action_review_list">Review List</string>
 
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
