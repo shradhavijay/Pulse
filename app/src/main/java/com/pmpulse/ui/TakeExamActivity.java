@@ -86,6 +86,20 @@ public class TakeExamActivity extends AppCompatActivity {
         staticsizw = 0;
         loadMoreTask.execute();
 
+        reviewList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showReview();
+            }
+        });
+
+    }
+    //show small summary
+    private void showReview() {
+        Intent intent = new Intent(TakeExamActivity.this, ReviewActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     //start countdown timer for test

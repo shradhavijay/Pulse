@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/marginSmall"
-        android:layout_marginTop="@dimen/marginStar"
+        android:layout_marginTop="@dimen/marginSmall"
         android:paddingBottom="@dimen/activity_margin_top" />
 
     <LinearLayout
@@ -24,10 +24,10 @@
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/marginSmall"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/fab_margin"
             android:layout_weight="1"
             android:background="@drawable/buttonred"
             android:text="@string/action_review_list"
