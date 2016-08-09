@@ -77,24 +77,27 @@
         <activity
             android:name=".ui.ReviewActivity"
             android:configChanges="orientation|screenSize"
-            android:excludeFromRecents="true"
-            />
+            android:excludeFromRecents="true" />
         <activity
             android:name=".ui.HistorySummaryActivity"
             android:configChanges="orientation|screenSize"
-            android:excludeFromRecents="true"
-            />
+            android:excludeFromRecents="true" />
         <activity
             android:name=".ui.HistoryDetailActivity"
             android:configChanges="orientation|screenSize"
-            android:excludeFromRecents="true"
-            />
-        <activity android:name=".ui.TakeExamActivity"
+            android:excludeFromRecents="true" />
+        <activity
+            android:name=".ui.TakeExamActivity"
             android:configChanges="orientation|screenSize"
-            android:excludeFromRecents="true"/>
-        <activity android:name=".ui.HistoryChapter"
+            android:excludeFromRecents="true" />
+        <activity
+            android:name=".ui.HistoryChapter"
             android:configChanges="orientation|screenSize"
-            android:excludeFromRecents="true"/>
+            android:excludeFromRecents="true" />
+        <activity
+            android:name=".ui.ExamResultActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true" />
     </application>
 
 </manifest>

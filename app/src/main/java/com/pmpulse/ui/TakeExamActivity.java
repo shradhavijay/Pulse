@@ -43,7 +43,7 @@ public class TakeExamActivity extends AppCompatActivity {
     Exam exam = new Exam();
     static long timeLeft = 600000;
     TextView tv_time_remaining_exam;
-    Button marked,reviewList;
+    Button marked,reviewList,submit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +74,7 @@ public class TakeExamActivity extends AppCompatActivity {
         tv_time_remaining_exam = (TextView) findViewById(R.id.tv_time_remaining_exam);
         marked = (Button) findViewById(R.id.marked);
         reviewList = (Button) findViewById(R.id.reviewList);
+        submit = (Button) findViewById(R.id.submit);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -90,6 +91,13 @@ public class TakeExamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showReview();
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showResult();
             }
         });
 
@@ -132,19 +140,33 @@ public class TakeExamActivity extends AppCompatActivity {
         alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (message.equals(getString(R.string.do_you_want_to_submit_exam)))
-                    examFinish(getString(R.string.exam_submitted));
-                else
-                    finish();
+                showResult();
             }
         });
         alert.show();
+    }
+
+    void showResult(){
+        Intent intent = new Intent(TakeExamActivity.this, ExamResultActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     //mark question for review
     public void markQuestion(View view){
         System.out.println("fnejhfjhd");
 
+    }
+
+    //shoe submit button and perform action
+    public void showSubmitAction(){
+        submit.setVisibility(View.VISIBLE);
+    }
+
+    //hide submit button
+    public void hideSubmitAction(){
+    submit.setVisibility(View.GONE);
     }
 
     private class ExamViewHolder1 extends RecyclerView.ViewHolder {
@@ -178,6 +200,11 @@ public class TakeExamActivity extends AppCompatActivity {
             int serial = position + 1;
             holder.card_view_exam.setTag(position);
             holder.question_serial.setText("Q No :" + serial + " of ");
+            /*if(position==9){
+                showSubmitAction();
+            }else{
+                hideSubmitAction();
+            }*/
 
         }
 

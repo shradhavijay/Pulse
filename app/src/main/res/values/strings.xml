@@ -124,10 +124,14 @@
     <string name="answer_saved">Answer saved successfully</string>
     <string name="marked_for_review">Marked for review</string>
     
+    <!--Exam history-->
     <string name="chapter_name"><b>Chapter Name</b></string>
     <string name="total_questions"><b>Total Questions</b></string>
     <string name="attempted"><b>Attempted</b></string>
     <string name="correct_answers"><b>Correct Answers</b></string>
     <string name="score"><b>Score(%)</b></string>
+    
+    <!--Exam result-->
+    <string name="exam_result">Exam Result</string>
 
 </resources>
