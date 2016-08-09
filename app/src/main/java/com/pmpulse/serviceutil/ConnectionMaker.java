@@ -32,8 +32,8 @@ public class ConnectionMaker {
     }
 
     public String service(String url, String methodType) {
-        if(KeyValues.isDebug)
-       System.out.println("url "+url);
+        if (KeyValues.isDebug)
+            System.out.println("url " + url);
         HttpURLConnection con = null;
         InputStream is = null;
         ByteArrayOutputStream outStream = null;
@@ -80,7 +80,7 @@ public class ConnectionMaker {
         return null;
     }
 
-    public String serviceA2Z(String url, String methodType) {
+    /*public String serviceA2Z(String url, String methodType) {
 
         if(KeyValues.isDebug)
             System.out.println("url "+url);
@@ -137,28 +137,28 @@ public class ConnectionMaker {
             }
         }
         return null;
-    }
-   /* public String serviceA2Z(String url, String methodType) {
+    }*/
+    public String serviceA2Z(String url, String methodType) {
 
-        if(KeyValues.isDebug)
-            System.out.println("url "+url);
+        if (KeyValues.isDebug)
+            System.out.println("url " + url);
         HttpURLConnection con = null;
         InputStream is = null;
         ByteArrayOutputStream outStream = null;
-        url = url+"/ajit/ajit/123tyut156";
+        url = url + "/ajit/ajit/123tyut156";
         String urlN = "http://a2zservice.pm-pulse.com/A2ZService.svc/Rest/UserAuthentication/ajit/ajit/123tyut156";
         try {
             con = (HttpURLConnection) (new URL(urlN)).openConnection();
             con.setRequestMethod(methodType);
-           // con.setDoInput(true);
+            // con.setDoInput(true);
             con.setDoOutput(false);
             con.setRequestProperty("Content-Type", "application/json;charset=utf-8");
-           // con.setRequestProperty("Content-Type", "charset=utf-8");
+            // con.setRequestProperty("Content-Type", "charset=utf-8");
             //con.setRequestProperty("Content-Type", "application/json;charset=utf-8");
             String valueString = "ajit:ajit:check";
             byte[] byteEncoded = Base64.encode(valueString.getBytes(), 1);
-            String encodedValue = "Basic "+byteEncoded;
-            con.setRequestProperty("ABC",encodedValue);
+            String encodedValue = "Basic " + byteEncoded;
+            con.setRequestProperty("ABC", encodedValue);
 
             con.setConnectTimeout(KeyValues.TIMEOUT);
             con.connect(); // Let's read the response
@@ -194,5 +194,6 @@ public class ConnectionMaker {
             }
         }
         return null;
-    }*/
+    }
 }
+
