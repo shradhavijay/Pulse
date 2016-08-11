@@ -37,6 +37,7 @@ import com.pmpulse.mediacontrol.AudioService;
 import com.pmpulse.mediacontrol.Controller;
 import com.pmpulse.serviceutil.CheckUserLoggedIn;
 import com.pmpulse.serviceutil.ConnectionMaker;
+import com.pmpulse.serviceutil.GetAudioUrl;
 import com.pmpulse.serviceutil.UpdateReadPlaylist;
 
 import java.util.ArrayList;
@@ -494,6 +495,8 @@ public class AudioPlaylistActivity extends AppCompatActivity implements MediaCon
                 case R.id.play:
                     CheckUserLoggedIn checkUserLoggedIn = new CheckUserLoggedIn();
                     if (checkUserLoggedIn.isUserLogged()) {
+                        GetAudioUrl getAudioUrl = new GetAudioUrl(audioListStatic.get(position).getServerAudioId(), AudioPlaylistActivity.this);
+                        String audioUrl = getAudioUrl.getAudioUrl();
                         if (!audioListStatic.get(position).getIsPlayed()) {
                             //update audio
                             new UpdateReadPlaylist(audioListStatic.get(position), AudioPlaylistActivity.this).execute();

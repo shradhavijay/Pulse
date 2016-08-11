@@ -96,9 +96,9 @@ public class DBQuery {
         }
     }
 
-    public void addChapter(String chapterName, String chapterUrl, String topicName, boolean isRead, String audioId, String categoryId) {
+    public void addChapter(String chapterName, String topicName, boolean isRead, String audioId, String categoryId) {
         if (!isChapterAdded(chapterName, getTopicId(topicName))) {
-            addChapterDetails(chapterName, getTopicId(topicName), chapterUrl, isRead, audioId, categoryId);
+            addChapterDetails(chapterName, getTopicId(topicName), "", isRead, audioId, categoryId);
         }
     }
 

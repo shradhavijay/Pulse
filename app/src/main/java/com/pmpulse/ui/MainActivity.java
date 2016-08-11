@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DBQuery dbQuery = new DBQuery(this);
         //store training name in db
         for (int countMainTopic = 0; countMainTopic < Parser.chapterAudios.size(); countMainTopic++) {
-            dbQuery.addChapter(Parser.chapterAudios.get(countMainTopic).getMainCategoryName(), Parser.chapterAudios.get(countMainTopic).getAudioPath(),
+            dbQuery.addChapter(Parser.chapterAudios.get(countMainTopic).getMainCategoryName(),
                     Parser.topic.get(position), Parser.chapterAudios.get(countMainTopic).getIsPlayed(), Parser.chapterAudios.get(countMainTopic).getAudioId(), Parser.chapterAudios.get(countMainTopic).getCategoryId());
         }
     }
