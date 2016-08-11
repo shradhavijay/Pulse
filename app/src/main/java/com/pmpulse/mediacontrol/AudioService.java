@@ -28,6 +28,7 @@ import com.pmpulse.serviceutil.UpdateReadPlaylist;
 import com.pmpulse.ui.AudioActivity;
 import com.pmpulse.ui.AudioPlaylistActivity;
 import com.pmpulse.ui.FreeAudioActivity;
+import com.pmpulse.ui.MainActivity;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class AudioService extends Service implements
 
     private WifiManager.WifiLock wifiLock;
     String type = null, topicPosition;
-    MediaSession.Token token ;
+    MediaSession.Token token;
 
     public void onCreate() {
         //create the service
@@ -63,15 +64,15 @@ public class AudioService extends Service implements
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(KeyValues.isDebug)
-        System.out.println("in on bind start");
+        if (KeyValues.isDebug)
+            System.out.println("in on bind start");
         if (intent != null && intent.getAction() != null) {
             if (intent.getAction().equals("END")) {
                 pausePlayer();
                 NotificationManager nMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 nMgr.cancel(1);
-                if(KeyValues.isDebug)
-                System.out.println("in on bind");
+                if (KeyValues.isDebug)
+                    System.out.println("in on bind");
             }
         }
 
@@ -135,10 +136,10 @@ public class AudioService extends Service implements
     public void stopAudioService() {
         if (player != null) {
             //todo crashing at logout
-          // if (player.isPlaying())
-          {
+            // if (player.isPlaying())
+            {
                 player.stop();
-               // player.release();
+                // player.release();
             }
         }
     }
@@ -319,52 +320,52 @@ public class AudioService extends Service implements
 
     //skip to next
     public int playNext() {
-            if (type != null) {
-                if (type.equals(KeyValues.TYPE_CHAPTER) || type.equals(KeyValues.TYPE_PLAYLIST)) {
+        if (type != null) {
+            if (type.equals(KeyValues.TYPE_CHAPTER) || type.equals(KeyValues.TYPE_PLAYLIST)) {
 
-                    CheckUserLoggedIn checkUserLoggedIn = new CheckUserLoggedIn();
-                    if (checkUserLoggedIn.isUserLogged()){
-                        songPosn++;
-                        if (songPosn >= songs.size()) songPosn = 0;
-                        Intent onPreparedIntent = new Intent("MEDIA_PLAYER_PREPARED");
-                        onPreparedIntent.putExtra("POS", songPosn);
-                        LocalBroadcastManager.getInstance(this).sendBroadcast(onPreparedIntent);
-                        playSong();
-
-                        //update is Read when audio is automatically forwarded
-                        if (type.equals(KeyValues.TYPE_CHAPTER)) {
-                            if (!Parser.chapterAudios.get(songPosn).getIsPlayed())
-                                new UpdateAudioPlayed(songPosn, getApplicationContext()).execute();
-                        } if(type.equals(KeyValues.TYPE_PLAYLIST)){
-                            if(!AudioPlaylistActivity.audioListStatic.get(songPosn).getIsPlayed()){
-                              new UpdateReadPlaylist(AudioPlaylistActivity.audioListStatic.get(songPosn), getApplicationContext()).execute();
-                            }
-                        }
-                        return songPosn;
-                    }
-                  else {
-                        //log out
-                        Intent onPreparedIntent = new Intent("MEDIA_PLAYER_STOP");
-                        LocalBroadcastManager.getInstance(this).sendBroadcast(onPreparedIntent);
-
-                        //clear notification
-                        NotificationManager nMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                        nMgr.cancel(1);
-                        return  0;
-                    }
-                }
-                if(type.equals(KeyValues.TYPE_FREE_AUDIO)){
+                CheckUserLoggedIn checkUserLoggedIn = new CheckUserLoggedIn();
+                if (checkUserLoggedIn.isUserLogged()) {
                     songPosn++;
                     if (songPosn >= songs.size()) songPosn = 0;
                     Intent onPreparedIntent = new Intent("MEDIA_PLAYER_PREPARED");
                     onPreparedIntent.putExtra("POS", songPosn);
                     LocalBroadcastManager.getInstance(this).sendBroadcast(onPreparedIntent);
                     playSong();
+
+                    //update is Read when audio is automatically forwarded
+                    if (type.equals(KeyValues.TYPE_CHAPTER)) {
+                        if (!Parser.chapterAudios.get(songPosn).getIsPlayed())
+                            new UpdateAudioPlayed(songPosn, getApplicationContext()).execute();
+                    }
+                    if (type.equals(KeyValues.TYPE_PLAYLIST)) {
+                        if (!MainActivity.audioListStatic.get(songPosn).getIsPlayed()) {
+                            new UpdateReadPlaylist(MainActivity.audioListStatic.get(songPosn), getApplicationContext()).execute();
+                        }
+                    }
                     return songPosn;
+                } else {
+                    //log out
+                    Intent onPreparedIntent = new Intent("MEDIA_PLAYER_STOP");
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(onPreparedIntent);
+
+                    //clear notification
+                    NotificationManager nMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    nMgr.cancel(1);
+                    return 0;
                 }
             }
-            return 0;
+            if (type.equals(KeyValues.TYPE_FREE_AUDIO)) {
+                songPosn++;
+                if (songPosn >= songs.size()) songPosn = 0;
+                Intent onPreparedIntent = new Intent("MEDIA_PLAYER_PREPARED");
+                onPreparedIntent.putExtra("POS", songPosn);
+                LocalBroadcastManager.getInstance(this).sendBroadcast(onPreparedIntent);
+                playSong();
+                return songPosn;
+            }
         }
+        return 0;
+    }
 
     @Override
     public void onDestroy() {

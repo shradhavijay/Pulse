@@ -1,5 +1,8 @@
 package com.pmpulse.ui;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
@@ -11,6 +14,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
@@ -26,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.pmpulse.R;
@@ -37,13 +43,14 @@ import com.pmpulse.mediacontrol.AudioService;
 import com.pmpulse.mediacontrol.Controller;
 import com.pmpulse.serviceutil.CheckUserLoggedIn;
 import com.pmpulse.serviceutil.ConnectionMaker;
-import com.pmpulse.serviceutil.GetAudioUrl;
+import com.pmpulse.serviceutil.Parser;
 import com.pmpulse.serviceutil.UpdateReadPlaylist;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Playlist Activity
@@ -65,12 +72,12 @@ public class AudioPlaylistActivity extends AppCompatActivity implements MediaCon
     // private SeekBar seekbar;
     private int songPosn;
     private LinearLayout anchor;
-    public static List<ChapterAudio> audioListStatic = new ArrayList<>();
+    // ProgressBar main_progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(!KeyValues.isDebug)
+        if (!KeyValues.isDebug)
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                     WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_audiolist);
@@ -79,48 +86,43 @@ public class AudioPlaylistActivity extends AppCompatActivity implements MediaCon
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         audioListView = (ListView) findViewById(R.id.audioListView);
         anchor = (LinearLayout) findViewById(R.id.anchor);
+        // main_progress = (ProgressBar) findViewById(R.id.main_progress);
         //fab = (FloatingActionButton) findViewById(R.id.fab);
 
         setController();
         Intent intent = getIntent();
         if (intent != null) {
-            getSupportActionBar().setTitle(intent.getStringExtra(KeyValues.KEY_CHAPTER_NAME));
-            //Audio audio = new Audio();
-            DBQuery dbQuery = new DBQuery(AudioPlaylistActivity.this);
-            List<ChapterAudio> audioList = dbQuery.getPlayListChapters(getSupportActionBar().getTitle().toString());
+            loadData(intent);
+        }
+    }
 
-            Collections.sort(audioList, new Comparator<ChapterAudio>() {
-                public int compare(ChapterAudio a, ChapterAudio b) {
-                    return a.getAudioId().compareTo(b.getAudioId());
+    void loadData(Intent intent) {
+        getSupportActionBar().setTitle(intent.getStringExtra(KeyValues.KEY_CHAPTER_NAME));
+        Collections.sort(MainActivity.audioListStatic, new Comparator<ChapterAudio>() {
+            public int compare(ChapterAudio a, ChapterAudio b) {
+                return a.getAudioId().compareTo(b.getAudioId());
+            }
+        });
+        adapter = new PlayListAudioAdapter(this, R.layout.list_item, MainActivity.audioListStatic, getSupportActionBar().getTitle().toString());
+        //populate data
+        audioListView.setAdapter(adapter);
+
+        final int songPosAfterNoti = intent.getIntExtra("POS", -1);
+        if (songPosAfterNoti >= 0) {
+            anchor.post(new Runnable() {
+                public void run() {
+                    setController();
+                    controller.setSongTitle(MainActivity.audioListStatic.get(songPosAfterNoti).getMainCategoryName());
+                    controller.show(0);
                 }
             });
-            adapter = new PlayListAudioAdapter(this, R.layout.list_item, audioList, getSupportActionBar().getTitle().toString());
-            //populate data
-            audioListView.setAdapter(adapter);
-            audioListStatic = audioList;
-            audioListStatic = audioList;
-
-
-            //topicId = intent.getStringExtra(KeyValues.KEY_CHAPTER_ID);
-            // mAuthTask = new ServerAudios(topicId);
-            //mAuthTask.execute((Void) null);
-            final int songPosAfterNoti = intent.getIntExtra("POS", -1);
-            if (songPosAfterNoti >= 0) {
-                anchor.post(new Runnable() {
-                    public void run() {
-                        setController();
-                        controller.setSongTitle(audioListStatic.get(songPosAfterNoti).getMainCategoryName());
-                        controller.show(0);
-                    }
-                });
-            }
         }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         //  controller.setSongTitle(songList.get(songPosn).getName());
-        controller.setSongTitle(audioListStatic.get(songPosn).getMainCategoryName());
+        controller.setSongTitle(MainActivity.audioListStatic.get(songPosn).getMainCategoryName());
         controller.show(0);
         return super.onTouchEvent(event);
     }
@@ -178,10 +180,10 @@ public class AudioPlaylistActivity extends AppCompatActivity implements MediaCon
 
     private List<MusicPlayerData> initialiseMusicPlayerData() {
         List<MusicPlayerData> musicPlayerDataList = new ArrayList<MusicPlayerData>();
-        for (int countData = 0; countData < audioListStatic.size(); countData++) {
+        for (int countData = 0; countData < MainActivity.audioListStatic.size(); countData++) {
             MusicPlayerData musicPlayerData = new MusicPlayerData();
-            musicPlayerData.setName(audioListStatic.get(countData).getMainCategoryName());
-            musicPlayerData.setPath(audioListStatic.get(countData).getAudioPath());
+            musicPlayerData.setName(MainActivity.audioListStatic.get(countData).getMainCategoryName());
+            musicPlayerData.setPath(MainActivity.audioListStatic.get(countData).getAudioPath());
             musicPlayerDataList.add(musicPlayerData);
         }
         return musicPlayerDataList;
@@ -208,7 +210,7 @@ public class AudioPlaylistActivity extends AppCompatActivity implements MediaCon
                 setController();
                 playbackPaused = false;
             }
-            controller.setSongTitle(audioListStatic.get(songPosn).getMainCategoryName());
+            controller.setSongTitle(MainActivity.audioListStatic.get(songPosn).getMainCategoryName());
             controller.show(0);
         } else {
             //show not connected to internet popup
@@ -298,8 +300,8 @@ public class AudioPlaylistActivity extends AppCompatActivity implements MediaCon
         CheckUserLoggedIn checkUserLoggedIn = new CheckUserLoggedIn();
         if (checkUserLoggedIn.isUserLogged()) {
             songPosn = musicSrv.playNext();
-            if (!audioListStatic.get(songPosn).getIsPlayed()) {
-                new UpdateReadPlaylist(audioListStatic.get(songPosn), AudioPlaylistActivity.this).execute();
+            if (!MainActivity.audioListStatic.get(songPosn).getIsPlayed()) {
+                new UpdateReadPlaylist(MainActivity.audioListStatic.get(songPosn), AudioPlaylistActivity.this).execute();
             }
             if (playbackPaused) {
                 setController();
@@ -328,9 +330,9 @@ public class AudioPlaylistActivity extends AppCompatActivity implements MediaCon
         CheckUserLoggedIn checkUserLoggedIn = new CheckUserLoggedIn();
         if (checkUserLoggedIn.isUserLogged()) {
             songPosn = musicSrv.playPrev();
-            if (!audioListStatic.get(songPosn).getIsPlayed()) {
+            if (!MainActivity.audioListStatic.get(songPosn).getIsPlayed()) {
                 //update audio
-                new UpdateReadPlaylist(audioListStatic.get(songPosn), AudioPlaylistActivity.this).execute();
+                new UpdateReadPlaylist(MainActivity.audioListStatic.get(songPosn), AudioPlaylistActivity.this).execute();
             }
             if (playbackPaused) {
                 setController();
@@ -367,7 +369,7 @@ public class AudioPlaylistActivity extends AppCompatActivity implements MediaCon
         if (paused) {
             setController();
             paused = false;
-            controller.setSongTitle(audioListStatic.get(songPosn).getMainCategoryName());
+            controller.setSongTitle(MainActivity.audioListStatic.get(songPosn).getMainCategoryName());
         }
     }
 
@@ -383,7 +385,7 @@ public class AudioPlaylistActivity extends AppCompatActivity implements MediaCon
             // When music player has been prepared, show controller
             setController();
             // controller.setSongTitle(songList.get(i.getIntExtra("POS", 0)).getName());
-            controller.setSongTitle(audioListStatic.get(i.getIntExtra("POS", 0)).getMainCategoryName());
+            controller.setSongTitle(MainActivity.audioListStatic.get(i.getIntExtra("POS", 0)).getMainCategoryName());
             controller.show(0);
         }
     };
@@ -495,11 +497,9 @@ public class AudioPlaylistActivity extends AppCompatActivity implements MediaCon
                 case R.id.play:
                     CheckUserLoggedIn checkUserLoggedIn = new CheckUserLoggedIn();
                     if (checkUserLoggedIn.isUserLogged()) {
-                        GetAudioUrl getAudioUrl = new GetAudioUrl(audioListStatic.get(position).getServerAudioId(), AudioPlaylistActivity.this);
-                        String audioUrl = getAudioUrl.getAudioUrl();
-                        if (!audioListStatic.get(position).getIsPlayed()) {
+                        if (!MainActivity.audioListStatic.get(position).getIsPlayed()) {
                             //update audio
-                            new UpdateReadPlaylist(audioListStatic.get(position), AudioPlaylistActivity.this).execute();
+                            new UpdateReadPlaylist(MainActivity.audioListStatic.get(position), AudioPlaylistActivity.this).execute();
                         }
                         playSong(position);
                     } else {

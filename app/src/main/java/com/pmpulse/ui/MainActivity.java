@@ -43,6 +43,7 @@ import com.pmpulse.serviceutil.ConnectionMaker;
 import com.pmpulse.serviceutil.Parser;
 import com.pmpulse.serviceutil.UserLogoutTask;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().findItem(R.id.nav_audiotraining).setChecked(true);
 
         //to set email id in side drawer
-       TextView userName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userName);
+        TextView userName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userName);
         TextView emaild = (TextView) navigationView.getHeaderView(0).findViewById(R.id.emaild);
         userName.setText(Parser.userName);
         emaild.setText(new User().getCreds(getApplicationContext()).getUserName());
@@ -186,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             hiddenInfo = getLayoutInflater().inflate(R.layout.module_playlist, myLayout, false);
             lv_topic = (ListView) hiddenInfo.findViewById(R.id.lv_topic);
             PlayListsAdapter adapter = new PlayListsAdapter(playlist, MainActivity.this);
+            main_progress = hiddenInfo.findViewById(R.id.main_progress);
             myLayout.addView(hiddenInfo);
             lv_topic.setAdapter(adapter);
         } else {
@@ -310,7 +312,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public class ServerAudios extends AsyncTask<Void, Void, String> {
 
         private int position;
-private boolean isLogged = false;
+        private boolean isLogged = false;
+
         ServerAudios(int position) {
             this.position = position;
         }
@@ -328,7 +331,7 @@ private boolean isLogged = false;
 
             /*CheckUserLoggedIn checkUserLoggedIn = new CheckUserLoggedIn();
             if (checkUserLoggedIn.isUserLogged())*/
-            if(isLogged){
+            if (isLogged) {
                 //attempt authentication against a network service.
                 try {
                     // Simulate network access.
@@ -395,9 +398,8 @@ private boolean isLogged = false;
     public void makeCall(int position) {
         if (new ConnectionMaker().isConnected(MainActivity.this)) {
             new ServerAudios(position).execute();
-        }
-        else
-        showAlert(getString(R.string.error_no_net));
+        } else
+            showAlert(getString(R.string.error_no_net));
     }
 
     //show alert dialog
@@ -638,14 +640,66 @@ private boolean isLogged = false;
             DBQuery dbQuery = new DBQuery(MainActivity.this);
             List<ChapterAudio> audioList = dbQuery.getPlayListChapters(playLists.get(position));
             if (audioList.size() > 0) {
-                Intent intent = new Intent(context, AudioPlaylistActivity.class);
-                intent.putExtra(KeyValues.KEY_CHAPTER_NAME, playLists.get(position));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                audioListStatic.clear();
+                audioListStatic = audioList;
+                new GetAudioUrl(playLists.get(position)).execute();
             } else {
                 showAlert(getString(R.string.error_no_chapter_added_in_playlist));
             }
         }
     }
 
+    public static List<ChapterAudio> audioListStatic = new ArrayList<>();
+
+    private class GetAudioUrl extends AsyncTask<Void, Void, Void> {
+
+        private String type = "ta";
+        String playlistName;
+
+        public GetAudioUrl(String playlistName) {
+            this.playlistName = playlistName;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showProgress();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            //get value from db
+            for (int i = 0; i < audioListStatic.size(); i++) {
+                try {
+                    String audioUrl = "";
+                    // Simulate network access.
+                    String response = new ConnectionMaker().service(KeyValues.urlGetAudioUrl + "/" + Parser.userNumber + "/" + audioListStatic.get(i).getServerAudioId() + "/" + type, ConnectionMaker.METHOD_GET);
+                    if (KeyValues.isDebug)
+                        System.out.println("response " + response);
+                    //parse audio url
+                    Parser parser = new Parser();
+                    audioUrl = parser.getAudioUrlParser(response);
+
+                    ChapterAudio chapterAudio = audioListStatic.get(i);
+                    chapterAudio.setAudioPath(audioUrl);
+                    audioListStatic.set(i, chapterAudio);
+
+                } catch (Exception e) {
+                    if (KeyValues.isDebug)
+                        System.out.println("exception in  GetAudioUrl" + e);
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            hideProgress();
+            Intent intent = new Intent(MainActivity.this, AudioPlaylistActivity.class);
+            intent.putExtra(KeyValues.KEY_CHAPTER_NAME, playlistName);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            MainActivity.this.startActivity(intent);
+        }
+    }
 }
