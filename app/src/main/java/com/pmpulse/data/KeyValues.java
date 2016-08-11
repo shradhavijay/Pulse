@@ -30,7 +30,7 @@ public class KeyValues {
     public static String urlAddRating = "http://pmdhwaniapi.pm-pulse.com/API/RateAudio";
     public static String urlIsLoggedIn = "http://pmdhwaniapi.pm-pulse.com/api/CheckUserStatus";
     public static String urlUpdateReadStatus = "http://pmdhwaniapi.pm-pulse.com/api/UpdateAudio";
-    public static String getUrlGetAudioUrl = "http://pmdhwaniapi.pm-pulse.com/API/GetAudioByID";
+    public static String urlGetAudioUrl = "http://pmdhwaniapi.pm-pulse.com/API/GetAudioByID";
     public static String urlLoginA2Z = "http://a2zservice.pm-pulse.com/A2ZService.svc/Rest/UserAuthentication";
 
     public static String udid = "UDID";

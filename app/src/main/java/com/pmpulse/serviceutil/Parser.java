@@ -21,7 +21,7 @@ public class Parser {
     public static int moduleId = 0;
     public static String success = "success";
     public static String Success = "Success";
-  //public static String failure = "Failure";
+    //public static String failure = "Failure";
     public static String userName = "";
     public static List<String> topic = new ArrayList<>();
     public static List<String> topicId = new ArrayList<>();
@@ -53,14 +53,14 @@ public class Parser {
     String isLoggedIn = "IsLoggedIn";
     String trainingID = "TrainingID";
     //parameter
-   String categoryID = "CategoryID";
+    String categoryID = "CategoryID";
 
     //parser for login and topics
     public String loginParse(String response) {
         try {
             response = toJSON(response);
-            if(KeyValues.isDebug)
-            System.out.println("parser " + response);
+            if (KeyValues.isDebug)
+                System.out.println("parser " + response);
             JSONObject parse = new JSONObject(response);
 
             if (parse.has(loginDetails)) {
@@ -84,15 +84,15 @@ public class Parser {
                     for (int topicCount = 0; topicCount < training.length(); topicCount++) {
                         topic.add(((JSONObject) training.get(topicCount)).getString(mainCategoryName));
                         moduleName = ((JSONObject) training.get(topicCount)).getString(trainingName);
-                        moduleId =  ((JSONObject) training.get(topicCount)).getInt(trainingID);
+                        moduleId = ((JSONObject) training.get(topicCount)).getInt(trainingID);
                         topicId.add(((JSONObject) training.get(topicCount)).getString(mainCategoryID));
                     }
 
                 }
             }
         } catch (JSONException e) {
-            if(KeyValues.isDebug)
-            System.out.println("in parser catch :" + e.getMessage());
+            if (KeyValues.isDebug)
+                System.out.println("in parser catch :" + e.getMessage());
             e.printStackTrace();
             return null;
         }
@@ -102,8 +102,8 @@ public class Parser {
     public String getAudioParser(String response) {
         try {
             response = toJSON(response);
-            if(KeyValues.isDebug)
-            System.out.println("parser " + response);
+            if (KeyValues.isDebug)
+                System.out.println("parser " + response);
             JSONArray parse = new JSONArray(response);
             chapterAudios.clear();
             for (int countAudio = 0; countAudio < parse.length(); countAudio++) {
@@ -113,8 +113,8 @@ public class Parser {
                 String fileUrl = "";
                 String domain = ((JSONObject) parse.get(countAudio)).getString(domainName);
                 String name = ((JSONObject) parse.get(countAudio)).getString(audioPath);
-                name = name.substring(0, name.length()-19);
-                fileUrl = domain+"Audios/2c334da84b9f/"+name+".mp3";
+                name = name.substring(0, name.length() - 19);
+                fileUrl = domain + "Audios/2c334da84b9f/" + name + ".mp3";
                 chapterAudio.setAudioPath(fileUrl);
 
                 chapterAudio.setIsPlayed(((JSONObject) parse.get(countAudio)).getBoolean(isPlayed));
@@ -125,8 +125,8 @@ public class Parser {
             }
 
         } catch (JSONException e) {
-            if(KeyValues.isDebug)
-            System.out.println("in getAudioParser parser catch :" + e.getMessage());
+            if (KeyValues.isDebug)
+                System.out.println("in getAudioParser parser catch :" + e.getMessage());
             e.printStackTrace();
             return null;
         }
@@ -136,14 +136,14 @@ public class Parser {
     public String logoutParser(String response) {
         try {
             response = toJSON(response);
-            if(KeyValues.isDebug)
-            System.out.println("parser logoutParser" + response);
+            if (KeyValues.isDebug)
+                System.out.println("parser logoutParser" + response);
             JSONArray parse = new JSONArray(response);
             statusLogout = ((JSONObject) parse.get(0)).getString(statusMessage);
 
         } catch (JSONException e) {
-            if(KeyValues.isDebug)
-            System.out.println("logoutParser catch :" + e.getMessage());
+            if (KeyValues.isDebug)
+                System.out.println("logoutParser catch :" + e.getMessage());
             e.printStackTrace();
         }
         return statusLogout;
@@ -153,14 +153,14 @@ public class Parser {
         boolean isLogged = false;
         try {
             response = toJSON(response);
-            if(KeyValues.isDebug)
-            System.out.println("parser logoutParser" + response);
+            if (KeyValues.isDebug)
+                System.out.println("parser logoutParser" + response);
             JSONArray parse = new JSONArray(response);
             isLogged = ((JSONObject) parse.get(0)).getBoolean(isLoggedIn);
 
         } catch (JSONException e) {
-            if(KeyValues.isDebug)
-            System.out.println("logoutParser catch :" + e.getMessage());
+            if (KeyValues.isDebug)
+                System.out.println("logoutParser catch :" + e.getMessage());
             e.printStackTrace();
         }
         return isLogged;
@@ -169,8 +169,8 @@ public class Parser {
     public String freeAudioParser(String response) {
         try {
             response = toJSON(response);
-            if(KeyValues.isDebug)
-            System.out.println("parser freeAudioParser" + response);
+            if (KeyValues.isDebug)
+                System.out.println("parser freeAudioParser" + response);
             JSONArray parse = new JSONArray(response);
             freeAudio.clear();
             for (int countFreeAudio = 0; countFreeAudio < parse.length(); countFreeAudio++) {
@@ -181,18 +181,40 @@ public class Parser {
                 String fileUrl = "";
                 String domain = ((JSONObject) parse.get(countFreeAudio)).getString(domainName);
                 String name = ((JSONObject) parse.get(countFreeAudio)).getString(fileURL);
-                name = name.substring(0, name.length()-19);
-                fileUrl = domain+"FreeAudio/"+name+".mp3";
+                name = name.substring(0, name.length() - 19);
+                fileUrl = domain + "FreeAudio/" + name + ".mp3";
                 freeAudios.setFileURL(fileUrl);
                 freeAudio.add(freeAudios);
             }
         } catch (JSONException e) {
-            if(KeyValues.isDebug)
-            System.out.println("freeAudioParser catch :" + e.getMessage());
+            if (KeyValues.isDebug)
+                System.out.println("freeAudioParser catch :" + e.getMessage());
             e.printStackTrace();
             return null;
         }
         return "" + freeAudio.size();
+    }
+
+    //parser for urlGetAudioUrl
+    public String getAudioUrlParser(String response) {
+        String fileUrl = "";
+        try {
+            response = toJSON(response);
+            if (KeyValues.isDebug)
+                System.out.println("parser getAudioUrlParser" + response);
+            JSONArray parse = new JSONArray(response);
+            String domain = ((JSONObject) parse.get(0)).getString(domainName);
+            String name = ((JSONObject) parse.get(0)).getString(audioPath);
+            name = name.substring(0, name.length() - 19);
+            fileUrl = domain + "Audios/2c334da84b9f/" + name + ".mp3";
+
+        } catch (JSONException e) {
+            if (KeyValues.isDebug)
+                System.out.println("getAudioUrlParser catch :" + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+        return fileUrl;
     }
 
     private String toJSON(String response) {

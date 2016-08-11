@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.pmpulse.data.KeyValues;
-import com.pmpulse.database.DBQuery;
 
 import java.util.concurrent.ExecutionException;
 
@@ -31,7 +30,7 @@ public class GetAudioUrl extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... params) {
         try {
             // Simulate network access.
-            String response = new ConnectionMaker().service(KeyValues.getUrlGetAudioUrl + "/" + Parser.userNumber + "/" + audioId+ "/" +type, ConnectionMaker.METHOD_GET);
+            String response = new ConnectionMaker().service(KeyValues.urlGetAudioUrl + "/" + Parser.userNumber + "/" + audioId + "/" + type, ConnectionMaker.METHOD_GET);
             if (KeyValues.isDebug)
                 System.out.println("response " + response);
             return response;
@@ -49,16 +48,19 @@ public class GetAudioUrl extends AsyncTask<Void, Void, String> {
     protected void onCancelled() {
     }
 
-    public String getAudioUrl(){
-        if(KeyValues.isDebug)
+    public String getAudioUrl() {
+        String audioUrl = "";
+        if (KeyValues.isDebug)
             System.out.println("in getAudioUrl");
         GetAudioUrl getAudioUrl = new GetAudioUrl(audioId, context);
         getAudioUrl.execute();
         String result = "";
         try {
             result = getAudioUrl.get();
-            if(KeyValues.isDebug)
-                System.out.println("in getAudioUrl result "+result);
+            Parser parser = new Parser();
+            audioUrl = parser.getAudioUrlParser(result);
+            if (KeyValues.isDebug)
+                System.out.println("in getAudioUrl result " + audioUrl);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
