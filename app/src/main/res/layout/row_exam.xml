@@ -3,13 +3,13 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view_exam"
-    card_view:cardBackgroundColor="@color/questionBackground"
-        android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/fab_margin"
     android:layout_marginLeft="@dimen/marginStar"
     android:layout_marginRight="@dimen/marginStar"
     android:layout_marginTop="@dimen/marginSmall"
+    card_view:cardBackgroundColor="@color/questionBackground"
     card_view:cardElevation="@dimen/marginStar">
 
     <LinearLayout
@@ -50,41 +50,41 @@
             android:id="@+id/answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginSmall"
-            android:layout_marginBottom="@dimen/marginStar">
+            android:layout_marginBottom="@dimen/marginStar"
+            android:layout_marginTop="@dimen/marginSmall">
 
             <RadioButton
-                android:background="@drawable/examselect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintv"
+                android:background="@drawable/examselect"
                 android:text="The standard chunk of Lorem Ipsum used "
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorButton" />
 
             <RadioButton
-                android:background="@drawable/examselect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintv"
+                android:background="@drawable/examselect"
                 android:text="The standard chunk of Lorem Ipsum used "
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorButton" />
 
             <RadioButton
-                android:background="@drawable/examselect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintv"
+                android:background="@drawable/examselect"
                 android:text="The standard chunk of Lorem Ipsum used "
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorButton" />
 
             <RadioButton
-                android:background="@drawable/examselect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintv"
+                android:background="@drawable/examselect"
                 android:text="The standard chunk of Lorem Ipsum used "
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorButton" />
