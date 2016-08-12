@@ -65,19 +65,6 @@
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:typeface="serif" />
-
-            <Button
-                android:id="@+id/btn_feature_a2ztraining"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fab_margin"
-                android:background="@drawable/buttonred"
-                android:text="@string/nav_a2zpm"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:typeface="serif" />
-
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

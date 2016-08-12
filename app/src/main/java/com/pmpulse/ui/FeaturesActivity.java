@@ -24,7 +24,7 @@ import com.pmpulse.serviceutil.Parser;
  */
 public class FeaturesActivity extends AppCompatActivity {
 
-    Button btn_feature_pmfreeaudio, btn_feature_audioTraining, btn_feature_a2ztraining;
+    Button btn_feature_pmfreeaudio, btn_feature_audioTraining;
     LinearLayout feature_content;
     View feature_progress;
 
@@ -42,7 +42,7 @@ public class FeaturesActivity extends AppCompatActivity {
         feature_progress = findViewById(R.id.feature_progress);
         btn_feature_audioTraining = (Button) findViewById(R.id.btn_feature_audiotraining);
         btn_feature_pmfreeaudio = (Button) findViewById(R.id.btn_feature_pmfreeaudio);
-        btn_feature_a2ztraining = (Button) findViewById(R.id.btn_feature_a2ztraining);
+        //btn_feature_a2ztraining = (Button) findViewById(R.id.btn_feature_a2ztraining);
 
         btn_feature_audioTraining.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +62,7 @@ public class FeaturesActivity extends AppCompatActivity {
             }
         });
 
-        btn_feature_a2ztraining.setOnClickListener(new View.OnClickListener() {
+        /*btn_feature_a2ztraining.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (new ConnectionMaker().isConnected(FeaturesActivity.this)) {
@@ -71,7 +71,7 @@ public class FeaturesActivity extends AppCompatActivity {
                     showAlert(getString(R.string.error_no_net));
                 }
             }
-        });
+        });*/
     }
 
     private void transferFreeAudio() {
