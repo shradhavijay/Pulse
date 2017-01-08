@@ -72,13 +72,13 @@ public class Parser {
                     userName = ((JSONObject) loginDetail.get(0)).getString(firstName) + " " + ((JSONObject) loginDetail.get(0)).getString(lastName);
 
                     //for fetching details on days remaining and completion percentage
-                    JSONArray trainingDetail = (JSONArray) parse.get(other);
+                   /* JSONArray trainingDetail = (JSONArray) parse.get(other);
                     JSONObject trainingDetailObj = (JSONObject) trainingDetail.get(0);
                     percentageCompleted = trainingDetailObj.getString(completed);
-                    subscriptionDaysRemain = trainingDetailObj.getString(daysRemain);
+                    subscriptionDaysRemain = trainingDetailObj.getString(daysRemain);*/
 
                     //parse topics
-                    JSONArray training = (JSONArray) parse.get(trainingCategory);
+                    /*JSONArray training = (JSONArray) parse.get(trainingCategory);
                     topic.clear();
                     topicId.clear();
                     for (int topicCount = 0; topicCount < training.length(); topicCount++) {
@@ -86,7 +86,7 @@ public class Parser {
                         moduleName = ((JSONObject) training.get(topicCount)).getString(trainingName);
                         moduleId = ((JSONObject) training.get(topicCount)).getInt(trainingID);
                         topicId.add(((JSONObject) training.get(topicCount)).getString(mainCategoryID));
-                    }
+                    }*/
 
                 }
             }
