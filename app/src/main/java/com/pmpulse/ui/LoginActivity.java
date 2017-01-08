@@ -28,6 +28,9 @@ import com.pmpulse.database.DBQuery;
 import com.pmpulse.serviceutil.ConnectionMaker;
 import com.pmpulse.serviceutil.Parser;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * A login screen that offers login via email and password.
  */
@@ -277,7 +280,8 @@ public class LoginActivity extends AppCompatActivity {
                     performDBOperation();*/
 
                     //call next service
-
+                    new UserPackages().execute();
+                    
                     // mLoginFormView.setVisibility(View.GONE);
                     //store cred
                     new User().storeCreds(mEmail, mPassword, getApplicationContext());
@@ -390,6 +394,74 @@ public class LoginActivity extends AppCompatActivity {
             mAuthTask = null;
             hideProgress();
             mLoginFormView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
+        public class UserPackages extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showProgress();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                // Simulate network access.
+                String response = new ConnectionMaker().service(KeyValues.urlGetPackages + "/" + Parser.userNumber, ConnectionMaker.METHOD_GET);
+                if (KeyValues.isDebug)
+                    System.out.println("response " + response);
+                return response;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(final String response) {
+            mAuthTask = null;
+            hideProgress();
+            // mProgressView.setVisibility(View.GONE);
+            //   mLoginFormView.setVisibility(View.INVISIBLE);
+            if (response == null) {
+                //timeout or some error
+                showAlert(getString(R.string.error_timeout));
+            } else {
+//                String status = new Parser().loginParse(response);
+                /*if (status.equals(Parser.success)) {
+                   *//* //perform db operation
+                    performDBOperation();*//*
+
+                    //call next service
+
+                    // mLoginFormView.setVisibility(View.GONE);
+                    //store cred
+                    new User().storeCreds(mEmail, mPassword, getApplicationContext());
+                    KeyValues.udid = udid;
+                    //navigate to main
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    //otherwise
+                    if (status.length() == 0) status = getString(R.string.error_timeout);
+                    showAlert(status);
+
+                }*/
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mAuthTask = null;
+            hideProgress();
+            //showProgress();
         }
     }
 }
