@@ -273,8 +273,11 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 String status = new Parser().loginParse(response);
                 if (status.equals(Parser.success)) {
-                    //perform db operation
-                    performDBOperation();
+                   /* //perform db operation
+                    performDBOperation();*/
+
+                    //call next service
+
                     // mLoginFormView.setVisibility(View.GONE);
                     //store cred
                     new User().storeCreds(mEmail, mPassword, getApplicationContext());
