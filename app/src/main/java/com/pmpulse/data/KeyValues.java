@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  */
 public class KeyValues {
 
-    public static boolean isDebug = false;
+    public static boolean isDebug = true;
 
     //for service
     public static String TYPE_FREE_AUDIO = "FREE_AUDIO";
@@ -24,6 +24,7 @@ public class KeyValues {
 
     public static int TIMEOUT = 30000;
     public static String urlLogin = "http://pmdhwaniapi.pm-pulse.com/API/Login";
+    public static String urlGetPackages = "http://pmdhwaniapi.pm-pulse.com/API/UserPackages";
     public static String urlGetAudio = "http://pmdhwaniapi.pm-pulse.com/API/GetAudios";
     public static String urlLogout = "http://pmdhwaniapi.pm-pulse.com/API/Logout";
     public static String urlFreeAudio = "http://pmdhwaniapi.pm-pulse.com/API/FreeAudio";
