@@ -86,7 +86,7 @@
 
     <string name="a2z_exam_simulator">A2Z Exam Simulator</string>
     <string name="a2z_test_center">A2Z Test Center</string>
-    
+
     <string name="contact_feedback">For Feedback</string>
     <string name="contact_account">For Account or Test-Related Issues or Sign-Up for New Account</string>
     <string name="contact_technical">For Technical Assistance</string>
@@ -123,15 +123,21 @@
     <string name="review_answer">Review Answers</string>
     <string name="answer_saved">Answer saved successfully</string>
     <string name="marked_for_review">Marked for review</string>
-    
+
     <!--Exam history-->
     <string name="chapter_name"><b>Chapter Name</b></string>
     <string name="total_questions"><b>Total Questions</b></string>
     <string name="attempted"><b>Attempted</b></string>
     <string name="correct_answers"><b>Correct Answers</b></string>
     <string name="score"><b>Score(%)</b></string>
-    
+
     <!--Exam result-->
     <string name="exam_result">Exam Result</string>
+
+    <!--Package List-->
+    <string name="packages">Packages</string>
+    <string name="training"><b>Training</b></string>
+    <string name="total_days"><b>Total Days</b></string>
+    <string name="price"><b>Price</b></string>
 
 </resources>
