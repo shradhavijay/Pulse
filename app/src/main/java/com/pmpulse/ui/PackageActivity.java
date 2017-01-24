@@ -3,7 +3,9 @@ package com.pmpulse.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.pmpulse.R;
 import com.pmpulse.data.KeyValues;
+import com.pmpulse.data.Package;
 import com.pmpulse.serviceutil.Parser;
 import com.squareup.picasso.Picasso;
 
@@ -55,12 +58,10 @@ public class PackageActivity extends AppCompatActivity {
 
     class PackageAdapter extends BaseAdapter {
 
-        List<String> data;
+        List<Package> data = Parser.packageList;
         Context context;
 
         public PackageAdapter(Context context) {
-            //  this.data = data;
-            data = Parser.topic;
             this.context = context;
         }
 
@@ -71,7 +72,7 @@ public class PackageActivity extends AppCompatActivity {
 
         @Override
         public String getItem(int position) {
-            return data.get(position);
+            return data.get(position).getPackageName();
         }
 
         @Override
@@ -79,13 +80,36 @@ public class PackageActivity extends AppCompatActivity {
             return data.hashCode();
         }
 
+        private class ViewHolder {
+            TextView trainingName;
+            TextView trainingDays;
+            TextView trainingPrice;
+            ImageView packageImage;
+        }
+
         @Override
         public View getView(final int position, View convertView, ViewGroup container) {
+            ViewHolder holder;
             if (convertView == null) {
                 LayoutInflater layoutInflater = (LayoutInflater) this.context
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = layoutInflater.inflate(R.layout.row_package, null);
+                holder = new ViewHolder();
+                holder.trainingName = (TextView) convertView.findViewById(R.id.trainingName);
+                holder.trainingDays = (TextView) convertView.findViewById(R.id.trainingDays);
+                holder.trainingPrice = (TextView) convertView.findViewById(R.id.trainingPrice);
+                holder.packageImage = (ImageView) convertView.findViewById(R.id.packageImage);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
             }
+
+            holder.trainingName.setText(data.get(position).getPackageName());
+            holder.trainingDays.setText(data.get(position).getTotalDays());
+            holder.trainingPrice.setText(data.get(position).getPrice());
+            Log.d("TAG", "data.get(position).getImagePath().trim() "+data.get(position).getImagePath().trim()+"trim");
+            Picasso.with(getApplicationContext()).load("http://dhwani.pm-pulse.com/PackageImages/ba4467b3-7229-4d58-8d8c-8401d414cf74.jpg").into(holder.packageImage);
+
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

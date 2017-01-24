@@ -3,6 +3,7 @@ package com.pmpulse.serviceutil;
 import com.pmpulse.data.ChapterAudio;
 import com.pmpulse.data.FreeAudios;
 import com.pmpulse.data.KeyValues;
+import com.pmpulse.data.Package;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +26,7 @@ public class Parser {
     public static String userName = "";
     public static List<String> topic = new ArrayList<>();
     public static List<String> topicId = new ArrayList<>();
+    public static List<Package> packageList = new ArrayList<>();
     public static List<ChapterAudio> chapterAudios = new ArrayList<>();
     public static String statusLogout = "";
     public static List<FreeAudios> freeAudio = new ArrayList<>();
@@ -54,6 +56,13 @@ public class Parser {
     String trainingID = "TrainingID";
     //parameter
     String categoryID = "CategoryID";
+
+    String PackageID = "PackageID";
+    String TrainingID = "TrainingID";
+    String PackageName = "PackageName";
+    String TotalDays = "TotalDays";
+    String Price = "Price";
+    String ImagePath = "ImagePath";
 
     //parser for login and topics
     public String loginParse(String response) {
@@ -97,6 +106,30 @@ public class Parser {
             return null;
         }
         return statusLogin;
+    }
+
+    public String packageParser(String response) {
+        try {
+            response = toJSON(response);
+            JSONArray parse = new JSONArray(response);
+            packageList.clear();
+            for (int countPackage = 0; countPackage < parse.length(); countPackage++) {
+                Package userPackage = new Package();
+                userPackage.setPackageId(((JSONObject) parse.get(countPackage)).getString(PackageID));
+                userPackage.setTrainingId(((JSONObject) parse.get(countPackage)).getString(TrainingID));
+                userPackage.setPackageName(((JSONObject) parse.get(countPackage)).getString(PackageName));
+                userPackage.setTotalDays(((JSONObject) parse.get(countPackage)).getString(TotalDays));
+                userPackage.setPrice(((JSONObject) parse.get(countPackage)).getString(Price));
+                userPackage.setImagePath(((JSONObject) parse.get(countPackage)).getString(ImagePath));
+                packageList.add(userPackage);
+            }
+        } catch (JSONException e) {
+            if (KeyValues.isDebug)
+                System.out.println("in packageParser parser catch :" + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+        return null;
     }
 
     public String getAudioParser(String response) {

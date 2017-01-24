@@ -28,9 +28,6 @@ import com.pmpulse.database.DBQuery;
 import com.pmpulse.serviceutil.ConnectionMaker;
 import com.pmpulse.serviceutil.Parser;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 /**
  * A login screen that offers login via email and password.
  */
@@ -125,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (new ConnectionMaker().isConnected(LoginActivity.this)) {
                     WifiManager m_wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
                     String m_wlanMacAdd = m_wm.getConnectionInfo().getMacAddress();
-                    m_wlanMacAdd = m_wlanMacAdd.replace(":","");
+                    m_wlanMacAdd = m_wlanMacAdd.replace(":", "");
                     String udid = android.provider.Settings.System.getString(super.getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
                     mAuthTask = new UserLoginTask(email, password, m_wlanMacAdd);
                     mAuthTask.execute((Void) null);
@@ -255,7 +252,7 @@ public class LoginActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             try {
                 // Simulate network access.
-                String response = new ConnectionMaker().service(KeyValues.urlLogin + "/" + mEmail + "/" + mPassword+"^"+udid, ConnectionMaker.METHOD_GET);
+                String response = new ConnectionMaker().service(KeyValues.urlLogin + "/" + mEmail + "/" + mPassword + "^" + udid, ConnectionMaker.METHOD_GET);
                 if (KeyValues.isDebug)
                     System.out.println("response " + response);
                 return response;
@@ -281,16 +278,12 @@ public class LoginActivity extends AppCompatActivity {
 
                     //call next service
                     new UserPackages().execute();
-                    
+
                     // mLoginFormView.setVisibility(View.GONE);
                     //store cred
                     new User().storeCreds(mEmail, mPassword, getApplicationContext());
-                  KeyValues.udid = udid;
-                    //navigate to main
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
+                    KeyValues.udid = udid;
+
                 } else {
                     //otherwise
                     if (status.length() == 0) status = getString(R.string.error_timeout);
@@ -306,6 +299,13 @@ public class LoginActivity extends AppCompatActivity {
             hideProgress();
             //showProgress();
         }
+    }
+
+    private void navigateToPackageActivity() {
+        Intent intent = new Intent(LoginActivity.this, PackageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -401,7 +401,7 @@ public class LoginActivity extends AppCompatActivity {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-        public class UserPackages extends AsyncTask<Void, Void, String> {
+    public class UserPackages extends AsyncTask<Void, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -426,34 +426,17 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(final String response) {
             mAuthTask = null;
             hideProgress();
-            // mProgressView.setVisibility(View.GONE);
-            //   mLoginFormView.setVisibility(View.INVISIBLE);
+            mLoginFormView.setVisibility(View.VISIBLE);
             if (response == null) {
                 //timeout or some error
                 showAlert(getString(R.string.error_timeout));
             } else {
-//                String status = new Parser().loginParse(response);
-                /*if (status.equals(Parser.success)) {
-                   *//* //perform db operation
-                    performDBOperation();*//*
-
-                    //call next service
-
-                    // mLoginFormView.setVisibility(View.GONE);
-                    //store cred
-                    new User().storeCreds(mEmail, mPassword, getApplicationContext());
-                    KeyValues.udid = udid;
-                    //navigate to main
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
+                if (response.length() > 4) {
+                    new Parser().packageParser(response);
+                    navigateToPackageActivity();
                 } else {
-                    //otherwise
-                    if (status.length() == 0) status = getString(R.string.error_timeout);
-                    showAlert(status);
-
-                }*/
+                    showAlert(getString(R.string.error_no_package));
+                }
             }
         }
 
@@ -461,7 +444,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onCancelled() {
             mAuthTask = null;
             hideProgress();
-            //showProgress();
+            mLoginFormView.setVisibility(View.VISIBLE);
         }
     }
 }
