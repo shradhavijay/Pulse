@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.pmpulse.ui.LoginActivity"
+            android:name=".ui.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateVisible|adjustUnspecified" />
@@ -42,35 +42,35 @@
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true" />
         <activity
-            android:name="com.pmpulse.ui.MainActivity"
+            android:name=".ui.MainActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.pmpulse.ui.AudioActivity"
+            android:name=".ui.AudioActivity"
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true" />
         <activity
-            android:name="com.pmpulse.ui.AudioPlaylistActivity"
+            android:name="ui.AudioPlaylistActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="com.pmpulse.ui.FreeAudioActivity"
+            android:name="ui.FreeAudioActivity"
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true"
             android:launchMode="singleTop" />
 
-        <service android:name="com.pmpulse.mediacontrol.AudioService" />
+        <service android:name=".mediacontrol.AudioService" />
 
         <activity
-            android:name="com.pmpulse.ui.A2ZLoginActivity"
+            android:name=".ui.A2ZLoginActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateVisible|adjustUnspecified" />
         <activity
-            android:name="com.pmpulse.ui.A2ZMainActivity"
+            android:name=".ui.A2ZMainActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.pmpulse.ui.InstructionsActivity"
+            android:name=".ui.InstructionsActivity"
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true" />
         <activity
