@@ -132,6 +132,30 @@ public class Parser {
         return null;
     }
 
+    public String topicParser(String response) {
+        try {
+            response = toJSON(response);
+            if (KeyValues.isDebug)
+                System.out.println("topicParser " + response);
+            JSONArray parse = new JSONArray(response);
+            topic.clear();
+            topicId.clear();
+
+            for (int topicCount = 0; topicCount < parse.length(); topicCount++) {
+                topic.add(((JSONObject) parse.get(topicCount)).getString(mainCategoryName));
+                moduleName = ((JSONObject) parse.get(topicCount)).getString(trainingName);
+                moduleId = ((JSONObject) parse.get(topicCount)).getInt(trainingID);
+                topicId.add(((JSONObject) parse.get(topicCount)).getString(mainCategoryID));
+            }
+        } catch (JSONException e) {
+            if (KeyValues.isDebug)
+                System.out.println("in topicParser catch :" + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+        return statusLogin;
+    }
+
     public String getAudioParser(String response) {
         try {
             response = toJSON(response);
@@ -250,7 +274,7 @@ public class Parser {
         return fileUrl;
     }
 
-    private String toJSON(String response) {
+    public String toJSON(String response) {
         response = response.replace("\\", "").replace("rn", "");
         response = response.substring(1, response.length() - 1);
         return response;
