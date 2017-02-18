@@ -25,6 +25,7 @@ public class KeyValues {
     public static int TIMEOUT = 30000;
     public static String urlLogin = "http://pmdhwaniapi.pm-pulse.com/API/Login";
     public static String urlGetPackages = "http://pmdhwaniapi.pm-pulse.com/API/UserPackages";
+    public static String urlGetCategory = "http://pmdhwaniapi.pm-pulse.com/API/GetCategories";
     public static String urlGetAudio = "http://pmdhwaniapi.pm-pulse.com/API/GetAudios";
     public static String urlLogout = "http://pmdhwaniapi.pm-pulse.com/API/Logout";
     public static String urlFreeAudio = "http://pmdhwaniapi.pm-pulse.com/API/FreeAudio";
