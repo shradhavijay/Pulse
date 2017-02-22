@@ -131,47 +131,6 @@ public class PackageActivity extends AppCompatActivity {
         }
     }
 
-   /* //web service call for getting topics in package
-    private class GetTopics extends AsyncTask<Void, Void, Void> {
-        int packageId;
-
-        public GetTopics(int packageId) {
-            this.packageId = packageId;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            //showProgress();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            //get value from db
-            try {
-                // Simulate network access.
-                String response = new ConnectionMaker().service(KeyValues.urlGetCategory + "/" + packageId, ConnectionMaker.METHOD_GET);
-                if (KeyValues.isDebug)
-                    System.out.println("response " + response);
-                //parse topics
-                Parser parser = new Parser();
-                parser.topicParser(response);
-
-            } catch (Exception e) {
-                if (KeyValues.isDebug)
-                    System.out.println("exception in  GetTopics" + e);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            // hideProgress();
-            transferToMain();
-        }
-    }*/
-
     //web service call for getting topics in package
     private class GetTopics extends AsyncTask<Void, Void, Void> {
         int packageId;

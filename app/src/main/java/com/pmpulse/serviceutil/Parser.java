@@ -42,7 +42,7 @@ public class Parser {
     String daysRemain = "DaysLeft";
     String firstName = "firstName";
     String lastName = "lastName";
-    String other = "Other";
+    String otherDetails = "OtherDetails";
     String mainCategoryID = "MainCategoryID";
     String audioPath = "AudioPath";
     String isPlayed = "IsPlayed";
@@ -111,6 +111,8 @@ public class Parser {
     public String packageParser(String response) {
         try {
             response = toJSON(response);
+            if (KeyValues.isDebug)
+                System.out.println("parser " + response);
             JSONArray parse = new JSONArray(response);
             packageList.clear();
             for (int countPackage = 0; countPackage < parse.length(); countPackage++) {
@@ -132,28 +134,34 @@ public class Parser {
         return null;
     }
 
-    public String topicParser(String response) {
+    public void topicParser(String response) {
         try {
             response = toJSON(response);
             if (KeyValues.isDebug)
                 System.out.println("topicParser " + response);
-            JSONArray parse = new JSONArray(response);
+            JSONObject parse = new JSONObject(response);
+
+            //for fetching details on days remaining and completion percentage
+            JSONArray trainingDetail = (JSONArray) parse.get(otherDetails);
+            JSONObject trainingDetailObj = (JSONObject) trainingDetail.get(0);
+            percentageCompleted = trainingDetailObj.getString(completed);
+            subscriptionDaysRemain = trainingDetailObj.getString(daysRemain);
+
+            //parse topics
+            JSONArray training = (JSONArray) parse.get(trainingCategory);
             topic.clear();
             topicId.clear();
-
-            for (int topicCount = 0; topicCount < parse.length(); topicCount++) {
-                topic.add(((JSONObject) parse.get(topicCount)).getString(mainCategoryName));
-                moduleName = ((JSONObject) parse.get(topicCount)).getString(trainingName);
-                moduleId = ((JSONObject) parse.get(topicCount)).getInt(trainingID);
-                topicId.add(((JSONObject) parse.get(topicCount)).getString(mainCategoryID));
+            for (int topicCount = 0; topicCount < training.length(); topicCount++) {
+                topic.add(((JSONObject) training.get(topicCount)).getString(mainCategoryName));
+                moduleName = ((JSONObject) training.get(topicCount)).getString(trainingName);
+                moduleId = ((JSONObject) training.get(topicCount)).getInt(trainingID);
+                topicId.add(((JSONObject) training.get(topicCount)).getString(mainCategoryID));
             }
         } catch (JSONException e) {
             if (KeyValues.isDebug)
                 System.out.println("in topicParser catch :" + e.getMessage());
             e.printStackTrace();
-            return null;
         }
-        return statusLogin;
     }
 
     public String getAudioParser(String response) {
