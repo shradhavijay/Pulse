@@ -119,7 +119,7 @@ public class PackageActivity extends AppCompatActivity {
             holder.trainingDays.setText(data.get(position).getTotalDays());
             holder.trainingPrice.setText(data.get(position).getPrice());
             Log.d("TAG", "data.get(position).getImagePath().trim() " + data.get(position).getImagePath().trim() + "trim");
-            Picasso.with(getApplicationContext()).load("http://dhwani.pm-pulse.com/PackageImages/ba4467b3-7229-4d58-8d8c-8401d414cf74.jpg").into(holder.packageImage);
+            Picasso.with(getApplicationContext()).load(data.get(position).getImagePath().trim()).into(holder.packageImage);
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -130,6 +130,47 @@ public class PackageActivity extends AppCompatActivity {
             return convertView;
         }
     }
+
+   /* //web service call for getting topics in package
+    private class GetTopics extends AsyncTask<Void, Void, Void> {
+        int packageId;
+
+        public GetTopics(int packageId) {
+            this.packageId = packageId;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //showProgress();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            //get value from db
+            try {
+                // Simulate network access.
+                String response = new ConnectionMaker().service(KeyValues.urlGetCategory + "/" + packageId, ConnectionMaker.METHOD_GET);
+                if (KeyValues.isDebug)
+                    System.out.println("response " + response);
+                //parse topics
+                Parser parser = new Parser();
+                parser.topicParser(response);
+
+            } catch (Exception e) {
+                if (KeyValues.isDebug)
+                    System.out.println("exception in  GetTopics" + e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            // hideProgress();
+            transferToMain();
+        }
+    }*/
 
     //web service call for getting topics in package
     private class GetTopics extends AsyncTask<Void, Void, Void> {
@@ -150,7 +191,7 @@ public class PackageActivity extends AppCompatActivity {
             //get value from db
             try {
                 // Simulate network access.
-                String response = new ConnectionMaker().service(KeyValues.urlGetCategory + "/" + packageId, ConnectionMaker.METHOD_GET);
+                String response = new ConnectionMaker().service(KeyValues.urlGetCategoriesandOtherDetails + "/" + Parser.userNumber + "/" + packageId, ConnectionMaker.METHOD_GET);
                 if (KeyValues.isDebug)
                     System.out.println("response " + response);
                 //parse topics
