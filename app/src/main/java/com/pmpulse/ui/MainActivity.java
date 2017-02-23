@@ -121,11 +121,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else {
             //super.onBackPressed();
-            confirmLogout();
-            /*Intent intent = new Intent(MainActivity.this, FeaturesActivity.class);
+           // confirmLogout();
+            Intent intent = new Intent(MainActivity.this, PackageActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-            finish();*/
+            finish();
         }
     }
 
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // List<Topic> topicList = module.getTopicList();
                 inflateChap();
             } else if (id == R.id.nav_logout) {
-                confirmLogout();
+              //  confirmLogout();
             } else if (id == R.id.nav_playlist) {
                 getSupportActionBar().setTitle(getString(R.string.nav_playlist));
                 //   PlayList playList = new PlayList();
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    //show alert dialog
+    /*//show alert dialog
     private void confirmLogout() {
         AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
         alert.setMessage(getString(R.string.message_logout));
@@ -209,12 +209,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         alert.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
-            }
+            }showAlert
         });
         alert.show();
-    }
+    }*/
 
-    private void logout() {
+    /*private void logout() {
         if (new ConnectionMaker().isConnected(MainActivity.this)) {
             UserLogoutTask userLogoutTask = new UserLogoutTask();
             userLogoutTask.execute();
@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             showAlert(getString(R.string.error_no_net));
         }
-    }
+    }*/
 
 
     //Shows the progress UI and hides the login form
