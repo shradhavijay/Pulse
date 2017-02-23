@@ -1,9 +1,13 @@
 package com.pmpulse.ui;
 
+import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -21,11 +25,14 @@ import com.pmpulse.R;
 import com.pmpulse.data.ChapterAudio;
 import com.pmpulse.data.KeyValues;
 import com.pmpulse.data.Package;
+import com.pmpulse.data.User;
 import com.pmpulse.serviceutil.ConnectionMaker;
 import com.pmpulse.serviceutil.Parser;
+import com.pmpulse.serviceutil.UserLogoutTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by shradha on 8/1/17.
@@ -57,6 +64,75 @@ public class PackageActivity extends AppCompatActivity {
 
         //  packageImage = (ImageView) findViewById(R.id.packageImage);
 //        Picasso.with(this).load("http://dhwani.pm-pulse.com/PackageImages/ba4467b3-7229-4d58-8d8c-8401d414cf74.jpg").into(packageImage);
+    }
+
+    @Override
+    public void onBackPressed() {
+    //show alert dialog
+        AlertDialog.Builder alert = new AlertDialog.Builder(PackageActivity.this);
+        alert.setMessage(getString(R.string.message_logout));
+        alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                logout();
+
+            }
+        });
+        alert.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+        alert.show();
+    }
+
+    private void logout() {
+        if (new ConnectionMaker().isConnected(PackageActivity.this)) {
+            UserLogoutTask userLogoutTask = new UserLogoutTask();
+            userLogoutTask.execute();
+            String result = "";
+            try {
+                result = userLogoutTask.get().toString();
+                if (KeyValues.isDebug)
+                    System.out.println("result " + result);
+                String statusMessage = new Parser().logoutParser(result);
+                if (statusMessage.equals(Parser.Success)) {
+                    //stop music player
+                    Intent onStopIntent = new Intent("MEDIA_PLAYER_STOP");
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(onStopIntent);
+                    //clear notification
+                    NotificationManager nMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    nMgr.cancel(1);
+
+                    new User().clearCreds(getApplicationContext());
+                    //transfer to Features Activity
+                    Intent intent = new Intent(PackageActivity.this, FeaturesActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    // intent.putExtra(KeyValues.KEY_FEATURE_NAME, getString(R.string.nav_freeaudios));
+                    startActivity(intent);
+                    finish();
+                } else {
+                    showAlert(getString(R.string.error_unable_to_logout));
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        } else {
+            showAlert(getString(R.string.error_no_net));
+        }
+    }
+
+    //show alert dialog
+    private void showAlert(String message) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(PackageActivity.this);
+        alert.setMessage(message);
+        alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+        alert.show();
     }
 
     private void transferToMain() {
