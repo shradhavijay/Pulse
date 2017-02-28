@@ -50,10 +50,10 @@
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true" />
         <activity
-            android:name="ui.AudioPlaylistActivity"
+            android:name="com.pmpulse.ui.AudioPlaylistActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="ui.FreeAudioActivity"
+            android:name="com.pmpulse.ui.FreeAudioActivity"
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true"
             android:launchMode="singleTop" />
