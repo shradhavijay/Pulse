@@ -26,6 +26,7 @@ import com.pmpulse.data.ChapterAudio;
 import com.pmpulse.data.KeyValues;
 import com.pmpulse.data.Package;
 import com.pmpulse.data.User;
+import com.pmpulse.database.DBQuery;
 import com.pmpulse.serviceutil.ConnectionMaker;
 import com.pmpulse.serviceutil.Parser;
 import com.pmpulse.serviceutil.UserLogoutTask;
@@ -68,7 +69,7 @@ public class PackageActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-    //show alert dialog
+        //show alert dialog
         AlertDialog.Builder alert = new AlertDialog.Builder(PackageActivity.this);
         alert.setMessage(getString(R.string.message_logout));
         alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
@@ -207,6 +208,14 @@ public class PackageActivity extends AppCompatActivity {
         }
     }
 
+    private void performDBOperation(int moduleId) {
+        DBQuery dbQuery = new DBQuery(this);
+        //store training name in db
+        for (int countMainTopic = 0; countMainTopic < Parser.topicId.size(); countMainTopic++)
+            dbQuery.addTopic(Parser.topic.get(countMainTopic), moduleId);
+
+    }
+
     //web service call for getting topics in package
     private class GetTopics extends AsyncTask<Void, Void, Void> {
         int packageId;
@@ -223,7 +232,6 @@ public class PackageActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            //get value from db
             try {
                 // Simulate network access.
                 String response = new ConnectionMaker().service(KeyValues.urlGetCategoriesandOtherDetails + "/" + Parser.userNumber + "/" + packageId, ConnectionMaker.METHOD_GET);
@@ -232,6 +240,7 @@ public class PackageActivity extends AppCompatActivity {
                 //parse topics
                 Parser parser = new Parser();
                 parser.topicParser(response);
+                performDBOperation(packageId);
 
             } catch (Exception e) {
                 if (KeyValues.isDebug)
