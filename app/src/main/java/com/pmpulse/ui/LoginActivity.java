@@ -217,15 +217,6 @@ public class LoginActivity extends AppCompatActivity {
         mProgressView.setVisibility(View.GONE);
     }
 
-
-    private void performDBOperation() {
-        DBQuery dbQuery = new DBQuery(this);
-        //store training name in db
-        for (int countMainTopic = 0; countMainTopic < Parser.topicId.size(); countMainTopic++)
-            dbQuery.addTopic(Parser.topic.get(countMainTopic));
-
-    }
-
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
