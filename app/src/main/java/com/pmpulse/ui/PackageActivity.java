@@ -201,7 +201,8 @@ public class PackageActivity extends AppCompatActivity {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new GetTopics(Integer.parseInt(data.get(position).getPackageId())).execute();
+                    Parser.selectedModuleId = Integer.parseInt(data.get(position).getPackageId());
+                    new GetTopics(Parser.selectedModuleId).execute();
                 }
             });
             return convertView;

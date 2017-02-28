@@ -307,12 +307,12 @@ public class DBQuery {
         }
     }
 
-    public List<String> getAllPlayListNames() {
+    public List<String> getAllPlayListNames(int moduleId) {
         List<String> playListNames = new ArrayList<>();
         try {
             DBCreate dbCreate = new DBCreate(context);
             SQLiteDatabase db = dbCreate.getReadableDatabase();
-            Cursor cr = db.rawQuery("SELECT T." + dbCreate.KEY_NAME + " FROM " + dbCreate.TABLE_PLAYLIST + " T", null);
+            Cursor cr = db.rawQuery("SELECT T." + dbCreate.KEY_NAME + " FROM " + dbCreate.TABLE_PLAYLIST + " T INNER JOIN " + dbCreate.TABLE_TOPIC + " P ON P." + dbCreate.KEY_ID_TOPIC + "= T." + dbCreate.KEY_ID_TOPIC + " WHERE P." + dbCreate.KEY_ID_MODULE + " = '" + moduleId + "'", null);
             if (KeyValues.isDebug)
                 System.out.println(cr.getCount() + " getPlayListNames");
             StringBuffer sb = new StringBuffer();

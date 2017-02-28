@@ -31,6 +31,7 @@ public class Parser {
     public static String statusLogout = "";
     public static List<FreeAudios> freeAudio = new ArrayList<>();
     public static String notGiven = "Not Given";
+    public static int selectedModuleId = 0;
 
     String loginDetails = "LoginDetails";
     String userId = "userid";

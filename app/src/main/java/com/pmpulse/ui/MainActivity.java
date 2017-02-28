@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else {
             //super.onBackPressed();
-           // confirmLogout();
+            // confirmLogout();
             Intent intent = new Intent(MainActivity.this, PackageActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // List<Topic> topicList = module.getTopicList();
                 inflateChap();
             } else if (id == R.id.nav_logout) {
-              //  confirmLogout();
+                //  confirmLogout();
             } else if (id == R.id.nav_playlist) {
                 getSupportActionBar().setTitle(getString(R.string.nav_playlist));
                 //   PlayList playList = new PlayList();
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().findItem(R.id.nav_playlist).setChecked(true);
         //get playlists
         DBQuery dbQuery = new DBQuery(this);
-        List<String> playlist = dbQuery.getAllPlayListNames();
+        List<String> playlist = dbQuery.getAllPlayListNames(Parser.selectedModuleId);
         if (playlist.size() > 0) {
             myLayout.removeAllViews();
             hiddenInfo = getLayoutInflater().inflate(R.layout.module_playlist, myLayout, false);
@@ -563,7 +563,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         if (KeyValues.alphaNumeric.matcher(edittext.getText().toString()).matches()) {
                             DBQuery dbQuery = new DBQuery(context);
                             dbQuery.renamePlayList(edittext.getText().toString(), playLists.get(position));
-                            playLists = dbQuery.getAllPlayListNames();
+                            playLists = dbQuery.getAllPlayListNames(Parser.selectedModuleId);
                             PlayListsAdapter adapter = new PlayListsAdapter(playLists, MainActivity.this);
                             lv_topic.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
@@ -606,7 +606,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void onClick(DialogInterface dialog, int whichButton) {
                     DBQuery dbQuery = new DBQuery(context);
                     dbQuery.removePlayList(playLists.get(position));
-                    List<String> playlist = dbQuery.getAllPlayListNames();
+                    List<String> playlist = dbQuery.getAllPlayListNames(Parser.selectedModuleId);
                     PlayListsAdapter adapter = new PlayListsAdapter(playlist, MainActivity.this);
                     lv_topic.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
