@@ -41,41 +41,64 @@ public class DBQuery {
 
             if (x > 0) {
                 //inserted
-                if(KeyValues.isDebug)
-                System.out.println("addPlaylist " + x);
+                if (KeyValues.isDebug)
+                    System.out.println("addPlaylist " + x);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in addPlaylist " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in addPlaylist " + e);
         }
         return x;
     }
 
-    public void addTopic(String nameOfTopic) {
+    public void addTopic(String nameOfTopic, int moduleId) {
         if (!isTopicAdded(nameOfTopic)) {
-            addMainTopic(nameOfTopic);
+            addMainTopic(nameOfTopic, moduleId);
+        } else {
+            //update topic link package id
+            updateTopicAddModuleId(nameOfTopic, moduleId);
         }
     }
 
-    private void addMainTopic(String topicName) {
+    private void addMainTopic(String topicName, int moduleId) {
         try {
             DBCreate dbCreate = new DBCreate(context);
             SQLiteDatabase db = dbCreate.getWritableDatabase();
             ContentValues values = new ContentValues();
 
             values.put(dbCreate.KEY_NAME, topicName);
+            values.put(dbCreate.KEY_ID_MODULE, moduleId);
             long x = db.insert(dbCreate.TABLE_TOPIC, null, values);
 
             if (x > 0) {
                 //inserted
-                if(KeyValues.isDebug)
-                System.out.println("addTopic " + x);
+                if (KeyValues.isDebug)
+                    System.out.println("addTopic " + x);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in addTopic " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in addTopic " + e);
+        }
+    }
+
+    //link previously added topics to moduleId
+    public void updateTopicAddModuleId(String topicName, int moduleId) {
+        try {
+            DBCreate dbCreate = new DBCreate(context);
+            SQLiteDatabase db = dbCreate.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+            values.put(dbCreate.KEY_ID_MODULE, moduleId);
+
+            int count = db.update(dbCreate.TABLE_TOPIC, values, dbCreate.KEY_NAME + " = '" + topicName + "'", null);
+            if (KeyValues.isDebug)
+                System.out.println("updateTopicAddModuleId " + count);
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (KeyValues.isDebug)
+                System.out.println("Exception in updateTopicAddModuleId " + e);
         }
     }
 
@@ -84,14 +107,14 @@ public class DBQuery {
             DBCreate dbCreate = new DBCreate(context);
             SQLiteDatabase db = dbCreate.getReadableDatabase();
             Cursor cr = db.rawQuery("SELECT * FROM " + dbCreate.TABLE_TOPIC + " T WHERE T." + dbCreate.KEY_NAME + "= '" + topicName + "'", null);
-            if(KeyValues.isDebug)
-            System.out.println(cr.getCount() + " isTopicAdded");
+            if (KeyValues.isDebug)
+                System.out.println(cr.getCount() + " isTopicAdded");
             return cr.getCount() > 0;
 
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in isTopicAdded " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in isTopicAdded " + e);
             return false;
         }
     }
@@ -107,8 +130,8 @@ public class DBQuery {
             DBCreate dbCreate = new DBCreate(context);
             SQLiteDatabase db = dbCreate.getReadableDatabase();
             Cursor cr = db.rawQuery("SELECT * FROM " + dbCreate.TABLE_CHAPTER + " T WHERE T." + dbCreate.KEY_NAME + "= '" + chapterName + "' AND T." + dbCreate.KEY_ID_TOPIC + "=" + topicId, null);
-            if(KeyValues.isDebug) {
-                 System.out.println("isChapterAdded " + cr.getCount());
+            if (KeyValues.isDebug) {
+                System.out.println("isChapterAdded " + cr.getCount());
             }
             if (cr.getCount() > 0) {
                 return true;
@@ -118,8 +141,8 @@ public class DBQuery {
 
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in isChapterAdded " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in isChapterAdded " + e);
             return false;
         }
     }
@@ -131,8 +154,8 @@ public class DBQuery {
             Cursor cr = db.rawQuery("SELECT C." + dbCreate.KEY_ID_TOPIC + " FROM " + dbCreate.TABLE_TOPIC + " C WHERE C." + dbCreate.KEY_NAME + "='" + topicName + "'", null);
             if (cr.getCount() > 0) {
                 while (cr.moveToNext()) {
-                    if(KeyValues.isDebug)
-                    System.out.println(cr.getInt(0) + " getTopicId");
+                    if (KeyValues.isDebug)
+                        System.out.println(cr.getInt(0) + " getTopicId");
                     return cr.getInt(0);
                 }
                 return 0;
@@ -143,8 +166,8 @@ public class DBQuery {
 
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in getTopicId " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in getTopicId " + e);
             return 0;
         }
     }
@@ -165,13 +188,13 @@ public class DBQuery {
 
             if (x > 0) {
                 //inserted
-                if(KeyValues.isDebug)
-                System.out.println("addChapter " + x);
+                if (KeyValues.isDebug)
+                    System.out.println("addChapter " + x);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in addChapter " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in addChapter " + e);
         }
     }
 
@@ -182,8 +205,8 @@ public class DBQuery {
             Cursor cr = db.rawQuery("SELECT C." + dbCreate.KEY_ID_CHAPTER + " FROM " + dbCreate.TABLE_CHAPTER + " C WHERE C." + dbCreate.KEY_NAME + "='" + chapterName + "'", null);
             if (cr.getCount() > 0) {
                 while (cr.moveToNext()) {
-                    if(KeyValues.isDebug)
-                    System.out.println(cr.getInt(0) + " getChapterId");
+                    if (KeyValues.isDebug)
+                        System.out.println(cr.getInt(0) + " getChapterId");
                     return cr.getInt(0);
                 }
                 return 0;
@@ -194,8 +217,8 @@ public class DBQuery {
 
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in getChapterId " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in getChapterId " + e);
             return 0;
         }
     }
@@ -207,8 +230,8 @@ public class DBQuery {
             Cursor cr = db.rawQuery("SELECT C." + dbCreate.KEY_ID_PL + " FROM " + dbCreate.TABLE_PLAYLIST + " C WHERE C." + dbCreate.KEY_NAME + "='" + playListName + "'", null);
             if (cr.getCount() > 0) {
                 while (cr.moveToNext()) {
-                    if(KeyValues.isDebug)
-                    System.out.println(cr.getInt(0) + " getPlaylistId");
+                    if (KeyValues.isDebug)
+                        System.out.println(cr.getInt(0) + " getPlaylistId");
                     return cr.getInt(0);
                 }
                 return 0;
@@ -219,8 +242,8 @@ public class DBQuery {
 
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in getPlaylistId " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in getPlaylistId " + e);
             return 0;
         }
     }
@@ -239,13 +262,13 @@ public class DBQuery {
 
             if (x > 0) {
                 //inserted
-                if(KeyValues.isDebug)
-                System.out.println("addPlaylistDetails " + x);
+                if (KeyValues.isDebug)
+                    System.out.println("addPlaylistDetails " + x);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in addPlaylistDetails " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in addPlaylistDetails " + e);
         }
     }
 
@@ -256,14 +279,14 @@ public class DBQuery {
             DBCreate dbCreate = new DBCreate(context);
             SQLiteDatabase db = dbCreate.getReadableDatabase();
             Cursor cr = db.rawQuery("SELECT * FROM " + dbCreate.TABLE_PLAYLIST_DETAIL + " T WHERE T." + dbCreate.KEY_ID_PL + "= '" + playlistId + "' AND T." + dbCreate.KEY_ID_CHAPTER + "= '" + chapterId + "'", null);
-            if(KeyValues.isDebug)
-            System.out.println(cr.getCount() + " isChapterAddedInSamePlaylist");
+            if (KeyValues.isDebug)
+                System.out.println(cr.getCount() + " isChapterAddedInSamePlaylist");
             return cr.getCount() > 0;
 
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in isChapterAddedInSamePlaylist " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in isChapterAddedInSamePlaylist " + e);
             return false;
         }
     }
@@ -273,13 +296,13 @@ public class DBQuery {
             DBCreate dbCreate = new DBCreate(context);
             SQLiteDatabase db = dbCreate.getReadableDatabase();
             Cursor cr = db.rawQuery("SELECT * FROM " + dbCreate.TABLE_PLAYLIST + " T WHERE T." + dbCreate.KEY_NAME + " = '" + playListName + "'", null);
-            if(KeyValues.isDebug)
-            System.out.println(cr.getCount() + " isPlaylistAdded");
+            if (KeyValues.isDebug)
+                System.out.println(cr.getCount() + " isPlaylistAdded");
             return cr.getCount() > 0;
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in isPlaylistAdded " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in isPlaylistAdded " + e);
             return false;
         }
     }
@@ -290,8 +313,8 @@ public class DBQuery {
             DBCreate dbCreate = new DBCreate(context);
             SQLiteDatabase db = dbCreate.getReadableDatabase();
             Cursor cr = db.rawQuery("SELECT T." + dbCreate.KEY_NAME + " FROM " + dbCreate.TABLE_PLAYLIST + " T", null);
-            if(KeyValues.isDebug)
-            System.out.println(cr.getCount() + " getPlayListNames");
+            if (KeyValues.isDebug)
+                System.out.println(cr.getCount() + " getPlayListNames");
             StringBuffer sb = new StringBuffer();
             if (cr.getCount() > 0) {
                 while (cr.moveToNext()) {
@@ -299,12 +322,12 @@ public class DBQuery {
                     playListNames.add(cr.getString(0));
                 }
             }
-            if(KeyValues.isDebug)
-            System.out.println(sb);
+            if (KeyValues.isDebug)
+                System.out.println(sb);
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in getPlayListNames " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in getPlayListNames " + e);
         }
         return playListNames;
     }
@@ -315,12 +338,12 @@ public class DBQuery {
             SQLiteDatabase db = dbCreate.getReadableDatabase();
             //Cursor count = db.execSQL("DELETE FROM " + dbCreate.TABLE_PLAYLIST + " WHERE " + dbCreate.KEY_NAME + "= '" + playlistName + "' ", null);
             int count = db.delete(dbCreate.TABLE_PLAYLIST, dbCreate.KEY_NAME + " = '" + playlistName + "'", null);
-            if(KeyValues.isDebug)
-            System.out.println("removePlayList " + count);
+            if (KeyValues.isDebug)
+                System.out.println("removePlayList " + count);
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in removePlayList " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in removePlayList " + e);
         }
     }
 
@@ -331,8 +354,8 @@ public class DBQuery {
             DBCreate dbCreate = new DBCreate(context);
             SQLiteDatabase db = dbCreate.getReadableDatabase();
             Cursor cr = db.rawQuery("SELECT C." + dbCreate.KEY_NAME + " FROM " + dbCreate.TABLE_PLAYLIST + " C WHERE C." + dbCreate.KEY_ID_TOPIC + " = '" + topicId + "'", null);
-            if(KeyValues.isDebug)
-            System.out.println(cr.getCount() + " getPlaylistOfTopic");
+            if (KeyValues.isDebug)
+                System.out.println(cr.getCount() + " getPlaylistOfTopic");
             StringBuffer sb = new StringBuffer();
             if (cr.getCount() > 0) {
                 while (cr.moveToNext()) {
@@ -340,12 +363,12 @@ public class DBQuery {
                     playList.add(cr.getString(0));
                 }
             }
-            if(KeyValues.isDebug)
-            System.out.println(sb);
+            if (KeyValues.isDebug)
+                System.out.println(sb);
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in getPlaylistOfTopic " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in getPlaylistOfTopic " + e);
         }
         return playList.toArray(new CharSequence[playList.size()]);
     }
@@ -359,12 +382,12 @@ public class DBQuery {
             values.put(dbCreate.KEY_NAME, newPlaylistName);
 
             int count = db.update(dbCreate.TABLE_PLAYLIST, values, dbCreate.KEY_NAME + " = '" + oldPlaylistName + "'", null);
-            if(KeyValues.isDebug)
-            System.out.println("renamePlayList " + count);
+            if (KeyValues.isDebug)
+                System.out.println("renamePlayList " + count);
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in renamePlayList " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in renamePlayList " + e);
         }
     }
 
@@ -375,26 +398,26 @@ public class DBQuery {
             SQLiteDatabase db = dbCreate.getReadableDatabase();
             //  Cursor cr = db.rawQuery("SELECT C." + dbCreate.KEY_NAME + ", C." + dbCreate.KEY_URL + " FROM " + dbCreate.TABLE_CHAPTER + " C WHERE C." + dbCreate.KEY_ID_CHAPTER + " = (SELECT PLD." + dbCreate.KEY_ID_CHAPTER + " FROM " + dbCreate.TABLE_PLAYLIST_DETAIL + " PLD INNER JOIN " + dbCreate.TABLE_PLAYLIST + " PL ON PLD." + dbCreate.KEY_ID_PL + "= PL." + dbCreate.KEY_ID_PL + " WHERE PL." + dbCreate.KEY_NAME + "= '" + playlistName + "')", null);
             Cursor cr = db.rawQuery("SELECT PLD." + dbCreate.KEY_ID_CHAPTER + " FROM " + dbCreate.TABLE_PLAYLIST_DETAIL + " PLD INNER JOIN " + dbCreate.TABLE_PLAYLIST + " PL ON PLD." + dbCreate.KEY_ID_PL + "= PL." + dbCreate.KEY_ID_PL + " WHERE PL." + dbCreate.KEY_NAME + "= '" + playlistName + "'", null);
-            if(KeyValues.isDebug)
-            System.out.println(cr.getCount() + " getPlayListChapters ");
+            if (KeyValues.isDebug)
+                System.out.println(cr.getCount() + " getPlayListChapters ");
             StringBuffer sb = new StringBuffer();
             if (cr.getCount() > 0) {
                 while (cr.moveToNext()) {
-                   Cursor crChapter = db.rawQuery("SELECT C." + dbCreate.KEY_NAME + ", C." + dbCreate.KEY_URL + " ,C." + dbCreate.KEY_ID_CHAPTER + ", C." + dbCreate.KEY_IS_READ + ", C." + dbCreate.KEY_AUDIO_ID + ", C." + dbCreate.KEY_CATEGORY_ID + " FROM " + dbCreate.TABLE_CHAPTER + " C WHERE C." + dbCreate.KEY_ID_CHAPTER + "= '" + cr.getString(0) + "'", null);
+                    Cursor crChapter = db.rawQuery("SELECT C." + dbCreate.KEY_NAME + ", C." + dbCreate.KEY_URL + " ,C." + dbCreate.KEY_ID_CHAPTER + ", C." + dbCreate.KEY_IS_READ + ", C." + dbCreate.KEY_AUDIO_ID + ", C." + dbCreate.KEY_CATEGORY_ID + " FROM " + dbCreate.TABLE_CHAPTER + " C WHERE C." + dbCreate.KEY_ID_CHAPTER + "= '" + cr.getString(0) + "'", null);
                     if (crChapter.getCount() > 0) {
                         while (crChapter.moveToNext()) {
                             ChapterAudio chapterAudio = new ChapterAudio();
                             chapterAudio.setMainCategoryName(crChapter.getString(0));
                             chapterAudio.setAudioPath(crChapter.getString(1));
                             chapterAudio.setAudioId(crChapter.getString(2));
-                          if(crChapter.getString(3).equalsIgnoreCase("1")){
-                              //true
-                              chapterAudio.setIsPlayed(true);
-                          }else{
-                              //false
-                              chapterAudio.setIsPlayed(false);
-                          }
-                          //  chapterAudio.setIsPlayed(Boolean.getBoolean(crChapter.getString(3)));
+                            if (crChapter.getString(3).equalsIgnoreCase("1")) {
+                                //true
+                                chapterAudio.setIsPlayed(true);
+                            } else {
+                                //false
+                                chapterAudio.setIsPlayed(false);
+                            }
+                            //  chapterAudio.setIsPlayed(Boolean.getBoolean(crChapter.getString(3)));
                             chapterAudio.setServerAudioId(crChapter.getString(4));
                             chapterAudio.setCategoryId(crChapter.getString(5));
                             chapterAudios.add(chapterAudio);
@@ -403,12 +426,12 @@ public class DBQuery {
                     }
                 }
             }
-            if(KeyValues.isDebug)
-            System.out.println(sb);
+            if (KeyValues.isDebug)
+                System.out.println(sb);
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in getPlayListChapters " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in getPlayListChapters " + e);
         }
         return chapterAudios;
     }
@@ -421,12 +444,12 @@ public class DBQuery {
             SQLiteDatabase db = dbCreate.getReadableDatabase();
             //Cursor count = db.execSQL("DELETE FROM " + dbCreate.TABLE_PLAYLIST + " WHERE " + dbCreate.KEY_NAME + "= '" + playlistName + "' ", null);
             int count = db.delete(dbCreate.TABLE_PLAYLIST_DETAIL, dbCreate.KEY_ID_PL + " = '" + playlistId + "' AND " + dbCreate.KEY_ID_CHAPTER + " ='" + chapterId + "'", null);
-            if(KeyValues.isDebug)
-            System.out.println("removePlayList " + count);
+            if (KeyValues.isDebug)
+                System.out.println("removePlayList " + count);
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in removePlayList " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in removePlayList " + e);
         }
     }
 
@@ -439,12 +462,12 @@ public class DBQuery {
             values.put(dbCreate.KEY_IS_READ, true);
 
             int count = db.update(dbCreate.TABLE_CHAPTER, values, dbCreate.KEY_AUDIO_ID + " = '" + audioId + "'", null);
-            if(KeyValues.isDebug)
-            System.out.println("updateIsReadChapter " + count);
+            if (KeyValues.isDebug)
+                System.out.println("updateIsReadChapter " + count);
         } catch (Exception e) {
             e.printStackTrace();
-            if(KeyValues.isDebug)
-            System.out.println("Exception in updateIsReadChapter " + e);
+            if (KeyValues.isDebug)
+                System.out.println("Exception in updateIsReadChapter " + e);
         }
     }
 }
