@@ -6,17 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/marginSmall"
-    android:layout_marginLeft="@dimen/fab_margin"
-    android:layout_marginRight="@dimen/fab_margin"
     android:layout_marginTop="@dimen/marginSmall"
     android:background="@android:color/transparent"
     card_view:cardElevation="@dimen/fab_margin">
 
     <LinearLayout
-        android:background="@drawable/rowselect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margintv"
+        android:background="@drawable/rowselect"
         android:orientation="horizontal"
         android:weightSum="4.2"
         tools:context="com.pmpulse.ui.PackageActivity">
@@ -25,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/marginSmall"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -41,11 +39,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/marginStar"
-            android:layout_marginRight="@dimen/marginStar"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:weightSum="4">
+            android:weightSum="3">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,11 +74,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/marginStar"
-            android:layout_marginRight="@dimen/marginStar"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:weightSum="4">
+            android:weightSum="3">
 
             <TextView
                 android:id="@+id/trainingName"
@@ -116,10 +110,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/marginSmall"
+            android:layout_gravity="center"
             android:layout_marginRight="@dimen/marginSmall"
             android:orientation="vertical">
 
