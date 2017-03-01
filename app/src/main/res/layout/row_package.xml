@@ -13,11 +13,12 @@
     card_view:cardElevation="@dimen/fab_margin">
 
     <LinearLayout
+        android:background="@drawable/rowselect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margintv"
         android:orientation="horizontal"
-        android:weightSum="3"
+        android:weightSum="4.2"
         tools:context="com.pmpulse.ui.PackageActivity">
 
         <LinearLayout
@@ -29,9 +30,9 @@
 
             <ImageView
                 android:id="@+id/packageImage"
-                android:src="@mipmap/ic_launcher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"
                 android:textAppearance="?android:textAppearanceListItemSmall"
                 android:textColor="@color/colorButton" />
         </LinearLayout>
@@ -44,7 +45,7 @@
             android:layout_marginRight="@dimen/marginStar"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:weightSum="3">
+            android:weightSum="4">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,7 +82,7 @@
             android:layout_marginRight="@dimen/marginStar"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:weightSum="3">
+            android:weightSum="4">
 
             <TextView
                 android:id="@+id/trainingName"
@@ -112,6 +113,24 @@
                 android:text="@string/price"
                 android:textAppearance="?android:textAppearanceListItemSmall"
                 android:textColor="@color/colorButton" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginSmall"
+            android:layout_marginRight="@dimen/marginSmall"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/im_slideshow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/marginTop"
+                android:paddingTop="@dimen/marginTop"
+                android:src="@android:drawable/ic_menu_slideshow"
+                android:tint="@color/colorAccent" />
         </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>
