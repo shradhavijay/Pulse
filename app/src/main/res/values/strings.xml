@@ -59,7 +59,10 @@
 
     <string name="welcome_message">Welcome!</string>
 
-    <string name="rate_audio">View/Rate Audio</string>
+    <string name="rate_audio">Rate/View Audio</string>
+    <string name="rate_audio_rating">Rate Audio</string>
+    <string name="view_audio_rating">View Rating</string>
+
     <string name="play_all">Play All</string>.
     <string name="play">Play</string>
 

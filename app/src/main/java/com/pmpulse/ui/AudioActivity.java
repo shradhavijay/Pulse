@@ -78,7 +78,7 @@ public class AudioActivity extends AppCompatActivity implements MediaController.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(!KeyValues.isDebug)
+        if (!KeyValues.isDebug)
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                     WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_audiolist);
@@ -472,6 +472,13 @@ public class AudioActivity extends AppCompatActivity implements MediaController.
                     //Inflating the Popup using xml file
                     popup.getMenuInflater().inflate(R.menu.audiooptions, popup.getMenu());
 
+                    final String rating = Parser.chapterAudios.get(position).getUserRating();
+                    if (rating.equals(Parser.notGiven)) {
+                        popup.getMenu().getItem(3).setTitle(R.string.rate_audio_rating);
+                    } else {
+                        popup.getMenu().getItem(3).setTitle(R.string.view_audio_rating);
+                    }
+
                     //registering popup with OnMenuItemClickListener
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         public boolean onMenuItemClick(MenuItem item) {
@@ -605,15 +612,14 @@ public class AudioActivity extends AppCompatActivity implements MediaController.
 
                 final String rating = Parser.chapterAudios.get(position).getUserRating();
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 if (!rating.equals(Parser.notGiven)) {
                     userRating = Integer.parseInt(rating);
+                    builder.setMessage(context.getString(R.string.view_audio_rating));
                 } else {
                     userRating = 0;
+                    builder.setMessage(context.getString(R.string.rate_audio_rating));
                 }
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-                builder.setMessage(context.getString(R.string.rate_audio));
 
                 LayoutInflater inflater = context.getLayoutInflater();
                 View dialoglayout = inflater.inflate(R.layout.viewrating, null);
