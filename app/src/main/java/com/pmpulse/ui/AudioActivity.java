@@ -617,7 +617,7 @@ public class AudioActivity extends AppCompatActivity implements MediaController.
                     userRating = Integer.parseInt(rating);
                     builder.setMessage(context.getString(R.string.view_audio_rating));
                 } else {
-                    userRating = 0;
+                    userRating = -16;
                     builder.setMessage(context.getString(R.string.rate_audio_rating));
                 }
 
@@ -629,7 +629,7 @@ public class AudioActivity extends AppCompatActivity implements MediaController.
                 int colorRed = Color.parseColor("#c74759");
                 DrawableCompat.setTint(progress, colorRed);
                 //give rating option only when rating not given
-                if (userRating == 0) {
+                if (userRating == -16) {
                     ratingBar.setIsIndicator(false);
                     //   ratingBar.setClickable(true);
                     builder.setPositiveButton(context.getString(R.string.ok), new DialogInterface.OnClickListener() {
