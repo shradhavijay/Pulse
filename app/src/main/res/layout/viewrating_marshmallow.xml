@@ -6,11 +6,11 @@
 
     <RatingBar
         android:id="@+id/ratingBar"
+        style="@style/RatingBarM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:numStars="5"
-        android:stepSize="1"
-        android:theme="@style/AppTheme.Progress" />
+        android:stepSize="1" />
 
 </LinearLayout>

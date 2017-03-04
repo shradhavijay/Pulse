@@ -613,6 +613,8 @@ public class AudioActivity extends AppCompatActivity implements MediaController.
                 final String rating = Parser.chapterAudios.get(position).getUserRating();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                //check build version
+
                 if (!rating.equals(Parser.notGiven)) {
                     userRating = Integer.parseInt(rating);
                     builder.setMessage(context.getString(R.string.view_audio_rating));
@@ -621,9 +623,15 @@ public class AudioActivity extends AppCompatActivity implements MediaController.
                     builder.setMessage(context.getString(R.string.rate_audio_rating));
                 }
 
+                View dialoglayout;
                 LayoutInflater inflater = context.getLayoutInflater();
-                View dialoglayout = inflater.inflate(R.layout.viewrating, null);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    dialoglayout = inflater.inflate(R.layout.viewrating_marshmallow, null);
+                } else {
+                    dialoglayout = inflater.inflate(R.layout.viewrating, null);
+                }
                 builder.setView(dialoglayout);
+
                 final RatingBar ratingBar = (RatingBar) dialoglayout.findViewById(R.id.ratingBar);
                 Drawable progress = ratingBar.getProgressDrawable();
                 int colorRed = Color.parseColor("#c74759");
